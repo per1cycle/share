@@ -71,8 +71,8 @@ e.g. in this example we use irc.oftc.net as irc network, you can choose irc.libr
 [ ?? ] Name [freenode]: irc.oftc.net
 [ ?? ] Name [freenode]: oftc
 [ ?? ] Server host (host only): irc.oftc.net
-[ ?? ] Server uses SSL? (yes/no) [no]: yes
-[ ?? ] Server port (1 to 65535) [6697]: 
+[ ?? ] Server uses SSL? (yes/no) [no]: no // buggy with ssl.... on my computer.
+[ ?? ] Server port (1 to 65535) [6667]: 
 [ ?? ] Server password (probably empty): 
 [ ?? ] Initial channels: #alpine-devel
 [ ** ] Enabled network modules [simple_away]
@@ -82,6 +82,19 @@ e.g. in this example we use irc.oftc.net as irc network, you can choose irc.libr
 now the bouncer is setup already.
 
 how to use it?
+
+```bash
+weechat
+
+# now you are in weechat cli
+/server add oftc localhost/10025
+/set irc.server.oftc.username pericycle
+/set irc.server.oftc.password <my password, don't look, u dum as>
+/save
+# do this step after you register your nickname.
+# /set irc.server.oftc.command "/msg nickserv identify xxx"
+
+```
 
 reference:
 - https://weechat.org/files/doc/weechat/stable/weechat_quickstart.en.html
