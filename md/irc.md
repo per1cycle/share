@@ -28,7 +28,7 @@ use command `weechat` to geeeeeeet in the weechat irc client.
 /connect libera
 /msg Nickserv register <password> <email>
 /join #gentoo
-dlan: It works this will at dlan it work ;-)
+dlan: It works this will at dlan call him it work ;-)
 ```
 
 ### use bouncer(recommend)
