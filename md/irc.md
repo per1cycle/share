@@ -42,7 +42,7 @@ sudo apt install weechat
 ```
 
 ### settttup znc config
-e.g. in this example we use irc.oftc.net as irc network, you can choose irc.libre.net in same way, only different is the identify way.
+e.g. in this example we use `irc.oftc.net` as irc network, you can choose `irc.libera.chat` in same way, only different is the identify way.
 
 ```text
 [ .. ] Checking for list of available modules...
