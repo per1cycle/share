@@ -18,14 +18,24 @@ sudo apt install weechat
 use command `weechat` to geeeeeeet in the weechat irc client.
 
 ### get directly into irc channel(not recommend)
+> difference between oftc and libera, oftc has channels like debian*, alpine* and libera has channel like u-boot, gentoo*, etc.
 
-TODO
+```bash
+# this time we use libera.chat server as an example.
+# in weechat client:
+/server add libera irc.libera.chat/6667
+/set irc.server.libera.username FOOBARTEST
+/connect libera
+/msg Nickserv register <password> <email>
+/join #gentoo
+dlan: It works this will at dlan it work ;-)
+```
 
 ### use bouncer(recommend)
 
-see znc 
+see [znc](#znc) 
 
-## introduce irc bouncer znc 
+## znc 
 ```bash
 sudo apt install weechat
 # use `znc --makeconf` to generate a znc config for irc
