@@ -18,7 +18,7 @@ sudo apt install weechat
 use command `weechat` to geeeeeeet in the weechat irc client.
 
 ### get directly into irc channel(not recommend)
-> difference between oftc and libera, oftc has channels like debian*, alpine* and libera has channel like u-boot, gentoo*, etc.
+> difference between oftc and libera, oftc has channels like debian*, alpine* and libera has channel like u-boot, gentoo*, fedora*, etc.
 
 ```bash
 # this time we use libera.chat server as an example.
