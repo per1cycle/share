@@ -40,16 +40,14 @@ e.g. in this example we use irc.oftc.net as irc network, you can choose irc.libr
 [ ** ] -- Global settings --
 [ ** ] 
 [ ?? ] Listen on port (1025 to 65534): 10025
-[ ?? ] Listen using SSL (yes/no) [no]: yes // perfer, notice use the irc network's port.
+[ ?? ] Listen using SSL (yes/no) [no]: no // perfer is yes, but buggy on my device. notice use the irc network's port.
  ?? ] Listen using both IPv4 and IPv6 (yes/no) [yes]: // use default
 [ .. ] Verifying the listener...
 [ ** ] Unable to locate pem file: [/home/z/.znc/znc.pem], creating it
-[ .. ] Writing Pem file [/home/z/.znc/znc.pem]...
-[ ** ] Enabled global modules [webadmin]
-[ ** ] 
+
 [ ** ] -- Admin user settings --
 [ ** ] 
-[ ?? ] Username (alphanumeric): pericycle // in this case, i have irc account in oftc, so i just use my name.
+[ ?? ] Username (alphanumeric): pericycle 
 [ ?? ] Enter password: 
 [ ?? ] Confirm password: 
 // use default
@@ -68,10 +66,9 @@ e.g. in this example we use irc.oftc.net as irc network, you can choose irc.libr
 [ ?? ] Name [freenode]: 
 
 // https://www.oftc.net/
-[ ?? ] Name [freenode]: irc.oftc.net
 [ ?? ] Name [freenode]: oftc
 [ ?? ] Server host (host only): irc.oftc.net
-[ ?? ] Server uses SSL? (yes/no) [no]: no // buggy with ssl.... on my computer.
+[ ?? ] Server uses SSL? (yes/no) [no]: no // a little buggy with ssl.... on my computer.
 [ ?? ] Server port (1 to 65535) [6667]: 
 [ ?? ] Server password (probably empty): 
 [ ?? ] Initial channels: #alpine-devel
@@ -87,14 +84,23 @@ how to use it?
 weechat
 
 # now you are in weechat cli
-/server add oftc localhost/10025
-/set irc.server.oftc.username pericycle
-/set irc.server.oftc.password <my password, don't look, u dum as>
+/server add oftc <localhost or the server ip which runs znc >/10025
+/set irc.server.oftc.username pericycle // the username same in the irc admin setting when you first set.
+/set irc.server.oftc.password <my password, don't look, u dum as> // same password in znc admin.
 /save
-# do this step after you register your nickname.
+# do this step after you register your nickname.[1]
 # /set irc.server.oftc.command "/msg nickserv identify xxx"
 
+# now you have your own id, remember use register, else you id may be take up by other guys.
+/msg NickServ register <xxx> <email@example.com>
+
+# after doing this you can set the [1] operation in weechat
 ```
+
+useful short cut:
+alt + m enable mouse.
+alt + up/down switch between channels.
+
 
 reference:
 - https://weechat.org/files/doc/weechat/stable/weechat_quickstart.en.html
