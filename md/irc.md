@@ -97,6 +97,8 @@ weechat
 # after doing this you can set the [1] operation in weechat
 ```
 
+BTW, in libera chat, you may setup your sasl password after you have register your nickserv.
+
 useful short cut:
 alt + m enable mouse.
 alt + up/down switch between channels.
