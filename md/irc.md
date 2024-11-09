@@ -28,7 +28,7 @@ use command `weechat` to geeeeeeet in the weechat irc client.
 /connect libera
 /msg Nickserv register <password> <email>
 /join #gentoo
-dlan: It works this will at dlan call him it work ;-)
+dlan: It works this will at dlan call him it work ;-) # don't really do it.
 ```
 
 ### use bouncer(recommend)
@@ -37,7 +37,7 @@ see [znc](#znc)
 
 ## znc 
 ```bash
-sudo apt install weechat
+sudo apt install znc
 # use `znc --makeconf` to generate a znc config for irc
 ```
 
