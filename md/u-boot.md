@@ -7,9 +7,6 @@ Port uboot to a new soc riscv board.
 
 riscv is getting more and more popular...balabala...
 
-See [jh7110 uboot upstream](https://patchwork.ozlabs.org/project/uboot/cover/20230329034224.26545-1-yanhong.wang@starfivetech.com/) as an example.
-Reference: [Porting uboot to new board](https://bootlin.com/pub/conferences/2017/elce/schulz-how-to-support-new-board-u-boot-linux/schulz-how-to-support-new-board-u-boot-linux.pdf)
-
 and work flow is as follow:
 
 Brief look at uboot structure, only list the relative important stuff.
@@ -107,6 +104,8 @@ add these file:
 
 add the defconfig file and set your vendor, board, target, dts, and just implement dram and uart as the minimal system.
 
+> What is dts? file to describe hardware. can be compiled to binary file (device tree bolb)
+
 ```
  arch/riscv/cpu/jh7110/dram.c                  |   38 +
  configs/starfive_visionfive2_12a_defconfig    |   79 +
@@ -155,12 +154,10 @@ endif
 One/Two commit per IP 
 e.g. 
 
-
-
 list todo IPs part:
+- Uart
 - Ram
 - Ethernet
-- Uart
 - Spi
 - Nand
 - Emmc
@@ -168,3 +165,7 @@ list todo IPs part:
 - Gpio
 - Reset
 - Pmic
+
+Reference: 
+- [Porting uboot to new board](https://bootlin.com/pub/conferences/2017/elce/schulz-how-to-support-new-board-u-boot-linux/schulz-how-to-support-new-board-u-boot-linux.pdf)
+- [jh7110 uboot upstream](https://patchwork.ozlabs.org/project/uboot/cover/20230329034224.26545-1-yanhong.wang@starfivetech.com/)
