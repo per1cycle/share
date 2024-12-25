@@ -1,23 +1,23 @@
 #include <random>
-
+#include "utils.h"
 const int N = 4096;
 const int blocks_per_grid = 100, threads_per_block = 1024;
 
-void generate_data_1d()
-{
-    
-}
-
+// accelerate 1d array operation
 __global__ void accelerate_1d_arr(float *arr_1d_a, float *arr_1d_b, float *arr_1d_c)
 {
     int idx = threadIdx.x;
     arr_1d_c[idx] = arr_1d_a[idx] + arr_1d_b[idx];
 }
-// accelerate 2d add/mul
+
+// accelerate 2d operation
 __global__ void accelerate_2d_array(float *DevPtrA, float *DevPtrB, float *DevPtrC, size_t Pitch, int Width, int Height)
 {
 
 }
+
+
+
 int main()
 {
     
@@ -41,7 +41,6 @@ int main()
     cudaMemcpy(device_arr_1d_b, host_arr_1d_b, N, cudaMemcpyHostToDevice);
     cudaMemcpy(device_arr_1d_c, host_arr_1d_c, N, cudaMemcpyHostToDevice);
     
-    
-
+    accelerate_1d_arr<<<blocks_per_grid, threads_per_block>>>(device_arr_1d_a, device_arr_1d_b, device_arr_1d_c);
 
 }
