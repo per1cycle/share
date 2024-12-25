@@ -169,3 +169,4 @@ list todo IPs part:
 Reference: 
 - [Porting uboot to new board](https://bootlin.com/pub/conferences/2017/elce/schulz-how-to-support-new-board-u-boot-linux/schulz-how-to-support-new-board-u-boot-linux.pdf)
 - [jh7110 uboot upstream](https://patchwork.ozlabs.org/project/uboot/cover/20230329034224.26545-1-yanhong.wang@starfivetech.com/)
+- 
