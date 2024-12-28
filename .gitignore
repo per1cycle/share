@@ -1,2 +1,5 @@
 *.out
 notebook/kaggle/data/*
+*.gz
+notebook/cs231n/cs231n/datasets/*
+*.pyc
