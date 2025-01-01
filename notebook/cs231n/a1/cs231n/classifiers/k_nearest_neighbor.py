@@ -131,7 +131,9 @@ class KNearestNeighbor(object):
         #########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-        np.linalg.norm().
+        sq_test = np.sum(X ** 2, axis=1).reshape(num_test, 1)
+        sq_train = np.sum(self.X_train ** 2, axis=1)
+        dists = np.sqrt(sq_test + sq_train - 2 * X.dot(self.X_train.T))
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
