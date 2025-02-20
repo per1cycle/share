@@ -12,6 +12,7 @@ FILE* input_file;
 int line_number = 1;
 char replace_char = 0;
 struct token g_token;
+int g_parse_digit = 0;
 
 const char* tokens[] = {
     "+",
@@ -54,7 +55,29 @@ int next()
     if(c == '\n') // if goto next line.
         line_number ++;
     return c;
+}
 
+void set_replace_char(int c)
+{
+    replace_char = c;
+}
+
+void parse_panic(const char* panic_info)
+{
+    printf("[ERROR]: %s\n", panic_info);
+    for(;;);
+}
+
+int next_digit(int start_digit)
+{
+    int result = start_digit - '0';
+    int c;
+    while((c = next()) && isdigit(c))
+    {
+        result = result * 10 + c - '0';
+    }
+    set_replace_char(c);
+    return result;
 }
 
 int skip()
@@ -75,26 +98,21 @@ int scan()
             return 0;
         case '+':
         {
-            printf("Found add\n");
             g_token.type = PLUS_T;
             break;
         }
         case '-':
         {
-            printf("Found minus\n");
-
             g_token.type = MINUS_T;
             break;
         }
         case '*':
         {
-            printf("Found mul\n");
             g_token.type = MUL_T;
             break;
         }
         case '/':
         {
-            printf("Found div\n");
             g_token.type = DIV_T;
             break;
         }
@@ -103,8 +121,13 @@ int scan()
             // will replace with next_digit() here.
             if (isdigit(c))
             {
-                printf("Find digits.\n");
+                g_token.type = INT_T;
+                g_parse_digit = next_digit(c);
                 break;
+            }
+            else 
+            {
+                // parse_panic("Unrecognize token");
             }
         }
             
@@ -116,7 +139,12 @@ void scan_file()
 {
     while (scan())
     {
-        
+        printf("Line#%d: <token: %s> ", line_number, tokens[g_token.type]);
+        if(g_token.type == INT_T)
+        {
+            printf("<value>: %d", g_parse_digit);
+        }
+        printf("\n");
     }
 }
 
