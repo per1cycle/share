@@ -1,7 +1,6 @@
 #ifndef AST_H
 #define AST_H
 #include "helper.h"
-#include <cstdio>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,7 +11,7 @@ enum
     MINUS_A,
     MUL_A,
     DIV_A,
-    DIGIT_A
+    INT_A,
 };
 
 struct ast_node
@@ -45,7 +44,7 @@ struct ast_node *make_node(int token, struct ast_node *left_node, struct ast_nod
  */
 struct ast_node *make_leaf_node(int value)
 {
-    return make_node(DIGIT_A, NULL, NULL, value);
+    return make_node(INT_A, NULL, NULL, value);
 }
 
 struct ast_node *make_unary_node(int token, struct ast_node *left_children, int value)
@@ -65,6 +64,8 @@ int token_to_ast_op(int token)
             return (MUL_A);
         case DIV_T:
             return (DIV_A);
+        case INT_T:
+            return (INT_A);
         default:
             fprintf(stderr, "Invalid token");
     }

@@ -1,7 +1,7 @@
-#include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-#include "helper.h"
+#include "ast.h"
 
 /*
 global variable
@@ -135,6 +135,23 @@ void scan_file()
     }
 }
 
+void first()
+{
+    int c = scan();
+    struct ast_node *node;
+
+    switch (c)
+    {
+    case INT_T:
+        node = make_leaf_node(c);
+        break;
+    
+    default:
+        break;
+    }
+}
+
+
 int main(int argc, char** argv)
 {
     if(argc < 2)
@@ -145,7 +162,10 @@ int main(int argc, char** argv)
     char* file_name = argv[1];
     input_file = fopen(file_name, "r");
 
-    scan_file();
+    // scan_file();
+    scan();
+    struct ast_node *node = build_ast();
+
 
     return 0;
 }
