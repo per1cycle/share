@@ -19,7 +19,8 @@ const char* tokens[] = {
     "-",
     "*",
     "/",
-    "integer"
+    "integer",
+    "Unknown type",
 };
 
 enum TOKEN_TYPE {
@@ -27,7 +28,8 @@ enum TOKEN_TYPE {
     MINUS_T,
     MUL_T,
     DIV_T,
-    INT_T
+    INT_T,
+    UNKNOWN_T,
 };
 
 struct token 
@@ -65,7 +67,7 @@ void set_replace_char(int c)
 void parse_panic(const char* panic_info)
 {
     printf("[ERROR]: %s\n", panic_info);
-    for(;;);
+    for(int i = 0; i < 1e8; i++);
 }
 
 int next_digit(int start_digit)
@@ -127,7 +129,9 @@ int scan()
             }
             else 
             {
-                // parse_panic("Unrecognize token");
+                g_token.type = UNKNOWN_T;
+                parse_panic("Parse error.");
+                return 1;
             }
         }
             
@@ -139,6 +143,10 @@ void scan_file()
 {
     while (scan())
     {
+        if (g_token.type == UNKNOWN_T)
+        {
+            continue;
+        }
         printf("Line#%d: <token: %s> ", line_number, tokens[g_token.type]);
         if(g_token.type == INT_T)
         {
