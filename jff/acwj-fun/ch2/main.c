@@ -45,7 +45,7 @@ void set_replace_char(int c)
 
 void parse_panic(const char* panic_info)
 {
-    printf("[ERROR]: %s\n", panic_info);
+    printf("[ERROR at line <#%d> ]: %s\n", line_number, panic_info);
     for(int i = 0; i < 1e8; i++);
 }
 

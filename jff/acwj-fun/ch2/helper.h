@@ -17,7 +17,6 @@ struct token
     int value;
 };
 
-
 const char* tokens[] = {
     "eof",
     "+",
