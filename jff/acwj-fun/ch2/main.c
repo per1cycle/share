@@ -79,7 +79,7 @@ int scan()
             return 0;
         case '+':
         {
-            g_token.type = PLUS_T;
+            g_token.type = ADD_T;
             break;
         }
         case '-':

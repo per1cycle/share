@@ -3,7 +3,7 @@
 
 enum TOKEN_TYPE {
     EOF_T = 0,
-    PLUS_T ,
+    ADD_T ,
     MINUS_T,
     MUL_T,
     DIV_T,
