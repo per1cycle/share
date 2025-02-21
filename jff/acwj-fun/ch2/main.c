@@ -16,14 +16,6 @@ char replace_char = 0;
 struct token g_token;
 int g_parse_digit = 0;
 
-const char* tokens[] = {
-    "+",
-    "-",
-    "*",
-    "/",
-    "integer",
-    "Unknown type",
-};
 
 void usage()
 {

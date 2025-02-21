@@ -2,7 +2,8 @@
 #define HELPER_H
 
 enum TOKEN_TYPE {
-    PLUS_T = 0,
+    EOF_T = 0,
+    PLUS_T ,
     MINUS_T,
     MUL_T,
     DIV_T,
@@ -16,5 +17,15 @@ struct token
     int value;
 };
 
+
+const char* tokens[] = {
+    "eof",
+    "+",
+    "-",
+    "*",
+    "/",
+    "integer",
+    "Unknown type",
+};
 
 #endif // HELPER_H
