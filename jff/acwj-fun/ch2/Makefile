@@ -1,5 +1,5 @@
 all: clean
-	clang main.c -o c 
+	clang main.c -o c.bin
 clean:
 	rm -rf c.bin
 
