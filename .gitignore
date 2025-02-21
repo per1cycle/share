@@ -6,3 +6,4 @@ notebook/cs231n/*/cs231n/__pycache__/*
 *.pyc
 *.zip
 jff/torch/data/
+*.bin
