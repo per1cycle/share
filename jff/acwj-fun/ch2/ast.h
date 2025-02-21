@@ -11,7 +11,8 @@ enum
     ADD_A,
     MINUS_A,
     MUL_A,
-    DIV_A
+    DIV_A,
+    DIGIT_A
 };
 
 struct ast_node
@@ -22,7 +23,7 @@ struct ast_node
     struct ast_node *right_node;
 };
 
-struct ast_node *make_node(token tk, struct ast_node *left_node, struct ast_node *right_node, int value)
+struct ast_node *make_node(int token, struct ast_node *left_node, struct ast_node *right_node, int value)
 {
     struct ast_node *node;
     node = (struct ast_node*)calloc(1, sizeof(ast_node));
@@ -32,11 +33,41 @@ struct ast_node *make_node(token tk, struct ast_node *left_node, struct ast_node
         fprintf(stderr, "[ERROR]: allocate ast_node error!");
         exit(1);
     }
-    node->token_type = tk;
+    node->token_type = token;
     node->left_node = left_node;
     node->right_node = right_node;
     node->value = value;
     return node;
+}
+
+/**
+ * left node will only be digit type.
+ */
+struct ast_node *make_leaf_node(int value)
+{
+    return make_node(DIGIT_A, NULL, NULL, value);
+}
+
+struct ast_node *make_unary_node(int token, struct ast_node *left_children, int value)
+{
+    return make_node(token, left_children, NULL, value);
+}
+
+int token_to_ast_op(int token)
+{
+    switch (token)
+    {
+        case ADD_T:
+            return (ADD_A);
+        case MINUS_T:
+            return (MINUS_A);
+        case MUL_T:
+            return (MUL_A);
+        case DIV_T:
+            return (DIV_A);
+        default:
+            fprintf(stderr, "Invalid token");
+    }
 }
 
 int interprete_ast_tree(struct ast_node *node)
@@ -54,24 +85,23 @@ int interprete_ast_tree(struct ast_node *node)
 
     switch (node->token_type)
     {
-        case PLUS_T:
+        case ADD_A:
             return (left_tree_value + right_tree_value);
             break;
-        case MINUS_T:
+        case MINUS_A:
             return (left_tree_value - right_tree_value);
             break;
-        case MUL_T:
+        case MUL_A:
             return (left_tree_value * right_tree_value);
             break;
-        case DIV_T:
+        case DIV_A:
             return (left_tree_value / right_tree_value);
             break;
         default:
             fprintf(stderr, "[ERROR]: ast tree parse error");
     }
-    // should use
+    // shouldn't be used
     return -1;
-
 }
 
 #endif // AST_H
