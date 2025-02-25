@@ -81,6 +81,10 @@ int token_to_ast_op(int token)
 int interprete_ast_tree(struct ast_node *node)
 {
     int left_tree_value = 0, right_tree_value = 0;
+    if(node->token_type == INT_A)
+    {
+        return node->value;
+    }
     if(node->left_node)
     {
         left_tree_value = interprete_ast_tree(node->left_node);
@@ -106,10 +110,11 @@ int interprete_ast_tree(struct ast_node *node)
             return (left_tree_value / right_tree_value);
             break;
         default:
-            fprintf(stderr, "[ERROR]: ast tree parse error");
+            fprintf(stderr, "[ERROR]: ast tree parse error\n");
     }
+    
     // shouldn't be used
-    return -1;
+    return -1000000;
 }
 
 #endif // AST_H
