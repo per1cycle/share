@@ -153,6 +153,7 @@ struct ast_node *first()
         break;
     
     default:
+        exit(1);
         break;
     }
     return NULL;
@@ -160,15 +161,10 @@ struct ast_node *first()
 
 struct ast_node* build_ast()
 {
-    // debug_recursive ++;
-    // if(debug_recursive > 10)
-    // {
-    //     return NULL;
-    // }
     struct ast_node *node, *left, *right;
     int node_type;
 
-    node = first();
+    left = first();
 
     if(g_token.type == EOF_T)
     {
@@ -176,10 +172,9 @@ struct ast_node* build_ast()
     }
 
     node_type = token_to_ast_op(g_token.type);
-    scan();
     
     right = build_ast();
-
+    
     node = make_node(node_type, left, right, 0);
     return (node);
 }
@@ -198,6 +193,6 @@ int main(int argc, char** argv)
     // scan();
     // struct ast_node *node = build_ast();
     struct ast_node *node = build_ast();
-    print_ast_node(node);
+    
     return 0;
 }
