@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "ast.h"
 
+// int debug_recursive = 0;
 /*
 global variable
 - file
@@ -76,6 +78,7 @@ int scan()
     switch (c) 
     {
         case EOF:
+            g_token.type = EOF_T;
             return 0;
         case '+':
         {
@@ -104,7 +107,7 @@ int scan()
             {
                 g_token.type = INT_T;
                 g_parse_digit = next_digit(c);
-                break;
+                return g_parse_digit;
             }
             else 
             {
@@ -115,7 +118,7 @@ int scan()
         }
             
     }
-    return c;
+    return 1;
 }
 
 void scan_file()
@@ -126,7 +129,7 @@ void scan_file()
         {
             continue;
         }
-        printf("Line#%d: <token: %s> ", line_number, tokens[g_token.type]);
+        printf("Line#%d: <token: %s> ", line_number, tokens_t[g_token.type]);
         if(g_token.type == INT_T)
         {
             printf("<value>: %d", g_parse_digit);
@@ -135,22 +138,51 @@ void scan_file()
     }
 }
 
-void first()
+struct ast_node *first()
 {
     int c = scan();
+
     struct ast_node *node;
 
-    switch (c)
+    switch (g_token.type)
     {
     case INT_T:
         node = make_leaf_node(c);
+        scan();
+        return (node);
         break;
     
     default:
         break;
     }
+    return NULL;
 }
 
+struct ast_node* build_ast()
+{
+    // debug_recursive ++;
+    // if(debug_recursive > 10)
+    // {
+    //     return NULL;
+    // }
+    struct ast_node *node, *left, *right;
+    int node_type;
+
+    node = first();
+
+    if(g_token.type == EOF_T)
+    {
+        return (left);
+    }
+
+    node_type = token_to_ast_op(g_token.type);
+    scan();
+    
+    right = build_ast();
+
+    node = make_node(node_type, left, right, 0);
+    return (node);
+}
 
 int main(int argc, char** argv)
 {
@@ -163,9 +195,9 @@ int main(int argc, char** argv)
     input_file = fopen(file_name, "r");
 
     // scan_file();
-    scan();
+    // scan();
+    // struct ast_node *node = build_ast();
     struct ast_node *node = build_ast();
-
-
+    print_ast_node(node);
     return 0;
 }

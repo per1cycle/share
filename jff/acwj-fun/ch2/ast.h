@@ -25,7 +25,7 @@ struct ast_node
 struct ast_node *make_node(int token, struct ast_node *left_node, struct ast_node *right_node, int value)
 {
     struct ast_node *node;
-    node = (struct ast_node*)calloc(1, sizeof(ast_node));
+    node = (struct ast_node*)calloc(1, sizeof(struct ast_node));
 
     if(node == NULL)
     {
@@ -36,7 +36,7 @@ struct ast_node *make_node(int token, struct ast_node *left_node, struct ast_nod
     node->left_node = left_node;
     node->right_node = right_node;
     node->value = value;
-    return node;
+    return (node);
 }
 
 /**
@@ -50,6 +50,11 @@ struct ast_node *make_leaf_node(int value)
 struct ast_node *make_unary_node(int token, struct ast_node *left_children, int value)
 {
     return make_node(token, left_children, NULL, value);
+}
+
+void print_ast_node(struct ast_node* ast_node)
+{
+    printf("[INFO]: <node type>: %s, <node value>: %d\n", tokens_a[ast_node->token_type], ast_node->value);
 }
 
 int token_to_ast_op(int token)
@@ -69,6 +74,8 @@ int token_to_ast_op(int token)
         default:
             fprintf(stderr, "Invalid token");
     }
+    // should't be called.
+    return 0;
 }
 
 int interprete_ast_tree(struct ast_node *node)

@@ -17,7 +17,7 @@ struct token
     int value;
 };
 
-const char* tokens[] = {
+const char* tokens_t[] = {
     "eof",
     "+",
     "-",
@@ -27,4 +27,11 @@ const char* tokens[] = {
     "Unknown type",
 };
 
+const char* tokens_a[] = {
+    "ast add",
+    "ast minus",
+    "ast mul",
+    "ast div",
+    "ast integer",
+};
 #endif // HELPER_H

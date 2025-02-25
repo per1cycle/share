@@ -3,6 +3,9 @@
         "iostream": "cpp",
         "chrono": "cpp",
         "ostream": "cpp",
-        "ast.h": "c"
+        "ast.h": "c",
+        "__locale": "c",
+        "cctype": "c",
+        "locale": "c"
     }
 }
