@@ -7,3 +7,4 @@ notebook/cs231n/*/cs231n/__pycache__/*
 *.zip
 jff/torch/data/
 *.bin
+*.codegen
