@@ -4,6 +4,7 @@
 #include "ast.h"
 #include "scan.h"
 #include "prio.h"
+#include "codegen.h"
 
 void usage()
 {
@@ -69,8 +70,15 @@ int main(int argc, char** argv)
     input_file = fopen(file_name, "r");
 
     struct ast_node *node = build_ast(0);
+    output_file = fopen(output_file_name, "w");
 
-    printf("%d\n", interprete_ast_tree(node));
+    if(output_file == NULL)
+    {
+        fprintf(stderr, "Error opening file\n");
+        exit(1);
+    }
+    
+    gen_asm(node);
 
     return 0;
 }

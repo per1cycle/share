@@ -1,7 +1,7 @@
 all: clean
 	clang main.c -o c.bin
 clean:
-	rm -rf c.bin
+	rm -rf c.bin c.codegen
 
 test: all
 	./c.bin input01 && \

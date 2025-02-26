@@ -4,11 +4,12 @@
 struct token;
 
 FILE* input_file;
+FILE* output_file;
 int line_number = 1;
 char replace_char = 0;
 struct token g_token;
 int g_parse_digit = 0;
-
+static const char output_file_name[] = "c.codegen";
 
 enum TOKEN_TYPE {
     EOF_T = 0,

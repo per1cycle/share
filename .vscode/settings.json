@@ -6,6 +6,8 @@
         "ast.h": "c",
         "__locale": "c",
         "cctype": "c",
-        "locale": "c"
+        "locale": "c",
+        "codegen.h": "c",
+        "helper.h": "c"
     }
 }
