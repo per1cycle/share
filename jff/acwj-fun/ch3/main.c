@@ -4,14 +4,6 @@
 #include "ast.h"
 #include "scan.h"
 
-struct token;
-
-FILE* input_file;
-int line_number = 1;
-char replace_char = 0;
-struct token g_token;
-int g_parse_digit = 0;
-
 
 void usage()
 {

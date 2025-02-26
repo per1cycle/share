@@ -1,6 +1,15 @@
 #ifndef HELPER_H
 #define HELPER_H
 
+struct token;
+
+FILE* input_file;
+int line_number = 1;
+char replace_char = 0;
+struct token g_token;
+int g_parse_digit = 0;
+
+
 enum TOKEN_TYPE {
     EOF_T = 0,
     ADD_T ,
