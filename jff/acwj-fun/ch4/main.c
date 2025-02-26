@@ -45,14 +45,12 @@ struct ast_node* build_ast(int pervious_token_priority)
 
     while(priority_of(token_type) > pervious_token_priority)
     {
-
         right = build_ast(op_priority[token_type]);
         left = make_node(token_to_ast_op(token_type), left, right, 0);
         token_type = g_token.type;
 
         if(token_type == EOF_T)
             return left;
-        
     }
 
     return (left);
@@ -77,7 +75,7 @@ int main(int argc, char** argv)
         fprintf(stderr, "Error opening file\n");
         exit(1);
     }
-    
+
     gen_asm(node);
 
     return 0;
