@@ -3,7 +3,7 @@
 
 #include "ast.h"
 #include "scan.h"
-
+#include "prio.h"
 
 void usage()
 {
@@ -31,24 +31,32 @@ struct ast_node *first()
     return NULL;
 }
 
-struct ast_node* build_ast()
+struct ast_node* build_ast(int pervious_token_priority)
 {
     struct ast_node *node, *left, *right;
-    int node_type;
+    int node_type, token_type;
 
     left = first();
+    token_type = g_token.type;
 
     if(g_token.type == EOF_T)
     {
         return (left);
     }
+    printf("token_type priority: %d\n", priority_of(token_type));
+    while(priority_of(token_type) > pervious_token_priority)
+    {
 
-    node_type = token_to_ast_op(g_token.type);
-    
-    right = build_ast();
-    
-    node = make_node(node_type, left, right, 0);
-    return (node);
+        right = build_ast(op_priority[token_type]);
+        left = make_node(token_to_ast_op(token_type), left, right, 0);
+        token_type = g_token.type;
+
+        if(token_type == EOF_T)
+            return left;
+        
+    }
+
+    return (left);
 }
 
 int main(int argc, char** argv)
@@ -62,7 +70,7 @@ int main(int argc, char** argv)
     char* file_name = argv[1];
     input_file = fopen(file_name, "r");
 
-    struct ast_node *node = build_ast();
+    struct ast_node *node = build_ast(0);
 
     printf("%d\n", interprete_ast_tree(node));
 
