@@ -8,3 +8,4 @@ notebook/cs231n/*/cs231n/__pycache__/*
 jff/torch/data/
 *.bin
 *.codegen
+*.s

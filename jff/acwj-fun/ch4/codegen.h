@@ -40,6 +40,24 @@ int codegen_div(int reg1, int reg2)
     return reg1;
 }
 
+int codegen_pre_asm()
+{
+    fprintf(output_file, "start\n");
+    return 1;
+}
+
+int codegen_printint(int reg)
+{
+    fprintf(output_file, "printint rx\n");
+    return 1;
+}
+
+int codegen_post_asm()
+{
+    fprintf(output_file, "end\n");
+    return 1;
+}
+
 int gen_ast(struct ast_node* node)
 {
     int left_result = 0, right_result = 0;
@@ -66,7 +84,12 @@ int gen_ast(struct ast_node* node)
 
 int gen_asm(struct ast_node* node)
 {
-    return gen_ast(node);
+    int ret = 0;
+    codegen_pre_asm();
+    ret = gen_ast(node);
+    codegen_printint(ret);
+    codegen_post_asm();
+    return ret;
 }
 
 #endif // CODEGEN_H
