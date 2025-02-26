@@ -40,10 +40,8 @@ struct ast_node* build_ast(int pervious_token_priority)
     token_type = g_token.type;
 
     if(g_token.type == EOF_T)
-    {
         return (left);
-    }
-    printf("token_type priority: %d\n", priority_of(token_type));
+
     while(priority_of(token_type) > pervious_token_priority)
     {
 
