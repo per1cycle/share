@@ -42,7 +42,28 @@ int codegen_div(int reg1, int reg2)
 
 int codegen_pre_asm()
 {
-    fprintf(output_file, "start\n");
+    fprintf(output_file, 
+        "\t.global _main\n"
+        "\t.p2align 2\n"
+        "\n"
+        "_print:\n"
+        "\tsub\tsp, sp, #32\n"
+        "\tstp\tx29, x30, [sp, #16]\n"
+        "\tadd\tx29, sp, #16\n"
+        "\tstur\tw0, [x29, #-4]\n"
+        "\tldur\tw9, [x29, #-4]\n"
+        "\tmov\tx8, x9\n"
+        "\tmov\tx9, sp\n"
+        "\tstr\tx8, [x9]\n"
+        "\tadrp\tx0, l_.str@PAGE\n"
+        "\tadd\tx0, x0, l_.str@PAGEOFF\n"
+        "\tbl\t_printf\n"
+        "\tldp\tx29, x30, [sp, #16]\n"
+        "\tadd\tsp, sp, #32\n"
+        "\tret\n"
+        "\n"
+    );
+
     return 1;
 }
 
