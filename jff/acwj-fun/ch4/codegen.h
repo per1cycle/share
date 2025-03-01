@@ -115,6 +115,11 @@ int codegen_pre_asm()
         "\tadd\tsp, sp, #32\n"
         "\tret\n"
         "\n"
+        "l_.str:\n"
+        "\t.asciz  \"%%d\"\n"
+        "\n"
+        "\t_main:\n"
+
     );
 
     return 1;
