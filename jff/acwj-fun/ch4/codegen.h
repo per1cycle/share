@@ -3,6 +3,39 @@
 #include "helper.h"
 #include "ast.h"
 extern FILE* output_file;
+// TODO
+/**
+ * code generator structure.
+ */
+// typedef struct codegen
+// {
+//     int (*codegen_add)(int reg1, int reg2);
+//     int (*codegen_minus)(int reg1, int reg2);
+//     int (*codegen_mul)(int reg1, int reg2);
+//     int (*codegen_div)(int reg1, int reg2);
+//     int (*codegen_load)(int value);
+//     int (*codegen_printint)(int reg);
+//     int (*codegen_pre_asm)();
+//     int (*codegen_post_asm)();
+// } codegen;
+enum REGISTERS 
+{
+    W8 = 0,
+    W9,
+    W10,
+    W11,
+    W12,
+    W13,
+    W14,
+    W15,
+    REGISTERS_NUM
+};
+// status of a register, 0 if free, 1 if used.
+int regs[REGISTERS_NUM];
+const char *registers[] = 
+{
+    "w8", "w9", "w10", "w11", "w12", "w13", "w14", "w15",
+};
 
 int codegen_add(int reg1, int reg2);
 int codegen_minus(int reg1, int reg2);
@@ -40,8 +73,28 @@ int codegen_div(int reg1, int reg2)
     return reg1;
 }
 
+void free_all_registers()
+{
+    for(int i = 0; i < REGISTERS_NUM; i++)
+        regs[i] = 0;
+}
+
+int allocate_register()
+{
+    for(int i = 0; i < REGISTERS_NUM; i++)
+    {
+        if(regs[i] == 0)
+        {
+            regs[i] = 1;
+            return i;
+        }
+    }
+    return -1;
+}
+
 int codegen_pre_asm()
 {
+    free_all_registers();
     fprintf(output_file, 
         "\t.global _main\n"
         "\t.p2align 2\n"
@@ -67,15 +120,20 @@ int codegen_pre_asm()
     return 1;
 }
 
-int codegen_printint(int reg)
+int codegen_printint(int result)
 {
-    fprintf(output_file, "printint rx\n");
+    fprintf(output_file, "mov w0, %d\n", result);
     return 1;
 }
 
 int codegen_post_asm()
 {
-    fprintf(output_file, "end\n");
+    fprintf(output_file, 
+        "\n"
+        "l_.str:\n"
+        "\t.string \"%%d\\n\"\n"
+        "\n"
+    );
     return 1;
 }
 
