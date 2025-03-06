@@ -15,6 +15,12 @@ https://github.com/freebsd/freebsd-ports/blob/main/emulators/qemu-user-static/Ma
 ```zsh
 pkg update
 pkg install poudriere qemu-user-static
+sysrc qemu_user_static_enable=YES
+service qemu_user_static start
+
+poudriere jail -c # create jails for bulk
+
+poudriere bulk -a -j xxx # specify running jail
 ```
 
 btw, jail is also needed for the whole process
