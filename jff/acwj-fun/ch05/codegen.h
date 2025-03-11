@@ -3,7 +3,7 @@
 #include "helper.h"
 #include "ast.h"
 extern FILE* output_file;
-// TODO
+// TODO, gen code for arm aarch64 platform, but currently has no plan
 /**
  * code generator structure.
  */

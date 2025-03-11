@@ -1,0 +1,818 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADD_A	jff/acwj-fun/ch02/ast.h	/^    ADD_A,$/;"	e	enum:__anon3
+ADD_A	jff/acwj-fun/ch03/ast.h	/^    ADD_A,$/;"	e	enum:__anon2
+ADD_A	jff/acwj-fun/ch04/ast.h	/^    ADD_A,$/;"	e	enum:__anon1
+ADD_A	jff/acwj-fun/ch05/ast.h	/^    ADD_A,$/;"	e	enum:__anon4
+ADD_T	jff/acwj-fun/ch02/helper.h	/^    ADD_T ,$/;"	e	enum:TOKEN_TYPE
+ADD_T	jff/acwj-fun/ch03/helper.h	/^    ADD_T ,$/;"	e	enum:TOKEN_TYPE
+ADD_T	jff/acwj-fun/ch04/helper.h	/^    ADD_T ,$/;"	e	enum:TOKEN_TYPE
+ADD_T	jff/acwj-fun/ch05/helper.h	/^    ADD_T ,$/;"	e	enum:TOKEN_TYPE
+AST_H	jff/acwj-fun/ch02/ast.h	/^#define AST_H$/;"	d
+AST_H	jff/acwj-fun/ch03/ast.h	/^#define AST_H$/;"	d
+AST_H	jff/acwj-fun/ch04/ast.h	/^#define AST_H$/;"	d
+AST_H	jff/acwj-fun/ch05/ast.h	/^#define AST_H$/;"	d
+BASE_DIR	notebook/cs231n/a3/cs231n/coco_utils.py	/^BASE_DIR = os.path.join(dir_path, "datasets\/coco_captioning")$/;"	v
+CIFAR10	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^from torchvision.datasets import CIFAR10$/;"	i
+CIFAR10Pair	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^class CIFAR10Pair(CIFAR10):$/;"	c
+CODEGEN_H	jff/acwj-fun/ch04/codegen.h	/^#define CODEGEN_H$/;"	d
+CODEGEN_H	jff/acwj-fun/ch05/codegen.h	/^#define CODEGEN_H$/;"	d
+CaptioningRNN	notebook/cs231n/a3/cs231n/classifiers/rnn.py	/^class CaptioningRNN:$/;"	c
+CaptioningSolver	notebook/cs231n/a3/cs231n/captioning_solver.py	/^class CaptioningSolver(object):$/;"	c
+CaptioningSolverTransformer	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^class CaptioningSolverTransformer(object):$/;"	c
+CaptioningTransformer	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^class CaptioningTransformer(nn.Module):$/;"	c
+ChunkSampler	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^class ChunkSampler(sampler.Sampler):$/;"	c
+DIV_A	jff/acwj-fun/ch02/ast.h	/^    DIV_A,$/;"	e	enum:__anon3
+DIV_A	jff/acwj-fun/ch03/ast.h	/^    DIV_A,$/;"	e	enum:__anon2
+DIV_A	jff/acwj-fun/ch04/ast.h	/^    DIV_A,$/;"	e	enum:__anon1
+DIV_A	jff/acwj-fun/ch05/ast.h	/^    DIV_A,$/;"	e	enum:__anon4
+DIV_T	jff/acwj-fun/ch01/main.c	/^    DIV_T,$/;"	e	enum:TOKEN_TYPE	file:
+DIV_T	jff/acwj-fun/ch02/helper.h	/^    DIV_T,$/;"	e	enum:TOKEN_TYPE
+DIV_T	jff/acwj-fun/ch03/helper.h	/^    DIV_T,$/;"	e	enum:TOKEN_TYPE
+DIV_T	jff/acwj-fun/ch04/helper.h	/^    DIV_T,$/;"	e	enum:TOKEN_TYPE
+DIV_T	jff/acwj-fun/ch05/helper.h	/^    DIV_T,$/;"	e	enum:TOKEN_TYPE
+DataLoader	notebook/cs231n/a2/pytorch_cifar.py	/^from torch.utils.data import DataLoader$/;"	i
+DataLoader	notebook/cs231n/a3/cs231n/simclr/utils.py	/^from torch.utils.data import DataLoader$/;"	i
+EOF_T	jff/acwj-fun/ch02/helper.h	/^    EOF_T = 0,$/;"	e	enum:TOKEN_TYPE
+EOF_T	jff/acwj-fun/ch03/helper.h	/^    EOF_T = 0,$/;"	e	enum:TOKEN_TYPE
+EOF_T	jff/acwj-fun/ch04/helper.h	/^    EOF_T = 0,$/;"	e	enum:TOKEN_TYPE
+EOF_T	jff/acwj-fun/ch05/helper.h	/^    EOF_T = 0,$/;"	e	enum:TOKEN_TYPE
+Extension	notebook/cs231n/a2/cs231n/setup.py	/^from distutils.extension import Extension$/;"	i
+F	notebook/cs231n/a3/cs231n/simclr/model.py	/^import torch.nn.functional as F$/;"	i
+F	notebook/cs231n/a3/cs231n/transformer_layers.py	/^from torch.nn import functional as F$/;"	i
+Factorial	jff/lest/samples/lest-unittest01.cc	/^int Factorial(int n)$/;"	f
+Fib	jff/lest/samples/lest-unittest01.cc	/^int Fib(int n)$/;"	f
+Flatten	notebook/cs231n/a2/pytorch_cifar.py	/^class Flatten(nn.Module):$/;"	c
+Flatten	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^class Flatten(nn.Module):$/;"	c
+FullyConnectedNet	notebook/cs231n/a2/cs231n/classifiers/fc_net.py	/^class FullyConnectedNet(object):$/;"	c
+HELPER_H	jff/acwj-fun/ch02/helper.h	/^#define HELPER_H$/;"	d
+HELPER_H	jff/acwj-fun/ch03/helper.h	/^#define HELPER_H$/;"	d
+HELPER_H	jff/acwj-fun/ch04/helper.h	/^#define HELPER_H$/;"	d
+HELPER_H	jff/acwj-fun/ch05/helper.h	/^#define HELPER_H$/;"	d
+INT_A	jff/acwj-fun/ch02/ast.h	/^    INT_A,$/;"	e	enum:__anon3
+INT_A	jff/acwj-fun/ch03/ast.h	/^    INT_A,$/;"	e	enum:__anon2
+INT_A	jff/acwj-fun/ch04/ast.h	/^    INT_A,$/;"	e	enum:__anon1
+INT_A	jff/acwj-fun/ch05/ast.h	/^    INT_A,$/;"	e	enum:__anon4
+INT_T	jff/acwj-fun/ch01/main.c	/^    INT_T,$/;"	e	enum:TOKEN_TYPE	file:
+INT_T	jff/acwj-fun/ch02/helper.h	/^    INT_T,$/;"	e	enum:TOKEN_TYPE
+INT_T	jff/acwj-fun/ch03/helper.h	/^    INT_T,$/;"	e	enum:TOKEN_TYPE
+INT_T	jff/acwj-fun/ch04/helper.h	/^    INT_T,$/;"	e	enum:TOKEN_TYPE
+INT_T	jff/acwj-fun/ch05/helper.h	/^    INT_T,$/;"	e	enum:TOKEN_TYPE
+Image	notebook/cs231n/a2/cs231n/image_utils.py	/^from PIL import Image$/;"	i
+Image	notebook/cs231n/a3/cs231n/image_utils.py	/^from PIL import Image$/;"	i
+Image	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^from PIL import Image$/;"	i
+KNearestNeighbor	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^class KNearestNeighbor(object):$/;"	c
+LOG	jff/acwj-fun/ch01/helper.h	/^#define LOG(/;"	d
+LinearClassifier	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^class LinearClassifier(object):$/;"	c
+LinearSVM	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^class LinearSVM(LinearClassifier):$/;"	c
+MERGE	notebook/cs231n/a2/makepdf.py	/^    MERGE = False$/;"	v
+MERGE	notebook/cs231n/a2/makepdf.py	/^    MERGE = True$/;"	v
+MERGE	notebook/cs231n/a3/makepdf.py	/^    MERGE = False$/;"	v
+MERGE	notebook/cs231n/a3/makepdf.py	/^    MERGE = True$/;"	v
+MINUS_A	jff/acwj-fun/ch02/ast.h	/^    MINUS_A,$/;"	e	enum:__anon3
+MINUS_A	jff/acwj-fun/ch03/ast.h	/^    MINUS_A,$/;"	e	enum:__anon2
+MINUS_A	jff/acwj-fun/ch04/ast.h	/^    MINUS_A,$/;"	e	enum:__anon1
+MINUS_A	jff/acwj-fun/ch05/ast.h	/^    MINUS_A,$/;"	e	enum:__anon4
+MINUS_T	jff/acwj-fun/ch01/main.c	/^    MINUS_T,$/;"	e	enum:TOKEN_TYPE	file:
+MINUS_T	jff/acwj-fun/ch02/helper.h	/^    MINUS_T,$/;"	e	enum:TOKEN_TYPE
+MINUS_T	jff/acwj-fun/ch03/helper.h	/^    MINUS_T,$/;"	e	enum:TOKEN_TYPE
+MINUS_T	jff/acwj-fun/ch04/helper.h	/^    MINUS_T,$/;"	e	enum:TOKEN_TYPE
+MINUS_T	jff/acwj-fun/ch05/helper.h	/^    MINUS_T,$/;"	e	enum:TOKEN_TYPE
+MUL_A	jff/acwj-fun/ch02/ast.h	/^    MUL_A,$/;"	e	enum:__anon3
+MUL_A	jff/acwj-fun/ch03/ast.h	/^    MUL_A,$/;"	e	enum:__anon2
+MUL_A	jff/acwj-fun/ch04/ast.h	/^    MUL_A,$/;"	e	enum:__anon1
+MUL_A	jff/acwj-fun/ch05/ast.h	/^    MUL_A,$/;"	e	enum:__anon4
+MUL_T	jff/acwj-fun/ch01/main.c	/^    MUL_T,$/;"	e	enum:TOKEN_TYPE	file:
+MUL_T	jff/acwj-fun/ch02/helper.h	/^    MUL_T,$/;"	e	enum:TOKEN_TYPE
+MUL_T	jff/acwj-fun/ch03/helper.h	/^    MUL_T,$/;"	e	enum:TOKEN_TYPE
+MUL_T	jff/acwj-fun/ch04/helper.h	/^    MUL_T,$/;"	e	enum:TOKEN_TYPE
+MUL_T	jff/acwj-fun/ch05/helper.h	/^    MUL_T,$/;"	e	enum:TOKEN_TYPE
+Model	notebook/cs231n/a3/cs231n/simclr/model.py	/^class Model(nn.Module):$/;"	c
+MultiHeadAttention	notebook/cs231n/a3/cs231n/transformer_layers.py	/^class MultiHeadAttention(nn.Module):$/;"	c
+NOISE_DIM	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^NOISE_DIM = 96$/;"	v
+PIL	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import PIL$/;"	i
+PLUS_T	jff/acwj-fun/ch01/main.c	/^    PLUS_T = 0,$/;"	e	enum:TOKEN_TYPE	file:
+PRIO_H	jff/acwj-fun/ch03/prio.h	/^#define PRIO_H$/;"	d
+PRIO_H	jff/acwj-fun/ch04/prio.h	/^#define PRIO_H$/;"	d
+PRIO_H	jff/acwj-fun/ch05/prio.h	/^#define PRIO_H$/;"	d
+PdfMerger	notebook/cs231n/a2/makepdf.py	/^    from PyPDF2 import PdfMerger$/;"	i
+PdfMerger	notebook/cs231n/a3/makepdf.py	/^    from PyPDF2 import PdfMerger$/;"	i
+PositionalEncoding	notebook/cs231n/a3/cs231n/transformer_layers.py	/^class PositionalEncoding(nn.Module):$/;"	c
+REGISTERS	jff/acwj-fun/ch04/codegen.h	/^enum REGISTERS $/;"	g
+REGISTERS	jff/acwj-fun/ch05/codegen.h	/^enum REGISTERS $/;"	g
+REGISTERS_NUM	jff/acwj-fun/ch04/codegen.h	/^    REGISTERS_NUM$/;"	e	enum:REGISTERS
+REGISTERS_NUM	jff/acwj-fun/ch05/codegen.h	/^    REGISTERS_NUM$/;"	e	enum:REGISTERS
+SCAN_H	jff/acwj-fun/ch02/scan.h	/^#define SCAN_H$/;"	d
+SCAN_H	jff/acwj-fun/ch03/scan.h	/^#define SCAN_H$/;"	d
+SCAN_H	jff/acwj-fun/ch04/scan.h	/^#define SCAN_H$/;"	d
+SCAN_H	jff/acwj-fun/ch05/scan.h	/^#define SCAN_H$/;"	d
+SQUEEZENET_MEAN	notebook/cs231n/a2/cs231n/image_utils.py	/^SQUEEZENET_MEAN = np.array([0.485, 0.456, 0.406], dtype=np.float32)$/;"	v
+SQUEEZENET_MEAN	notebook/cs231n/a3/cs231n/image_utils.py	/^SQUEEZENET_MEAN = np.array([0.485, 0.456, 0.406], dtype=np.float32)$/;"	v
+SQUEEZENET_STD	notebook/cs231n/a2/cs231n/image_utils.py	/^SQUEEZENET_STD = np.array([0.229, 0.224, 0.225], dtype=np.float32)$/;"	v
+SQUEEZENET_STD	notebook/cs231n/a3/cs231n/image_utils.py	/^SQUEEZENET_STD = np.array([0.229, 0.224, 0.225], dtype=np.float32)$/;"	v
+Softmax	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^class Softmax(LinearClassifier):$/;"	c
+Solver	notebook/cs231n/a1/cs231n/solver.py	/^class Solver(object):$/;"	c
+Solver	notebook/cs231n/a2/cs231n/solver.py	/^class Solver(object):$/;"	c
+T	notebook/cs231n/a2/pytorch_cifar.py	/^import torchvision.transforms as T$/;"	i
+T	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import torchvision.transforms as T$/;"	i
+TEST	jff/lest/samples/lest-unittest01.cc	/^TEST(FactorialTest, Positive)$/;"	f
+TEST	jff/lest/samples/lest-unittest01.cc	/^TEST(FibonacciTest, Positive)$/;"	f
+TOKEN_TYPE	jff/acwj-fun/ch01/main.c	/^enum TOKEN_TYPE {$/;"	g	file:
+TOKEN_TYPE	jff/acwj-fun/ch02/helper.h	/^enum TOKEN_TYPE {$/;"	g
+TOKEN_TYPE	jff/acwj-fun/ch03/helper.h	/^enum TOKEN_TYPE {$/;"	g
+TOKEN_TYPE	jff/acwj-fun/ch04/helper.h	/^enum TOKEN_TYPE {$/;"	g
+TOKEN_TYPE	jff/acwj-fun/ch05/helper.h	/^enum TOKEN_TYPE {$/;"	g
+ThreeLayerConvNet	notebook/cs231n/a2/cs231n/classifiers/cnn.py	/^class ThreeLayerConvNet(object):$/;"	c
+TransformerDecoder	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^class TransformerDecoder(nn.Module):$/;"	c
+TransformerDecoderLayer	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^class TransformerDecoderLayer(nn.Module):$/;"	c
+TwoLayerNet	notebook/cs231n/a1/cs231n/classifiers/fc_net.py	/^class TwoLayerNet(object):$/;"	c
+UNKNOWN_T	jff/acwj-fun/ch01/main.c	/^    UNKNOWN_T,$/;"	e	enum:TOKEN_TYPE	file:
+UNKNOWN_T	jff/acwj-fun/ch02/helper.h	/^    UNKNOWN_T,$/;"	e	enum:TOKEN_TYPE
+UNKNOWN_T	jff/acwj-fun/ch03/helper.h	/^    UNKNOWN_T,$/;"	e	enum:TOKEN_TYPE
+UNKNOWN_T	jff/acwj-fun/ch04/helper.h	/^    UNKNOWN_T,$/;"	e	enum:TOKEN_TYPE
+UNKNOWN_T	jff/acwj-fun/ch05/helper.h	/^    UNKNOWN_T,$/;"	e	enum:TOKEN_TYPE
+UTILS_H	jff/cuda/ch1/utils.h	/^#define UTILS_H$/;"	d
+Unflatten	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^class Unflatten(nn.Module):$/;"	c
+Variable	notebook/cs231n/a2/pytorch_cifar.py	/^from torch.autograd import Variable$/;"	i
+W10	jff/acwj-fun/ch04/codegen.h	/^    W10,$/;"	e	enum:REGISTERS
+W10	jff/acwj-fun/ch05/codegen.h	/^    W10,$/;"	e	enum:REGISTERS
+W11	jff/acwj-fun/ch04/codegen.h	/^    W11,$/;"	e	enum:REGISTERS
+W11	jff/acwj-fun/ch05/codegen.h	/^    W11,$/;"	e	enum:REGISTERS
+W12	jff/acwj-fun/ch04/codegen.h	/^    W12,$/;"	e	enum:REGISTERS
+W12	jff/acwj-fun/ch05/codegen.h	/^    W12,$/;"	e	enum:REGISTERS
+W13	jff/acwj-fun/ch04/codegen.h	/^    W13,$/;"	e	enum:REGISTERS
+W13	jff/acwj-fun/ch05/codegen.h	/^    W13,$/;"	e	enum:REGISTERS
+W14	jff/acwj-fun/ch04/codegen.h	/^    W14,$/;"	e	enum:REGISTERS
+W14	jff/acwj-fun/ch05/codegen.h	/^    W14,$/;"	e	enum:REGISTERS
+W15	jff/acwj-fun/ch04/codegen.h	/^    W15,$/;"	e	enum:REGISTERS
+W15	jff/acwj-fun/ch05/codegen.h	/^    W15,$/;"	e	enum:REGISTERS
+W8	jff/acwj-fun/ch04/codegen.h	/^    W8 = 0,$/;"	e	enum:REGISTERS
+W8	jff/acwj-fun/ch05/codegen.h	/^    W8 = 0,$/;"	e	enum:REGISTERS
+W9	jff/acwj-fun/ch04/codegen.h	/^    W9,$/;"	e	enum:REGISTERS
+W9	jff/acwj-fun/ch05/codegen.h	/^    W9,$/;"	e	enum:REGISTERS
+__getitem__	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^    def __getitem__(self, index):$/;"	m	class:CIFAR10Pair	file:
+__init__	notebook/cs231n/a1/cs231n/classifiers/fc_net.py	/^    def __init__($/;"	m	class:TwoLayerNet
+__init__	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^    def __init__(self):$/;"	m	class:KNearestNeighbor
+__init__	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^    def __init__(self):$/;"	m	class:LinearClassifier
+__init__	notebook/cs231n/a1/cs231n/solver.py	/^    def __init__(self, model, data, **kwargs):$/;"	m	class:Solver
+__init__	notebook/cs231n/a2/cs231n/classifiers/cnn.py	/^    def __init__($/;"	m	class:ThreeLayerConvNet
+__init__	notebook/cs231n/a2/cs231n/classifiers/fc_net.py	/^    def __init__($/;"	m	class:FullyConnectedNet
+__init__	notebook/cs231n/a2/cs231n/solver.py	/^    def __init__(self, model, data, **kwargs):$/;"	m	class:Solver
+__init__	notebook/cs231n/a3/cs231n/captioning_solver.py	/^    def __init__(self, model, data, **kwargs):$/;"	m	class:CaptioningSolver
+__init__	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^    def __init__(self, model, data, idx_to_word, **kwargs):$/;"	m	class:CaptioningSolverTransformer
+__init__	notebook/cs231n/a3/cs231n/classifiers/rnn.py	/^    def __init__($/;"	m	class:CaptioningRNN
+__init__	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^    def __init__(self, decoder_layer, num_layers):$/;"	m	class:TransformerDecoder
+__init__	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^    def __init__(self, input_dim, num_heads, dim_feedforward=2048, dropout=0.1):$/;"	m	class:TransformerDecoderLayer
+__init__	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^    def __init__(self, word_to_idx, input_dim, wordvec_dim, num_heads=4,$/;"	m	class:CaptioningTransformer
+__init__	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^    def __init__(self, N=-1, C=128, H=7, W=7):$/;"	m	class:Unflatten
+__init__	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^    def __init__(self, num_samples, start=0):$/;"	m	class:ChunkSampler
+__init__	notebook/cs231n/a3/cs231n/simclr/model.py	/^    def __init__(self, feature_dim=128):$/;"	m	class:Model
+__init__	notebook/cs231n/a3/cs231n/transformer_layers.py	/^    def __init__(self, embed_dim, dropout=0.1, max_len=5000):$/;"	m	class:PositionalEncoding
+__init__	notebook/cs231n/a3/cs231n/transformer_layers.py	/^    def __init__(self, embed_dim, num_heads, dropout=0.1):$/;"	m	class:MultiHeadAttention
+__iter__	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^    def __iter__(self):$/;"	m	class:ChunkSampler	file:
+__len__	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^    def __len__(self):$/;"	m	class:ChunkSampler	file:
+_init_weights	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^    def _init_weights(self, module):$/;"	m	class:CaptioningTransformer
+_main	jff/acwj-fun/ch04/sample.s	/^_main:$/;"	l
+_main	jff/acwj-fun/ch05/sample.s	/^_main:$/;"	l
+_main	jff/acwj-fun/playground/main.s	/^_main:                                  ; @main$/;"	l
+_print	jff/acwj-fun/ch04/sample.s	/^_print:$/;"	l
+_print	jff/acwj-fun/ch05/sample.s	/^_print:$/;"	l
+_reset	notebook/cs231n/a1/cs231n/solver.py	/^    def _reset(self):$/;"	m	class:Solver
+_reset	notebook/cs231n/a2/cs231n/solver.py	/^    def _reset(self):$/;"	m	class:Solver
+_reset	notebook/cs231n/a3/cs231n/captioning_solver.py	/^    def _reset(self):$/;"	m	class:CaptioningSolver
+_reset	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^    def _reset(self):$/;"	m	class:CaptioningSolverTransformer
+_save_checkpoint	notebook/cs231n/a1/cs231n/solver.py	/^    def _save_checkpoint(self):$/;"	m	class:Solver
+_save_checkpoint	notebook/cs231n/a2/cs231n/solver.py	/^    def _save_checkpoint(self):$/;"	m	class:Solver
+_step	notebook/cs231n/a1/cs231n/solver.py	/^    def _step(self):$/;"	m	class:Solver
+_step	notebook/cs231n/a2/cs231n/solver.py	/^    def _step(self):$/;"	m	class:Solver
+_step	notebook/cs231n/a3/cs231n/captioning_solver.py	/^    def _step(self):$/;"	m	class:CaptioningSolver
+_step	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^    def _step(self):$/;"	m	class:CaptioningSolverTransformer
+adam	notebook/cs231n/a1/cs231n/optim.py	/^def adam(w, dw, config=None):$/;"	f
+adam	notebook/cs231n/a2/cs231n/optim.py	/^def adam(w, dw, config=None):$/;"	f
+adam	notebook/cs231n/a3/cs231n/optim.py	/^def adam(w, dw, config=None):$/;"	f
+affine_backward	notebook/cs231n/a1/cs231n/layers.py	/^def affine_backward(dout, cache):$/;"	f
+affine_backward	notebook/cs231n/a2/cs231n/layers.py	/^def affine_backward(dout, cache):$/;"	f
+affine_backward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def affine_backward(dout, cache):$/;"	f
+affine_forward	notebook/cs231n/a1/cs231n/layers.py	/^def affine_forward(x, w, b):$/;"	f
+affine_forward	notebook/cs231n/a2/cs231n/layers.py	/^def affine_forward(x, w, b):$/;"	f
+affine_forward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def affine_forward(x, w, b):$/;"	f
+affine_relu_backward	notebook/cs231n/a1/cs231n/layer_utils.py	/^def affine_relu_backward(dout, cache):$/;"	f
+affine_relu_backward	notebook/cs231n/a2/cs231n/layer_utils.py	/^def affine_relu_backward(dout, cache):$/;"	f
+affine_relu_forward	notebook/cs231n/a1/cs231n/layer_utils.py	/^def affine_relu_forward(x, w, b):$/;"	f
+affine_relu_forward	notebook/cs231n/a2/cs231n/layer_utils.py	/^def affine_relu_forward(x, w, b):$/;"	f
+allocate_register	jff/acwj-fun/ch04/codegen.h	/^int allocate_register()$/;"	f
+allocate_register	jff/acwj-fun/ch05/codegen.h	/^int allocate_register()$/;"	f
+argparse	notebook/cs231n/a2/makepdf.py	/^import argparse$/;"	i
+argparse	notebook/cs231n/a3/makepdf.py	/^import argparse$/;"	i
+args	notebook/cs231n/a2/makepdf.py	/^    args = parser.parse_args()$/;"	v
+args	notebook/cs231n/a3/makepdf.py	/^    args = parser.parse_args()$/;"	v
+ast_node	jff/acwj-fun/ch02/ast.h	/^struct ast_node$/;"	s
+ast_node	jff/acwj-fun/ch03/ast.h	/^struct ast_node$/;"	s
+ast_node	jff/acwj-fun/ch04/ast.h	/^struct ast_node$/;"	s
+ast_node	jff/acwj-fun/ch05/ast.h	/^struct ast_node$/;"	s
+batchnorm_backward	notebook/cs231n/a1/cs231n/layers.py	/^def batchnorm_backward(dout, cache):$/;"	f
+batchnorm_backward	notebook/cs231n/a2/cs231n/layers.py	/^def batchnorm_backward(dout, cache):$/;"	f
+batchnorm_backward_alt	notebook/cs231n/a1/cs231n/layers.py	/^def batchnorm_backward_alt(dout, cache):$/;"	f
+batchnorm_backward_alt	notebook/cs231n/a2/cs231n/layers.py	/^def batchnorm_backward_alt(dout, cache):$/;"	f
+batchnorm_forward	notebook/cs231n/a1/cs231n/layers.py	/^def batchnorm_forward(x, gamma, beta, bn_param):$/;"	f
+batchnorm_forward	notebook/cs231n/a2/cs231n/layers.py	/^def batchnorm_forward(x, gamma, beta, bn_param):$/;"	f
+bce_loss	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def bce_loss(input, target):$/;"	f
+blur_image	notebook/cs231n/a2/cs231n/image_utils.py	/^def blur_image(X):$/;"	f
+blur_image	notebook/cs231n/a3/cs231n/image_utils.py	/^def blur_image(X):$/;"	f
+build_ast	jff/acwj-fun/ch02/main.c	/^struct ast_node* build_ast()$/;"	f
+build_ast	jff/acwj-fun/ch03/main.c	/^struct ast_node* build_ast(int pervious_token_priority)$/;"	f
+build_ast	jff/acwj-fun/ch04/main.c	/^struct ast_node* build_ast(int pervious_token_priority)$/;"	f
+build_ast	jff/acwj-fun/ch05/main.c	/^struct ast_node* build_ast(int pervious_token_priority)$/;"	f
+build_dc_classifier	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def build_dc_classifier(batch_size):$/;"	f
+build_dc_generator	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def build_dc_generator(noise_dim=NOISE_DIM):$/;"	f
+ceil	notebook/cs231n/a1/cs231n/vis_utils.py	/^from math import sqrt, ceil$/;"	i
+ceil	notebook/cs231n/a2/cs231n/vis_utils.py	/^from math import sqrt, ceil$/;"	i
+check_accuracy	notebook/cs231n/a1/cs231n/solver.py	/^    def check_accuracy(self, X, y, num_samples=None, batch_size=100):$/;"	m	class:Solver
+check_accuracy	notebook/cs231n/a2/cs231n/solver.py	/^    def check_accuracy(self, X, y, num_samples=None, batch_size=100):$/;"	m	class:Solver
+check_accuracy	notebook/cs231n/a3/cs231n/captioning_solver.py	/^    def check_accuracy(self, X, y, num_samples=None, batch_size=100):$/;"	m	class:CaptioningSolver
+clever_format	notebook/cs231n/a3/cs231n/simclr/utils.py	/^from thop import profile, clever_format$/;"	i
+clones	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^def clones(module, N):$/;"	f
+codegen_add	jff/acwj-fun/ch04/codegen.h	/^int codegen_add(int reg1, int reg2)$/;"	f
+codegen_add	jff/acwj-fun/ch05/codegen.h	/^int codegen_add(int reg1, int reg2)$/;"	f
+codegen_div	jff/acwj-fun/ch04/codegen.h	/^int codegen_div(int reg1, int reg2)$/;"	f
+codegen_div	jff/acwj-fun/ch05/codegen.h	/^int codegen_div(int reg1, int reg2)$/;"	f
+codegen_load	jff/acwj-fun/ch04/codegen.h	/^int codegen_load(int value)$/;"	f
+codegen_load	jff/acwj-fun/ch05/codegen.h	/^int codegen_load(int value)$/;"	f
+codegen_minus	jff/acwj-fun/ch04/codegen.h	/^int codegen_minus(int reg1, int reg2)$/;"	f
+codegen_minus	jff/acwj-fun/ch05/codegen.h	/^int codegen_minus(int reg1, int reg2)$/;"	f
+codegen_mul	jff/acwj-fun/ch04/codegen.h	/^int codegen_mul(int reg1, int reg2)$/;"	f
+codegen_mul	jff/acwj-fun/ch05/codegen.h	/^int codegen_mul(int reg1, int reg2)$/;"	f
+codegen_post_asm	jff/acwj-fun/ch04/codegen.h	/^int codegen_post_asm()$/;"	f
+codegen_post_asm	jff/acwj-fun/ch05/codegen.h	/^int codegen_post_asm()$/;"	f
+codegen_pre_asm	jff/acwj-fun/ch04/codegen.h	/^int codegen_pre_asm()$/;"	f
+codegen_pre_asm	jff/acwj-fun/ch05/codegen.h	/^int codegen_pre_asm()$/;"	f
+codegen_printint	jff/acwj-fun/ch04/codegen.h	/^int codegen_printint(int result)$/;"	f
+codegen_printint	jff/acwj-fun/ch05/codegen.h	/^int codegen_printint(int result)$/;"	f
+col2im_6d_cython	notebook/cs231n/a2/cs231n/fast_layers.py	/^    from .im2col_cython import col2im_6d_cython$/;"	i
+col2im_6d_cython	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^def col2im_6d_cython(np.ndarray[DTYPE_t, ndim=6] cols, int N, int C, int H, int W,$/;"	f
+col2im_6d_cython_inner	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^cdef col2im_6d_cython_inner(np.ndarray[DTYPE_t, ndim=6] cols,$/;"	f
+col2im_cython	notebook/cs231n/a2/cs231n/fast_layers.py	/^    from .im2col_cython import col2im_cython, im2col_cython$/;"	i
+col2im_cython	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^def col2im_cython(np.ndarray[DTYPE_t, ndim=2] cols, int N, int C, int H, int W,$/;"	f
+col2im_cython_inner	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^cdef int col2im_cython_inner(np.ndarray[DTYPE_t, ndim=2] cols,$/;"	f
+col2im_indices	notebook/cs231n/a2/cs231n/im2col.py	/^def col2im_indices(cols, x_shape, field_height=3, field_width=3, padding=1, stride=1):$/;"	f
+color_histogram_hsv	notebook/cs231n/a1/cs231n/features.py	/^def color_histogram_hsv(im, nbin=10, xmin=0, xmax=255, normalized=True):$/;"	f
+compute_distances_no_loops	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^    def compute_distances_no_loops(self, X):$/;"	m	class:KNearestNeighbor
+compute_distances_one_loop	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^    def compute_distances_one_loop(self, X):$/;"	m	class:KNearestNeighbor
+compute_distances_two_loops	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^    def compute_distances_two_loops(self, X):$/;"	m	class:KNearestNeighbor
+compute_sim_matrix	notebook/cs231n/a3/cs231n/simclr/contrastive_loss.py	/^def compute_sim_matrix(out):$/;"	f
+compute_test_transform	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^def compute_test_transform():$/;"	f
+compute_train_transform	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^def compute_train_transform(seed=123456):$/;"	f
+conv_backward_fast	notebook/cs231n/a2/cs231n/fast_layers.py	/^conv_backward_fast = conv_backward_strides$/;"	v
+conv_backward_im2col	notebook/cs231n/a2/cs231n/fast_layers.py	/^def conv_backward_im2col(dout, cache):$/;"	f
+conv_backward_naive	notebook/cs231n/a1/cs231n/layers.py	/^def conv_backward_naive(dout, cache):$/;"	f
+conv_backward_naive	notebook/cs231n/a2/cs231n/layers.py	/^def conv_backward_naive(dout, cache):$/;"	f
+conv_backward_strides	notebook/cs231n/a2/cs231n/fast_layers.py	/^def conv_backward_strides(dout, cache):$/;"	f
+conv_bn_relu_backward	notebook/cs231n/a2/cs231n/layer_utils.py	/^def conv_bn_relu_backward(dout, cache):$/;"	f
+conv_bn_relu_forward	notebook/cs231n/a2/cs231n/layer_utils.py	/^def conv_bn_relu_forward(x, w, b, gamma, beta, conv_param, bn_param):$/;"	f
+conv_forward_fast	notebook/cs231n/a2/cs231n/fast_layers.py	/^conv_forward_fast = conv_forward_strides$/;"	v
+conv_forward_fast	notebook/cs231n/a2/cs231n/image_utils.py	/^    from .fast_layers import conv_forward_fast$/;"	i
+conv_forward_fast	notebook/cs231n/a3/cs231n/image_utils.py	/^    from .fast_layers import conv_forward_fast$/;"	i
+conv_forward_im2col	notebook/cs231n/a2/cs231n/fast_layers.py	/^def conv_forward_im2col(x, w, b, conv_param):$/;"	f
+conv_forward_naive	notebook/cs231n/a1/cs231n/layers.py	/^def conv_forward_naive(x, w, b, conv_param):$/;"	f
+conv_forward_naive	notebook/cs231n/a2/cs231n/layers.py	/^def conv_forward_naive(x, w, b, conv_param):$/;"	f
+conv_forward_strides	notebook/cs231n/a2/cs231n/fast_layers.py	/^def conv_forward_strides(x, w, b, conv_param):$/;"	f
+conv_relu_backward	notebook/cs231n/a2/cs231n/layer_utils.py	/^def conv_relu_backward(dout, cache):$/;"	f
+conv_relu_forward	notebook/cs231n/a2/cs231n/layer_utils.py	/^def conv_relu_forward(x, w, b, conv_param):$/;"	f
+conv_relu_pool_backward	notebook/cs231n/a2/cs231n/layer_utils.py	/^def conv_relu_pool_backward(dout, cache):$/;"	f
+conv_relu_pool_forward	notebook/cs231n/a2/cs231n/layer_utils.py	/^def conv_relu_pool_forward(x, w, b, conv_param, pool_param):$/;"	f
+copy	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^import copy$/;"	i
+count_params	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def count_params(model):$/;"	f
+cython	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^cimport cython$/;"	i
+cythonize	notebook/cs231n/a2/cs231n/setup.py	/^from Cython.Build import cythonize$/;"	i
+decode_captions	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^from .coco_utils import sample_coco_minibatch, decode_captions$/;"	i
+decode_captions	notebook/cs231n/a3/cs231n/coco_utils.py	/^def decode_captions(captions, idx_to_word):$/;"	f
+deprocess_image	notebook/cs231n/a2/cs231n/image_utils.py	/^def deprocess_image(img, rescale=False):$/;"	f
+deprocess_image	notebook/cs231n/a3/cs231n/image_utils.py	/^def deprocess_image(img, rescale=False):$/;"	f
+deprocess_img	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def deprocess_img(x):$/;"	f
+dir_path	notebook/cs231n/a3/cs231n/coco_utils.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	v
+discriminator	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def discriminator(seed=None):$/;"	f
+discriminator_loss	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def discriminator_loss(logits_real, logits_fake):$/;"	f
+division	notebook/cs231n/a1/cs231n/solver.py	/^from __future__ import print_function, division$/;"	i
+division	notebook/cs231n/a2/cs231n/solver.py	/^from __future__ import print_function, division$/;"	i
+dropout_backward	notebook/cs231n/a1/cs231n/layers.py	/^def dropout_backward(dout, cache):$/;"	f
+dropout_backward	notebook/cs231n/a2/cs231n/layers.py	/^def dropout_backward(dout, cache):$/;"	f
+dropout_forward	notebook/cs231n/a1/cs231n/layers.py	/^def dropout_forward(x, dropout_param):$/;"	f
+dropout_forward	notebook/cs231n/a2/cs231n/layers.py	/^def dropout_forward(x, dropout_param):$/;"	f
+dset	notebook/cs231n/a2/pytorch_cifar.py	/^import torchvision.datasets as dset$/;"	i
+dtype	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^dtype = torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor$/;"	v
+error	notebook/cs231n/a2/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+error	notebook/cs231n/a3/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+eval_numerical_gradient	notebook/cs231n/a1/cs231n/gradient_check.py	/^def eval_numerical_gradient(f, x, verbose=True, h=0.00001):$/;"	f
+eval_numerical_gradient	notebook/cs231n/a2/cs231n/gradient_check.py	/^def eval_numerical_gradient(f, x, verbose=True, h=0.00001):$/;"	f
+eval_numerical_gradient	notebook/cs231n/a3/cs231n/gradient_check.py	/^def eval_numerical_gradient(f, x, verbose=True, h=0.00001):$/;"	f
+eval_numerical_gradient_array	notebook/cs231n/a1/cs231n/gradient_check.py	/^def eval_numerical_gradient_array(f, x, df, h=1e-5):$/;"	f
+eval_numerical_gradient_array	notebook/cs231n/a2/cs231n/gradient_check.py	/^def eval_numerical_gradient_array(f, x, df, h=1e-5):$/;"	f
+eval_numerical_gradient_array	notebook/cs231n/a3/cs231n/gradient_check.py	/^def eval_numerical_gradient_array(f, x, df, h=1e-5):$/;"	f
+eval_numerical_gradient_blobs	notebook/cs231n/a1/cs231n/gradient_check.py	/^def eval_numerical_gradient_blobs(f, inputs, output, h=1e-5):$/;"	f
+eval_numerical_gradient_blobs	notebook/cs231n/a2/cs231n/gradient_check.py	/^def eval_numerical_gradient_blobs(f, inputs, output, h=1e-5):$/;"	f
+eval_numerical_gradient_blobs	notebook/cs231n/a3/cs231n/gradient_check.py	/^def eval_numerical_gradient_blobs(f, inputs, output, h=1e-5):$/;"	f
+eval_numerical_gradient_net	notebook/cs231n/a1/cs231n/gradient_check.py	/^def eval_numerical_gradient_net(net, inputs, output, h=1e-5):$/;"	f
+eval_numerical_gradient_net	notebook/cs231n/a2/cs231n/gradient_check.py	/^def eval_numerical_gradient_net(net, inputs, output, h=1e-5):$/;"	f
+eval_numerical_gradient_net	notebook/cs231n/a3/cs231n/gradient_check.py	/^def eval_numerical_gradient_net(net, inputs, output, h=1e-5):$/;"	f
+extensions	notebook/cs231n/a2/cs231n/setup.py	/^extensions = [$/;"	v
+extract_features	notebook/cs231n/a1/cs231n/features.py	/^def extract_features(imgs, feature_fns, verbose=False):$/;"	f
+first	jff/acwj-fun/ch02/main.c	/^struct ast_node *first()$/;"	f
+first	jff/acwj-fun/ch03/main.c	/^struct ast_node *first()$/;"	f
+first	jff/acwj-fun/ch04/main.c	/^struct ast_node *first()$/;"	f
+first	jff/acwj-fun/ch05/main.c	/^struct ast_node *first()$/;"	f
+forward	notebook/cs231n/a2/pytorch_cifar.py	/^    def forward(self, x):$/;"	m	class:Flatten
+forward	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^    def forward(self, features, captions):$/;"	m	class:CaptioningTransformer
+forward	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^    def forward(self, tgt, memory, tgt_mask=None):$/;"	m	class:TransformerDecoder
+forward	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^    def forward(self, tgt, memory, tgt_mask=None):$/;"	m	class:TransformerDecoderLayer
+forward	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^    def forward(self, x):$/;"	m	class:Flatten
+forward	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^    def forward(self, x):$/;"	m	class:Unflatten
+forward	notebook/cs231n/a3/cs231n/simclr/model.py	/^    def forward(self, x):$/;"	m	class:Model
+forward	notebook/cs231n/a3/cs231n/transformer_layers.py	/^    def forward(self, query, key, value, attn_mask=None):$/;"	m	class:MultiHeadAttention
+forward	notebook/cs231n/a3/cs231n/transformer_layers.py	/^    def forward(self, x):$/;"	m	class:PositionalEncoding
+free_all_registers	jff/acwj-fun/ch04/codegen.h	/^void free_all_registers()$/;"	f
+free_all_registers	jff/acwj-fun/ch05/codegen.h	/^void free_all_registers()$/;"	f
+g_parse_digit	jff/acwj-fun/ch01/main.c	/^int g_parse_digit = 0;$/;"	v
+g_parse_digit	jff/acwj-fun/ch02/main.c	/^int g_parse_digit = 0;$/;"	v
+g_parse_digit	jff/acwj-fun/ch03/helper.h	/^int g_parse_digit = 0;$/;"	v
+g_parse_digit	jff/acwj-fun/ch04/helper.h	/^int g_parse_digit = 0;$/;"	v
+g_parse_digit	jff/acwj-fun/ch05/helper.h	/^int g_parse_digit = 0;$/;"	v
+g_token	jff/acwj-fun/ch01/main.c	/^struct token g_token;$/;"	v	typeref:struct:token
+g_token	jff/acwj-fun/ch02/main.c	/^struct token g_token;$/;"	v	typeref:struct:token
+g_token	jff/acwj-fun/ch03/helper.h	/^struct token g_token;$/;"	v	typeref:struct:token
+g_token	jff/acwj-fun/ch04/helper.h	/^struct token g_token;$/;"	v	typeref:struct:token
+g_token	jff/acwj-fun/ch05/helper.h	/^struct token g_token;$/;"	v	typeref:struct:token
+gen_asm	jff/acwj-fun/ch04/codegen.h	/^int gen_asm(struct ast_node* node)$/;"	f
+gen_asm	jff/acwj-fun/ch05/codegen.h	/^int gen_asm(struct ast_node* node)$/;"	f
+gen_ast	jff/acwj-fun/ch04/codegen.h	/^int gen_ast(struct ast_node* node)$/;"	f
+gen_ast	jff/acwj-fun/ch05/codegen.h	/^int gen_ast(struct ast_node* node)$/;"	f
+generate_data_1d	jff/cuda/ch1/utils.h	/^void generate_data_1d(float *array_1d, int size)$/;"	f
+generate_data_2d	jff/cuda/ch1/utils.h	/^void generate_data_2d(float ** array_2d, int width, int height)$/;"	f
+generator	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def generator(noise_dim=NOISE_DIM, seed=None):$/;"	f
+generator_loss	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def generator_loss(logits_fake):$/;"	f
+get_CIFAR10_data	notebook/cs231n/a1/cs231n/data_utils.py	/^def get_CIFAR10_data($/;"	f
+get_CIFAR10_data	notebook/cs231n/a2/cs231n/data_utils.py	/^def get_CIFAR10_data($/;"	f
+get_CIFAR10_data	notebook/cs231n/a3/cs231n/data_utils.py	/^def get_CIFAR10_data($/;"	f
+get_im2col_indices	notebook/cs231n/a2/cs231n/im2col.py	/^def get_im2col_indices(x_shape, field_height, field_width, padding=1, stride=1):$/;"	f
+get_optimizer	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def get_optimizer(model):$/;"	f
+grad_check_sparse	notebook/cs231n/a1/cs231n/gradient_check.py	/^def grad_check_sparse(f, x, analytic_grad, num_checks=10, h=1e-5):$/;"	f
+grad_check_sparse	notebook/cs231n/a2/cs231n/gradient_check.py	/^def grad_check_sparse(f, x, analytic_grad, num_checks=10, h=1e-5):$/;"	f
+grad_check_sparse	notebook/cs231n/a3/cs231n/gradient_check.py	/^def grad_check_sparse(f, x, analytic_grad, num_checks=10, h=1e-5):$/;"	f
+h5py	notebook/cs231n/a3/cs231n/coco_utils.py	/^import h5py$/;"	i
+hog_feature	notebook/cs231n/a1/cs231n/features.py	/^def hog_feature(im):$/;"	f
+im2col_cython	notebook/cs231n/a2/cs231n/fast_layers.py	/^    from .im2col_cython import col2im_cython, im2col_cython$/;"	i
+im2col_cython	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^def im2col_cython(np.ndarray[DTYPE_t, ndim=4] x, int field_height,$/;"	f
+im2col_cython_inner	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^cdef int im2col_cython_inner(np.ndarray[DTYPE_t, ndim=2] cols,$/;"	f
+im2col_indices	notebook/cs231n/a2/cs231n/im2col.py	/^def im2col_indices(x, field_height, field_width, padding=1, stride=1):$/;"	f
+image_from_url	notebook/cs231n/a2/cs231n/image_utils.py	/^def image_from_url(url):$/;"	f
+image_from_url	notebook/cs231n/a3/cs231n/image_utils.py	/^def image_from_url(url):$/;"	f
+imread	notebook/cs231n/a1/cs231n/data_utils.py	/^from imageio import imread$/;"	i
+imread	notebook/cs231n/a2/cs231n/data_utils.py	/^from imageio import imread$/;"	i
+imread	notebook/cs231n/a2/cs231n/image_utils.py	/^from imageio import imread$/;"	i
+imread	notebook/cs231n/a3/cs231n/data_utils.py	/^from imageio import imread$/;"	i
+imread	notebook/cs231n/a3/cs231n/image_utils.py	/^from imageio import imread$/;"	i
+initialize_weights	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def initialize_weights(m):$/;"	f
+input_file	jff/acwj-fun/ch01/main.c	/^FILE* input_file;$/;"	v
+input_file	jff/acwj-fun/ch02/main.c	/^FILE* input_file;$/;"	v
+input_file	jff/acwj-fun/ch03/helper.h	/^FILE* input_file;$/;"	v
+input_file	jff/acwj-fun/ch04/helper.h	/^FILE* input_file;$/;"	v
+input_file	jff/acwj-fun/ch05/helper.h	/^FILE* input_file;$/;"	v
+interprete_ast_tree	jff/acwj-fun/ch02/ast.h	/^int interprete_ast_tree(struct ast_node *node)$/;"	f
+interprete_ast_tree	jff/acwj-fun/ch03/ast.h	/^int interprete_ast_tree(struct ast_node *node)$/;"	f
+interprete_ast_tree	jff/acwj-fun/ch04/ast.h	/^int interprete_ast_tree(struct ast_node *node)$/;"	f
+interprete_ast_tree	jff/acwj-fun/ch05/ast.h	/^int interprete_ast_tree(struct ast_node *node)$/;"	f
+json	notebook/cs231n/a3/cs231n/coco_utils.py	/^import os, json$/;"	i
+layernorm_backward	notebook/cs231n/a1/cs231n/layers.py	/^def layernorm_backward(dout, cache):$/;"	f
+layernorm_backward	notebook/cs231n/a2/cs231n/layers.py	/^def layernorm_backward(dout, cache):$/;"	f
+layernorm_forward	notebook/cs231n/a1/cs231n/layers.py	/^def layernorm_forward(x, gamma, beta, ln_param):$/;"	f
+layernorm_forward	notebook/cs231n/a2/cs231n/layers.py	/^def layernorm_forward(x, gamma, beta, ln_param):$/;"	f
+left_node	jff/acwj-fun/ch02/ast.h	/^    struct ast_node *left_node;$/;"	m	struct:ast_node	typeref:struct:ast_node::ast_node
+left_node	jff/acwj-fun/ch03/ast.h	/^    struct ast_node *left_node;$/;"	m	struct:ast_node	typeref:struct:ast_node::ast_node
+left_node	jff/acwj-fun/ch04/ast.h	/^    struct ast_node *left_node;$/;"	m	struct:ast_node	typeref:struct:ast_node::ast_node
+left_node	jff/acwj-fun/ch05/ast.h	/^    struct ast_node *left_node;$/;"	m	struct:ast_node	typeref:struct:ast_node::ast_node
+line_number	jff/acwj-fun/ch01/main.c	/^int line_number = 1;$/;"	v
+line_number	jff/acwj-fun/ch02/main.c	/^int line_number = 1;$/;"	v
+line_number	jff/acwj-fun/ch03/helper.h	/^int line_number = 1;$/;"	v
+line_number	jff/acwj-fun/ch04/helper.h	/^int line_number = 1;$/;"	v
+line_number	jff/acwj-fun/ch05/helper.h	/^int line_number = 1;$/;"	v
+load_CIFAR10	notebook/cs231n/a1/cs231n/data_utils.py	/^def load_CIFAR10(ROOT):$/;"	f
+load_CIFAR10	notebook/cs231n/a2/cs231n/data_utils.py	/^def load_CIFAR10(ROOT):$/;"	f
+load_CIFAR10	notebook/cs231n/a3/cs231n/data_utils.py	/^def load_CIFAR10(ROOT):$/;"	f
+load_CIFAR_batch	notebook/cs231n/a1/cs231n/data_utils.py	/^def load_CIFAR_batch(filename):$/;"	f
+load_CIFAR_batch	notebook/cs231n/a2/cs231n/data_utils.py	/^def load_CIFAR_batch(filename):$/;"	f
+load_CIFAR_batch	notebook/cs231n/a3/cs231n/data_utils.py	/^def load_CIFAR_batch(filename):$/;"	f
+load_coco_data	notebook/cs231n/a3/cs231n/coco_utils.py	/^def load_coco_data(base_dir=BASE_DIR, max_train=None, pca_features=True):$/;"	f
+load_image	notebook/cs231n/a2/cs231n/image_utils.py	/^def load_image(filename, size=None):$/;"	f
+load_image	notebook/cs231n/a3/cs231n/image_utils.py	/^def load_image(filename, size=None):$/;"	f
+load_imagenet_val	notebook/cs231n/a1/cs231n/data_utils.py	/^def load_imagenet_val(num=None):$/;"	f
+load_imagenet_val	notebook/cs231n/a2/cs231n/data_utils.py	/^def load_imagenet_val(num=None):$/;"	f
+load_imagenet_val	notebook/cs231n/a3/cs231n/data_utils.py	/^def load_imagenet_val(num=None):$/;"	f
+load_models	notebook/cs231n/a1/cs231n/data_utils.py	/^def load_models(models_dir):$/;"	f
+load_models	notebook/cs231n/a2/cs231n/data_utils.py	/^def load_models(models_dir):$/;"	f
+load_models	notebook/cs231n/a3/cs231n/data_utils.py	/^def load_models(models_dir):$/;"	f
+load_pickle	notebook/cs231n/a1/cs231n/data_utils.py	/^def load_pickle(f):$/;"	f
+load_pickle	notebook/cs231n/a2/cs231n/data_utils.py	/^def load_pickle(f):$/;"	f
+load_pickle	notebook/cs231n/a3/cs231n/data_utils.py	/^def load_pickle(f):$/;"	f
+load_tiny_imagenet	notebook/cs231n/a1/cs231n/data_utils.py	/^def load_tiny_imagenet(path, dtype=np.float32, subtract_mean=True):$/;"	f
+load_tiny_imagenet	notebook/cs231n/a2/cs231n/data_utils.py	/^def load_tiny_imagenet(path, dtype=np.float32, subtract_mean=True):$/;"	f
+load_tiny_imagenet	notebook/cs231n/a3/cs231n/data_utils.py	/^def load_tiny_imagenet(path, dtype=np.float32, subtract_mean=True):$/;"	f
+loss	notebook/cs231n/a1/cs231n/classifiers/fc_net.py	/^    def loss(self, X, y=None):$/;"	m	class:TwoLayerNet
+loss	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^    def loss(self, X_batch, y_batch, reg):$/;"	m	class:LinearClassifier
+loss	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^    def loss(self, X_batch, y_batch, reg):$/;"	m	class:LinearSVM
+loss	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^    def loss(self, X_batch, y_batch, reg):$/;"	m	class:Softmax
+loss	notebook/cs231n/a2/cs231n/classifiers/cnn.py	/^    def loss(self, X, y=None):$/;"	m	class:ThreeLayerConvNet
+loss	notebook/cs231n/a2/cs231n/classifiers/fc_net.py	/^    def loss(self, X, y=None):$/;"	m	class:FullyConnectedNet
+loss	notebook/cs231n/a3/cs231n/classifiers/rnn.py	/^    def loss(self, features, captions):$/;"	m	class:CaptioningRNN
+ls_discriminator_loss	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def ls_discriminator_loss(scores_real, scores_fake):$/;"	f
+ls_generator_loss	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def ls_generator_loss(scores_fake):$/;"	f
+lstm_backward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def lstm_backward(dh, cache):$/;"	f
+lstm_forward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def lstm_forward(x, h0, Wx, Wh, b):$/;"	f
+lstm_step_backward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def lstm_step_backward(dnext_h, dnext_c, cache):$/;"	f
+lstm_step_forward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def lstm_step_forward(x, prev_h, prev_c, Wx, Wh, b):$/;"	f
+main	jff/acwj-fun/ch01/main.c	/^int main(int argc, char** argv)$/;"	f
+main	jff/acwj-fun/ch02/main.c	/^int main(int argc, char** argv)$/;"	f
+main	jff/acwj-fun/ch03/main.c	/^int main(int argc, char** argv)$/;"	f
+main	jff/acwj-fun/ch04/main.c	/^int main(int argc, char** argv)$/;"	f
+main	jff/acwj-fun/ch05/main.c	/^int main(int argc, char** argv)$/;"	f
+main	jff/acwj-fun/playground/main.c	/^int main()$/;"	f
+main	jff/algo/cpp/search/Dfs.cpp	/^int main()$/;"	f
+main	jff/algo/cpp/search/EightQueen.cpp	/^int main()$/;"	f
+main	notebook/cs231n/a2/makepdf.py	/^def main(files, pdf_name):$/;"	f
+main	notebook/cs231n/a2/pytorch_cifar.py	/^def main():$/;"	f
+main	notebook/cs231n/a3/makepdf.py	/^def main(files, pdf_name):$/;"	f
+make_leaf_node	jff/acwj-fun/ch02/ast.h	/^struct ast_node *make_leaf_node(int value)$/;"	f
+make_leaf_node	jff/acwj-fun/ch03/ast.h	/^struct ast_node *make_leaf_node(int value)$/;"	f
+make_leaf_node	jff/acwj-fun/ch04/ast.h	/^struct ast_node *make_leaf_node(int value)$/;"	f
+make_leaf_node	jff/acwj-fun/ch05/ast.h	/^struct ast_node *make_leaf_node(int value)$/;"	f
+make_node	jff/acwj-fun/ch02/ast.h	/^struct ast_node *make_node(int token, struct ast_node *left_node, struct ast_node *right_node, int value)$/;"	f
+make_node	jff/acwj-fun/ch03/ast.h	/^struct ast_node *make_node(int token, struct ast_node *left_node, struct ast_node *right_node, int value)$/;"	f
+make_node	jff/acwj-fun/ch04/ast.h	/^struct ast_node *make_node(int token, struct ast_node *left_node, struct ast_node *right_node, int value)$/;"	f
+make_node	jff/acwj-fun/ch05/ast.h	/^struct ast_node *make_node(int token, struct ast_node *left_node, struct ast_node *right_node, int value)$/;"	f
+make_unary_node	jff/acwj-fun/ch02/ast.h	/^struct ast_node *make_unary_node(int token, struct ast_node *left_children, int value)$/;"	f
+make_unary_node	jff/acwj-fun/ch03/ast.h	/^struct ast_node *make_unary_node(int token, struct ast_node *left_children, int value)$/;"	f
+make_unary_node	jff/acwj-fun/ch04/ast.h	/^struct ast_node *make_unary_node(int token, struct ast_node *left_children, int value)$/;"	f
+make_unary_node	jff/acwj-fun/ch05/ast.h	/^struct ast_node *make_unary_node(int token, struct ast_node *left_children, int value)$/;"	f
+math	notebook/cs231n/a3/cs231n/transformer_layers.py	/^import math$/;"	i
+matplotlib	notebook/cs231n/a1/cs231n/features.py	/^import matplotlib$/;"	i
+max_pool_backward_fast	notebook/cs231n/a2/cs231n/fast_layers.py	/^def max_pool_backward_fast(dout, cache):$/;"	f
+max_pool_backward_im2col	notebook/cs231n/a2/cs231n/fast_layers.py	/^def max_pool_backward_im2col(dout, cache):$/;"	f
+max_pool_backward_naive	notebook/cs231n/a1/cs231n/layers.py	/^def max_pool_backward_naive(dout, cache):$/;"	f
+max_pool_backward_naive	notebook/cs231n/a2/cs231n/layers.py	/^def max_pool_backward_naive(dout, cache):$/;"	f
+max_pool_backward_reshape	notebook/cs231n/a2/cs231n/fast_layers.py	/^def max_pool_backward_reshape(dout, cache):$/;"	f
+max_pool_forward_fast	notebook/cs231n/a2/cs231n/fast_layers.py	/^def max_pool_forward_fast(x, pool_param):$/;"	f
+max_pool_forward_im2col	notebook/cs231n/a2/cs231n/fast_layers.py	/^def max_pool_forward_im2col(x, pool_param):$/;"	f
+max_pool_forward_naive	notebook/cs231n/a1/cs231n/layers.py	/^def max_pool_forward_naive(x, pool_param):$/;"	f
+max_pool_forward_naive	notebook/cs231n/a2/cs231n/layers.py	/^def max_pool_forward_naive(x, pool_param):$/;"	f
+max_pool_forward_reshape	notebook/cs231n/a2/cs231n/fast_layers.py	/^def max_pool_forward_reshape(x, pool_param):$/;"	f
+next	jff/acwj-fun/ch01/main.c	/^int next()$/;"	f
+next	jff/acwj-fun/ch02/scan.h	/^int next()$/;"	f
+next	jff/acwj-fun/ch03/scan.h	/^int next()$/;"	f
+next	jff/acwj-fun/ch04/scan.h	/^int next()$/;"	f
+next	jff/acwj-fun/ch05/scan.h	/^int next()$/;"	f
+next_digit	jff/acwj-fun/ch01/main.c	/^int next_digit(int start_digit)$/;"	f
+next_digit	jff/acwj-fun/ch02/scan.h	/^int next_digit(int start_digit)$/;"	f
+next_digit	jff/acwj-fun/ch03/scan.h	/^int next_digit(int start_digit)$/;"	f
+next_digit	jff/acwj-fun/ch04/scan.h	/^int next_digit(int start_digit)$/;"	f
+next_digit	jff/acwj-fun/ch05/scan.h	/^int next_digit(int start_digit)$/;"	f
+nn	notebook/cs231n/a2/pytorch_cifar.py	/^import torch.nn as nn$/;"	i
+nn	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^import torch.nn as nn$/;"	i
+nn	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import torch.nn as nn$/;"	i
+nn	notebook/cs231n/a3/cs231n/simclr/model.py	/^import torch.nn as nn$/;"	i
+nn	notebook/cs231n/a3/cs231n/simclr/model.py	/^import torch.nn.functional as F$/;"	i
+nn	notebook/cs231n/a3/cs231n/transformer_layers.py	/^import torch.nn as nn$/;"	i
+np	notebook/cs231n/a1/cs231n/classifiers/fc_net.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/classifiers/linear_svm.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/classifiers/softmax.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/data_utils.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/features.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/gradient_check.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/layers.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/optim.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/solver.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a1/cs231n/vis_utils.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/classifiers/cnn.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/classifiers/fc_net.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/data_utils.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/fast_layers.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/gradient_check.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/im2col.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^cimport numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/im2col_cython.pyx	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/image_utils.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/layers.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/optim.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/solver.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a2/cs231n/vis_utils.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/captioning_solver.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/classifiers/rnn.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/coco_utils.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/data_utils.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/gradient_check.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/image_utils.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/optim.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/rnn_layers.py	/^import numpy as np$/;"	i
+np	notebook/cs231n/a3/cs231n/simclr/contrastive_loss.py	/^import numpy as np$/;"	i
+numpy	notebook/cs231n/a2/cs231n/setup.py	/^import numpy$/;"	i
+object	notebook/cs231n/a1/cs231n/classifiers/fc_net.py	/^from builtins import object$/;"	i
+object	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^from builtins import object$/;"	i
+object	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^from builtins import object$/;"	i
+object	notebook/cs231n/a1/cs231n/solver.py	/^from builtins import object$/;"	i
+object	notebook/cs231n/a2/cs231n/classifiers/cnn.py	/^from builtins import object$/;"	i
+object	notebook/cs231n/a2/cs231n/classifiers/fc_net.py	/^from builtins import object$/;"	i
+object	notebook/cs231n/a2/cs231n/solver.py	/^from builtins import object$/;"	i
+op_priority	jff/acwj-fun/ch03/prio.h	/^static const int op_priority[] = {$/;"	v
+op_priority	jff/acwj-fun/ch04/prio.h	/^static const int op_priority[] = {$/;"	v
+op_priority	jff/acwj-fun/ch05/prio.h	/^static const int op_priority[] = {$/;"	v
+optim	notebook/cs231n/a1/cs231n/solver.py	/^from cs231n import optim$/;"	i
+optim	notebook/cs231n/a2/cs231n/solver.py	/^from cs231n import optim$/;"	i
+optim	notebook/cs231n/a2/pytorch_cifar.py	/^import torch.optim as optim$/;"	i
+optim	notebook/cs231n/a3/cs231n/captioning_solver.py	/^from . import optim$/;"	i
+optim	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^from . import optim$/;"	i
+optim	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import torch.optim as optim$/;"	i
+optim	notebook/cs231n/a3/cs231n/simclr/utils.py	/^import torch.optim as optim$/;"	i
+os	notebook/cs231n/a1/cs231n/data_utils.py	/^import os$/;"	i
+os	notebook/cs231n/a1/cs231n/solver.py	/^import os$/;"	i
+os	notebook/cs231n/a2/cs231n/data_utils.py	/^import os$/;"	i
+os	notebook/cs231n/a2/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+os	notebook/cs231n/a2/cs231n/solver.py	/^import os$/;"	i
+os	notebook/cs231n/a2/makepdf.py	/^import os$/;"	i
+os	notebook/cs231n/a3/cs231n/coco_utils.py	/^import os, json$/;"	i
+os	notebook/cs231n/a3/cs231n/data_utils.py	/^import os$/;"	i
+os	notebook/cs231n/a3/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+os	notebook/cs231n/a3/makepdf.py	/^import os$/;"	i
+output_file	jff/acwj-fun/ch04/helper.h	/^FILE* output_file;$/;"	v
+output_file	jff/acwj-fun/ch05/helper.h	/^FILE* output_file;$/;"	v
+output_file_name	jff/acwj-fun/ch04/helper.h	/^static const char output_file_name[] = "c.codegen";$/;"	v
+output_file_name	jff/acwj-fun/ch05/helper.h	/^static const char output_file_name[] = "c.codegen";$/;"	v
+parse	notebook/cs231n/a2/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+parse	notebook/cs231n/a3/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+parse_panic	jff/acwj-fun/ch01/main.c	/^void parse_panic(const char* panic_info)$/;"	f
+parse_panic	jff/acwj-fun/ch02/scan.h	/^void parse_panic(const char* panic_info)$/;"	f
+parse_panic	jff/acwj-fun/ch03/scan.h	/^void parse_panic(const char* panic_info)$/;"	f
+parse_panic	jff/acwj-fun/ch04/scan.h	/^void parse_panic(const char* panic_info)$/;"	f
+parse_panic	jff/acwj-fun/ch05/scan.h	/^void parse_panic(const char* panic_info)$/;"	f
+parser	notebook/cs231n/a2/makepdf.py	/^    parser = argparse.ArgumentParser()$/;"	v
+parser	notebook/cs231n/a3/makepdf.py	/^    parser = argparse.ArgumentParser()$/;"	v
+pd	notebook/cs231n/a3/cs231n/simclr/utils.py	/^import pandas as pd$/;"	i
+pickle	notebook/cs231n/a1/cs231n/data_utils.py	/^from six.moves import cPickle as pickle$/;"	i
+pickle	notebook/cs231n/a1/cs231n/solver.py	/^import pickle as pickle$/;"	i
+pickle	notebook/cs231n/a2/cs231n/data_utils.py	/^from six.moves import cPickle as pickle$/;"	i
+pickle	notebook/cs231n/a2/cs231n/solver.py	/^import pickle as pickle$/;"	i
+pickle	notebook/cs231n/a3/cs231n/data_utils.py	/^import pickle$/;"	i
+platform	notebook/cs231n/a1/cs231n/data_utils.py	/^import platform$/;"	i
+platform	notebook/cs231n/a2/cs231n/data_utils.py	/^import platform$/;"	i
+platform	notebook/cs231n/a3/cs231n/data_utils.py	/^import platform$/;"	i
+pos	jff/algo/cpp/search/Dfs.cpp	/^int pos[10] = {0};$/;"	v
+predict	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^    def predict(self, X, k=1, num_loops=0):$/;"	m	class:KNearestNeighbor
+predict	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^    def predict(self, X):$/;"	m	class:LinearClassifier
+predict_labels	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^    def predict_labels(self, dists, k=1):$/;"	m	class:KNearestNeighbor
+preprocess_image	notebook/cs231n/a2/cs231n/image_utils.py	/^def preprocess_image(img):$/;"	f
+preprocess_image	notebook/cs231n/a3/cs231n/image_utils.py	/^def preprocess_image(img):$/;"	f
+preprocess_img	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def preprocess_img(x):$/;"	f
+print_array_1d	jff/cuda/ch1/utils.h	/^void print_array_1d(float *result, int size)$/;"	f
+print_ast_node	jff/acwj-fun/ch02/ast.h	/^void print_ast_node(struct ast_node* ast_node)$/;"	f
+print_ast_node	jff/acwj-fun/ch03/ast.h	/^void print_ast_node(struct ast_node* ast_node)$/;"	f
+print_ast_node	jff/acwj-fun/ch04/ast.h	/^void print_ast_node(struct ast_node* ast_node)$/;"	f
+print_ast_node	jff/acwj-fun/ch05/ast.h	/^void print_ast_node(struct ast_node* ast_node)$/;"	f
+print_function	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^from __future__ import print_function$/;"	i
+print_function	notebook/cs231n/a1/cs231n/data_utils.py	/^from __future__ import print_function$/;"	i
+print_function	notebook/cs231n/a1/cs231n/features.py	/^from __future__ import print_function$/;"	i
+print_function	notebook/cs231n/a1/cs231n/gradient_check.py	/^from __future__ import print_function$/;"	i
+print_function	notebook/cs231n/a1/cs231n/solver.py	/^from __future__ import print_function, division$/;"	i
+print_function	notebook/cs231n/a2/cs231n/data_utils.py	/^from __future__ import print_function$/;"	i
+print_function	notebook/cs231n/a2/cs231n/fast_layers.py	/^from __future__ import print_function$/;"	i
+print_function	notebook/cs231n/a2/cs231n/gradient_check.py	/^from __future__ import print_function$/;"	i
+print_function	notebook/cs231n/a2/cs231n/image_utils.py	/^from __future__ import print_function$/;"	i
+print_function	notebook/cs231n/a2/cs231n/solver.py	/^from __future__ import print_function, division$/;"	i
+priority_of	jff/acwj-fun/ch03/prio.h	/^int priority_of(int token_type)$/;"	f
+priority_of	jff/acwj-fun/ch04/prio.h	/^int priority_of(int token_type)$/;"	f
+priority_of	jff/acwj-fun/ch05/prio.h	/^int priority_of(int token_type)$/;"	f
+profile	notebook/cs231n/a3/cs231n/simclr/utils.py	/^from thop import profile, clever_format$/;"	i
+random	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^import random$/;"	i
+randrange	notebook/cs231n/a1/cs231n/gradient_check.py	/^from random import randrange$/;"	i
+randrange	notebook/cs231n/a2/cs231n/gradient_check.py	/^from random import randrange$/;"	i
+randrange	notebook/cs231n/a3/cs231n/gradient_check.py	/^from random import randrange$/;"	i
+range	notebook/cs231n/a1/cs231n/classifiers/fc_net.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/classifiers/linear_svm.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/classifiers/softmax.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/data_utils.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/features.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/gradient_check.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/layers.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/solver.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a1/cs231n/vis_utils.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a2/cs231n/classifiers/fc_net.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a2/cs231n/data_utils.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a2/cs231n/gradient_check.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a2/cs231n/im2col.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a2/cs231n/image_utils.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a2/cs231n/layers.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a2/cs231n/solver.py	/^from builtins import range$/;"	i
+range	notebook/cs231n/a2/cs231n/vis_utils.py	/^from builtins import range$/;"	i
+registers	jff/acwj-fun/ch04/codegen.h	/^const char *registers[] = $/;"	v
+registers	jff/acwj-fun/ch05/codegen.h	/^const char *registers[] = $/;"	v
+regs	jff/acwj-fun/ch04/codegen.h	/^int regs[REGISTERS_NUM];$/;"	v
+regs	jff/acwj-fun/ch05/codegen.h	/^int regs[REGISTERS_NUM];$/;"	v
+rel_error	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def rel_error(x,y):$/;"	f
+rel_error	notebook/cs231n/a3/cs231n/simclr/contrastive_loss.py	/^def rel_error(x,y):$/;"	f
+relu_backward	notebook/cs231n/a1/cs231n/layers.py	/^def relu_backward(dout, cache):$/;"	f
+relu_backward	notebook/cs231n/a2/cs231n/layers.py	/^def relu_backward(dout, cache):$/;"	f
+relu_forward	notebook/cs231n/a1/cs231n/layers.py	/^def relu_forward(x):$/;"	f
+relu_forward	notebook/cs231n/a2/cs231n/layers.py	/^def relu_forward(x):$/;"	f
+replace_char	jff/acwj-fun/ch01/main.c	/^char replace_char = 0;$/;"	v
+replace_char	jff/acwj-fun/ch02/main.c	/^char replace_char = 0;$/;"	v
+replace_char	jff/acwj-fun/ch03/helper.h	/^char replace_char = 0;$/;"	v
+replace_char	jff/acwj-fun/ch04/helper.h	/^char replace_char = 0;$/;"	v
+replace_char	jff/acwj-fun/ch05/helper.h	/^char replace_char = 0;$/;"	v
+request	notebook/cs231n/a2/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+request	notebook/cs231n/a3/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+resnet50	notebook/cs231n/a3/cs231n/simclr/model.py	/^from torchvision.models.resnet import resnet50$/;"	i
+rgb2gray	notebook/cs231n/a1/cs231n/features.py	/^def rgb2gray(rgb):$/;"	f
+right_node	jff/acwj-fun/ch02/ast.h	/^    struct ast_node *right_node;$/;"	m	struct:ast_node	typeref:struct:ast_node::ast_node
+right_node	jff/acwj-fun/ch03/ast.h	/^    struct ast_node *right_node;$/;"	m	struct:ast_node	typeref:struct:ast_node::ast_node
+right_node	jff/acwj-fun/ch04/ast.h	/^    struct ast_node *right_node;$/;"	m	struct:ast_node	typeref:struct:ast_node::ast_node
+right_node	jff/acwj-fun/ch05/ast.h	/^    struct ast_node *right_node;$/;"	m	struct:ast_node	typeref:struct:ast_node::ast_node
+rmsprop	notebook/cs231n/a1/cs231n/optim.py	/^def rmsprop(w, dw, config=None):$/;"	f
+rmsprop	notebook/cs231n/a2/cs231n/optim.py	/^def rmsprop(w, dw, config=None):$/;"	f
+rmsprop	notebook/cs231n/a3/cs231n/optim.py	/^def rmsprop(w, dw, config=None):$/;"	f
+rnn_backward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def rnn_backward(dh, cache):$/;"	f
+rnn_forward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def rnn_forward(x, h0, Wx, Wh, b):$/;"	f
+rnn_step_backward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def rnn_step_backward(dnext_h, cache):$/;"	f
+rnn_step_forward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def rnn_step_forward(x, prev_h, Wx, Wh, b):$/;"	f
+run_a_gan	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def run_a_gan(D, G, D_solver, G_solver, discriminator_loss, generator_loss, loader_train, show_every=250,$/;"	f
+sample	notebook/cs231n/a3/cs231n/classifiers/rnn.py	/^    def sample(self, features, max_length=30):$/;"	m	class:CaptioningRNN
+sample	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^    def sample(self, features, max_length=30):$/;"	m	class:CaptioningTransformer
+sample_coco_minibatch	notebook/cs231n/a3/cs231n/captioning_solver.py	/^from .coco_utils import sample_coco_minibatch$/;"	i
+sample_coco_minibatch	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^from .coco_utils import sample_coco_minibatch, decode_captions$/;"	i
+sample_coco_minibatch	notebook/cs231n/a3/cs231n/coco_utils.py	/^def sample_coco_minibatch(data, batch_size=100, split="train"):$/;"	f
+sample_noise	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^def sample_noise(batch_size, dim, seed=None):$/;"	f
+sampler	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^from torch.utils.data import sampler$/;"	i
+scan	jff/acwj-fun/ch01/main.c	/^int scan()$/;"	f
+scan	jff/acwj-fun/ch02/scan.h	/^int scan()$/;"	f
+scan	jff/acwj-fun/ch03/scan.h	/^int scan()$/;"	f
+scan	jff/acwj-fun/ch04/scan.h	/^int scan()$/;"	f
+scan	jff/acwj-fun/ch05/scan.h	/^int scan()$/;"	f
+scan_file	jff/acwj-fun/ch01/main.c	/^void scan_file()$/;"	f
+scan_file	jff/acwj-fun/ch02/scan.h	/^void scan_file()$/;"	f
+scan_file	jff/acwj-fun/ch03/scan.h	/^void scan_file()$/;"	f
+scan_file	jff/acwj-fun/ch04/scan.h	/^void scan_file()$/;"	f
+scan_file	jff/acwj-fun/ch05/scan.h	/^void scan_file()$/;"	f
+set_replace_char	jff/acwj-fun/ch01/main.c	/^void set_replace_char(int c)$/;"	f
+set_replace_char	jff/acwj-fun/ch02/scan.h	/^void set_replace_char(int c)$/;"	f
+set_replace_char	jff/acwj-fun/ch03/scan.h	/^void set_replace_char(int c)$/;"	f
+set_replace_char	jff/acwj-fun/ch04/scan.h	/^void set_replace_char(int c)$/;"	f
+set_replace_char	jff/acwj-fun/ch05/scan.h	/^void set_replace_char(int c)$/;"	f
+setup	notebook/cs231n/a2/cs231n/setup.py	/^from distutils.core import setup$/;"	i
+sgd	notebook/cs231n/a1/cs231n/optim.py	/^def sgd(w, dw, config=None):$/;"	f
+sgd	notebook/cs231n/a2/cs231n/optim.py	/^def sgd(w, dw, config=None):$/;"	f
+sgd	notebook/cs231n/a3/cs231n/optim.py	/^def sgd(w, dw, config=None):$/;"	f
+sgd_momentum	notebook/cs231n/a1/cs231n/optim.py	/^def sgd_momentum(w, dw, config=None):$/;"	f
+sgd_momentum	notebook/cs231n/a2/cs231n/optim.py	/^def sgd_momentum(w, dw, config=None):$/;"	f
+sgd_momentum	notebook/cs231n/a3/cs231n/optim.py	/^def sgd_momentum(w, dw, config=None):$/;"	f
+shuffle	notebook/cs231n/a1/cs231n/classifiers/linear_svm.py	/^from random import shuffle$/;"	i
+shuffle	notebook/cs231n/a1/cs231n/classifiers/softmax.py	/^from random import shuffle$/;"	i
+sigmoid	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def sigmoid(x):$/;"	f
+sim	notebook/cs231n/a3/cs231n/simclr/contrastive_loss.py	/^def sim(z_i, z_j):$/;"	f
+sim_positive_pairs	notebook/cs231n/a3/cs231n/simclr/contrastive_loss.py	/^def sim_positive_pairs(out_left, out_right):$/;"	f
+simclr_loss_naive	notebook/cs231n/a3/cs231n/simclr/contrastive_loss.py	/^def simclr_loss_naive(out_left, out_right, tau):$/;"	f
+simclr_loss_vectorized	notebook/cs231n/a3/cs231n/simclr/contrastive_loss.py	/^def simclr_loss_vectorized(out_left, out_right, tau, device='cuda'):$/;"	f
+skip	jff/acwj-fun/ch01/main.c	/^int skip()$/;"	f
+skip	jff/acwj-fun/ch02/scan.h	/^int skip()$/;"	f
+skip	jff/acwj-fun/ch03/scan.h	/^int skip()$/;"	f
+skip	jff/acwj-fun/ch04/scan.h	/^int skip()$/;"	f
+skip	jff/acwj-fun/ch05/scan.h	/^int skip()$/;"	f
+softmax_loss	notebook/cs231n/a1/cs231n/layers.py	/^def softmax_loss(x, y):$/;"	f
+softmax_loss	notebook/cs231n/a2/cs231n/layers.py	/^def softmax_loss(x, y):$/;"	f
+softmax_loss_naive	notebook/cs231n/a1/cs231n/classifiers/softmax.py	/^def softmax_loss_naive(W, X, y, reg):$/;"	f
+softmax_loss_vectorized	notebook/cs231n/a1/cs231n/classifiers/softmax.py	/^def softmax_loss_vectorized(W, X, y, reg):$/;"	f
+solve	jff/algo/cpp/search/Dfs.cpp	/^void solve(int cur, int total_len)$/;"	f
+spatial_batchnorm_backward	notebook/cs231n/a1/cs231n/layers.py	/^def spatial_batchnorm_backward(dout, cache):$/;"	f
+spatial_batchnorm_backward	notebook/cs231n/a2/cs231n/layers.py	/^def spatial_batchnorm_backward(dout, cache):$/;"	f
+spatial_batchnorm_forward	notebook/cs231n/a1/cs231n/layers.py	/^def spatial_batchnorm_forward(x, gamma, beta, bn_param):$/;"	f
+spatial_batchnorm_forward	notebook/cs231n/a2/cs231n/layers.py	/^def spatial_batchnorm_forward(x, gamma, beta, bn_param):$/;"	f
+spatial_groupnorm_backward	notebook/cs231n/a1/cs231n/layers.py	/^def spatial_groupnorm_backward(dout, cache):$/;"	f
+spatial_groupnorm_backward	notebook/cs231n/a2/cs231n/layers.py	/^def spatial_groupnorm_backward(dout, cache):$/;"	f
+spatial_groupnorm_forward	notebook/cs231n/a1/cs231n/layers.py	/^def spatial_groupnorm_forward(x, gamma, beta, G, gn_param):$/;"	f
+spatial_groupnorm_forward	notebook/cs231n/a2/cs231n/layers.py	/^def spatial_groupnorm_forward(x, gamma, beta, G, gn_param):$/;"	f
+sqrt	notebook/cs231n/a1/cs231n/vis_utils.py	/^from math import sqrt, ceil$/;"	i
+sqrt	notebook/cs231n/a2/cs231n/vis_utils.py	/^from math import sqrt, ceil$/;"	i
+standard_library	notebook/cs231n/a1/cs231n/solver.py	/^from future import standard_library$/;"	i
+standard_library	notebook/cs231n/a2/cs231n/image_utils.py	/^from future import standard_library$/;"	i
+standard_library	notebook/cs231n/a2/cs231n/solver.py	/^from future import standard_library$/;"	i
+stat	jff/algo/cpp/search/Dfs.cpp	/^int stat[10] = {0};$/;"	v
+subprocess	notebook/cs231n/a2/makepdf.py	/^import subprocess$/;"	i
+subprocess	notebook/cs231n/a3/makepdf.py	/^import subprocess$/;"	i
+svm_loss	notebook/cs231n/a1/cs231n/layers.py	/^def svm_loss(x, y):$/;"	f
+svm_loss_naive	notebook/cs231n/a1/cs231n/classifiers/linear_svm.py	/^def svm_loss_naive(W, X, y, reg):$/;"	f
+svm_loss_vectorized	notebook/cs231n/a1/cs231n/classifiers/linear_svm.py	/^def svm_loss_vectorized(W, X, y, reg):$/;"	f
+tempfile	notebook/cs231n/a2/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+tempfile	notebook/cs231n/a3/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+temporal_affine_backward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def temporal_affine_backward(dout, cache):$/;"	f
+temporal_affine_forward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def temporal_affine_forward(x, w, b):$/;"	f
+temporal_softmax_loss	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def temporal_softmax_loss(x, y, mask, verbose=False):$/;"	f
+test	notebook/cs231n/a3/cs231n/simclr/utils.py	/^def test(model, memory_data_loader, test_data_loader, epoch, epochs, c, temperature=0.5, k=200, device='cuda'):$/;"	f
+token	jff/acwj-fun/ch01/main.c	/^struct token $/;"	s	file:
+token	jff/acwj-fun/ch02/helper.h	/^struct token $/;"	s
+token	jff/acwj-fun/ch03/helper.h	/^struct token $/;"	s
+token	jff/acwj-fun/ch04/helper.h	/^struct token $/;"	s
+token	jff/acwj-fun/ch05/helper.h	/^struct token $/;"	s
+token_to_ast_op	jff/acwj-fun/ch02/ast.h	/^int token_to_ast_op(int token)$/;"	f
+token_to_ast_op	jff/acwj-fun/ch03/ast.h	/^int token_to_ast_op(int token)$/;"	f
+token_to_ast_op	jff/acwj-fun/ch04/ast.h	/^int token_to_ast_op(int token)$/;"	f
+token_to_ast_op	jff/acwj-fun/ch05/ast.h	/^int token_to_ast_op(int token)$/;"	f
+token_type	jff/acwj-fun/ch02/ast.h	/^    int token_type;$/;"	m	struct:ast_node
+token_type	jff/acwj-fun/ch03/ast.h	/^    int token_type;$/;"	m	struct:ast_node
+token_type	jff/acwj-fun/ch04/ast.h	/^    int token_type;$/;"	m	struct:ast_node
+token_type	jff/acwj-fun/ch05/ast.h	/^    int token_type;$/;"	m	struct:ast_node
+tokens	jff/acwj-fun/ch01/main.c	/^const char* tokens[] = {$/;"	v
+tokens_a	jff/acwj-fun/ch02/helper.h	/^const char* tokens_a[] = {$/;"	v
+tokens_a	jff/acwj-fun/ch03/helper.h	/^const char* tokens_a[] = {$/;"	v
+tokens_a	jff/acwj-fun/ch04/helper.h	/^const char* tokens_a[] = {$/;"	v
+tokens_a	jff/acwj-fun/ch05/helper.h	/^const char* tokens_a[] = {$/;"	v
+tokens_t	jff/acwj-fun/ch02/helper.h	/^const char* tokens_t[] = {$/;"	v
+tokens_t	jff/acwj-fun/ch03/helper.h	/^const char* tokens_t[] = {$/;"	v
+tokens_t	jff/acwj-fun/ch04/helper.h	/^const char* tokens_t[] = {$/;"	v
+tokens_t	jff/acwj-fun/ch05/helper.h	/^const char* tokens_t[] = {$/;"	v
+torch	notebook/cs231n/a2/pytorch_cifar.py	/^import torch$/;"	i
+torch	notebook/cs231n/a2/pytorch_cifar.py	/^import torch.nn as nn$/;"	i
+torch	notebook/cs231n/a2/pytorch_cifar.py	/^import torch.optim as optim$/;"	i
+torch	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^import torch$/;"	i
+torch	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^import torch$/;"	i
+torch	notebook/cs231n/a3/cs231n/classifiers/transformer.py	/^import torch.nn as nn$/;"	i
+torch	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import torch$/;"	i
+torch	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import torch.nn as nn$/;"	i
+torch	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import torch.optim as optim$/;"	i
+torch	notebook/cs231n/a3/cs231n/simclr/contrastive_loss.py	/^import torch$/;"	i
+torch	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^import torch$/;"	i
+torch	notebook/cs231n/a3/cs231n/simclr/model.py	/^import torch$/;"	i
+torch	notebook/cs231n/a3/cs231n/simclr/model.py	/^import torch.nn as nn$/;"	i
+torch	notebook/cs231n/a3/cs231n/simclr/model.py	/^import torch.nn.functional as F$/;"	i
+torch	notebook/cs231n/a3/cs231n/simclr/utils.py	/^import torch$/;"	i
+torch	notebook/cs231n/a3/cs231n/simclr/utils.py	/^import torch.optim as optim$/;"	i
+torch	notebook/cs231n/a3/cs231n/transformer_layers.py	/^import torch$/;"	i
+torch	notebook/cs231n/a3/cs231n/transformer_layers.py	/^import torch.nn as nn$/;"	i
+torchvision	notebook/cs231n/a2/pytorch_cifar.py	/^import torchvision.datasets as dset$/;"	i
+torchvision	notebook/cs231n/a2/pytorch_cifar.py	/^import torchvision.transforms as T$/;"	i
+torchvision	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import torchvision$/;"	i
+torchvision	notebook/cs231n/a3/cs231n/gan_pytorch.py	/^import torchvision.transforms as T$/;"	i
+tqdm	notebook/cs231n/a3/cs231n/simclr/utils.py	/^from tqdm import tqdm$/;"	i
+train	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^    def train(self, X, y):$/;"	m	class:KNearestNeighbor
+train	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^    def train($/;"	m	class:LinearClassifier
+train	notebook/cs231n/a1/cs231n/solver.py	/^    def train(self):$/;"	m	class:Solver
+train	notebook/cs231n/a2/cs231n/solver.py	/^    def train(self):$/;"	m	class:Solver
+train	notebook/cs231n/a3/cs231n/captioning_solver.py	/^    def train(self):$/;"	m	class:CaptioningSolver
+train	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^    def train(self):$/;"	m	class:CaptioningSolverTransformer
+train	notebook/cs231n/a3/cs231n/simclr/utils.py	/^def train(model, data_loader, train_optimizer, epoch, epochs, batch_size=32, temperature=0.5, device='cuda'):$/;"	f
+train_val	notebook/cs231n/a3/cs231n/simclr/utils.py	/^def train_val(model, data_loader, train_optimizer, epoch, epochs, device='cuda'):$/;"	f
+transformer_temporal_softmax_loss	notebook/cs231n/a3/cs231n/captioning_solver_transformer.py	/^    def transformer_temporal_softmax_loss(self, x, y, mask):$/;"	m	class:CaptioningSolverTransformer
+transforms	notebook/cs231n/a3/cs231n/simclr/data_utils.py	/^from torchvision import transforms$/;"	i
+type	jff/acwj-fun/ch01/main.c	/^    enum TOKEN_TYPE type;$/;"	m	struct:token	typeref:enum:token::TOKEN_TYPE	file:
+type	jff/acwj-fun/ch02/helper.h	/^    enum TOKEN_TYPE type;$/;"	m	struct:token	typeref:enum:token::TOKEN_TYPE
+type	jff/acwj-fun/ch03/helper.h	/^    enum TOKEN_TYPE type;$/;"	m	struct:token	typeref:enum:token::TOKEN_TYPE
+type	jff/acwj-fun/ch04/helper.h	/^    enum TOKEN_TYPE type;$/;"	m	struct:token	typeref:enum:token::TOKEN_TYPE
+type	jff/acwj-fun/ch05/helper.h	/^    enum TOKEN_TYPE type;$/;"	m	struct:token	typeref:enum:token::TOKEN_TYPE
+uniform_filter	notebook/cs231n/a1/cs231n/features.py	/^from scipy.ndimage import uniform_filter$/;"	i
+urllib	notebook/cs231n/a2/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+urllib	notebook/cs231n/a3/cs231n/image_utils.py	/^import urllib.request, urllib.error, urllib.parse, os, tempfile$/;"	i
+usage	jff/acwj-fun/ch01/main.c	/^void usage()$/;"	f
+usage	jff/acwj-fun/ch02/main.c	/^void usage()$/;"	f
+usage	jff/acwj-fun/ch03/main.c	/^void usage()$/;"	f
+usage	jff/acwj-fun/ch04/main.c	/^void usage()$/;"	f
+usage	jff/acwj-fun/ch05/main.c	/^void usage()$/;"	f
+value	jff/acwj-fun/ch01/main.c	/^    int value;$/;"	m	struct:token	file:
+value	jff/acwj-fun/ch02/ast.h	/^    int value;$/;"	m	struct:ast_node
+value	jff/acwj-fun/ch02/helper.h	/^    int value;$/;"	m	struct:token
+value	jff/acwj-fun/ch03/ast.h	/^    int value;$/;"	m	struct:ast_node
+value	jff/acwj-fun/ch03/helper.h	/^    int value;$/;"	m	struct:token
+value	jff/acwj-fun/ch04/ast.h	/^    int value;$/;"	m	struct:ast_node
+value	jff/acwj-fun/ch04/helper.h	/^    int value;$/;"	m	struct:token
+value	jff/acwj-fun/ch05/ast.h	/^    int value;$/;"	m	struct:ast_node
+value	jff/acwj-fun/ch05/helper.h	/^    int value;$/;"	m	struct:token
+vis_grid	notebook/cs231n/a1/cs231n/vis_utils.py	/^def vis_grid(Xs):$/;"	f
+vis_grid	notebook/cs231n/a2/cs231n/vis_utils.py	/^def vis_grid(Xs):$/;"	f
+vis_nn	notebook/cs231n/a1/cs231n/vis_utils.py	/^def vis_nn(rows):$/;"	f
+vis_nn	notebook/cs231n/a2/cs231n/vis_utils.py	/^def vis_nn(rows):$/;"	f
+visualize_grid	notebook/cs231n/a1/cs231n/vis_utils.py	/^def visualize_grid(Xs, ubound=255.0, padding=1):$/;"	f
+visualize_grid	notebook/cs231n/a2/cs231n/vis_utils.py	/^def visualize_grid(Xs, ubound=255.0, padding=1):$/;"	f
+word_embedding_backward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def word_embedding_backward(dout, cache):$/;"	f
+word_embedding_forward	notebook/cs231n/a3/cs231n/rnn_layers.py	/^def word_embedding_forward(x, W):$/;"	f
+xrange	notebook/cs231n/a1/cs231n/classifiers/k_nearest_neighbor.py	/^from past.builtins import xrange$/;"	i
+xrange	notebook/cs231n/a1/cs231n/classifiers/linear_classifier.py	/^from past.builtins import xrange$/;"	i
+xrange	notebook/cs231n/a1/cs231n/classifiers/linear_svm.py	/^from past.builtins import xrange$/;"	i
+xrange	notebook/cs231n/a1/cs231n/classifiers/softmax.py	/^from past.builtins import xrange$/;"	i
+xrange	notebook/cs231n/a1/cs231n/features.py	/^from past.builtins import xrange$/;"	i
+xrange	notebook/cs231n/a1/cs231n/gradient_check.py	/^from past.builtins import xrange$/;"	i
+xrange	notebook/cs231n/a1/cs231n/vis_utils.py	/^from past.builtins import xrange$/;"	i
+xrange	notebook/cs231n/a2/cs231n/gradient_check.py	/^from past.builtins import xrange$/;"	i
+xrange	notebook/cs231n/a2/cs231n/vis_utils.py	/^from past.builtins import xrange$/;"	i
+zip	notebook/cs231n/a1/cs231n/features.py	/^from builtins import zip$/;"	i
