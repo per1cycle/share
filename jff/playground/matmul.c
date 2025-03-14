@@ -149,5 +149,5 @@ int main()
 {
     srand(time(NULL)); 
     // test_matmul_int(1024);
-    test_matmul_fp32(1024);
+    test_matmul_fp32(4096);
 }
