@@ -38,7 +38,6 @@ void print_mat_fp(int size, float** mat)
     printf("\n");
 }
 
-
 void print_mat_int(int size, int** mat)
 {
     for(int i = 0; i < size; i ++)
@@ -50,6 +49,16 @@ void print_mat_int(int size, int** mat)
         printf("\n");
     }
     printf("\n");
+}
+
+void measure_time(void (*func)(int N), int N) 
+{
+    clock_t start = clock();
+    (*func)(N);
+    clock_t end = clock();
+    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+
+    printf("Function costs: %.3f seconds\n", seconds);
 }
 
 void matmul_int(int size, int **mat_a, int **mat_b, int **out)
@@ -83,6 +92,7 @@ void matmul_fp32(int size, float **mat_a, float **mat_b, float **out)
 
 void test_matmul_fp32(int N)
 {
+    printf("[====] Running matmul test on fp32 using N=%d\n", N);
     float **mat_a, **mat_b;
     float **out;
 
@@ -100,9 +110,9 @@ void test_matmul_fp32(int N)
     gen_matrix_fp(N, mat_a), gen_matrix_fp(N, mat_b);
     matmul_fp32(N, mat_a, mat_b, out);
 
-    print_mat_fp(N, mat_a);
-    print_mat_fp(N, mat_b);
-    print_mat_fp(N, out);
+    // print_mat_fp(N, mat_a);
+    // print_mat_fp(N, mat_b);
+    // print_mat_fp(N, out);
 
     for(int i = 0; i < N; i ++)
     {
@@ -115,6 +125,7 @@ void test_matmul_fp32(int N)
 
 void test_matmul_int(int N)
 {
+    printf("[====] Running matmul test on int using N=%d\n", N);
     int **mat_a, **mat_b;
     int **out;
 
@@ -132,9 +143,9 @@ void test_matmul_int(int N)
     gen_matrix(N, mat_a), gen_matrix(N, mat_b);
     matmul_int(N, mat_a, mat_b, out);
 
-    print_mat_int(N, mat_a);
-    print_mat_int(N, mat_b);
-    print_mat_int(N, out);
+    // print_mat_int(N, mat_a);
+    // print_mat_int(N, mat_b);
+    // print_mat_int(N, out);
 
     for(int i = 0; i < N; i ++)
     {
@@ -148,6 +159,6 @@ void test_matmul_int(int N)
 int main()
 {
     srand(time(NULL)); 
-    // test_matmul_int(1024);
-    test_matmul_fp32(4096);
+    measure_time(test_matmul_int, 2048);
+    measure_time(test_matmul_fp32, 2048);
 }
