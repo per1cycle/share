@@ -51,6 +51,11 @@ void print_mat_int(int size, int** mat)
     printf("\n");
 }
 
+/**
+ * measure time of matmul func,
+ * though it's a little bit un precise,
+ * cause it the malloc time also include.
+ */
 void measure_time(void (*func)(int N), int N) 
 {
     clock_t start = clock();
@@ -158,7 +163,7 @@ void test_matmul_int(int N)
 
 int main()
 {
-    srand(time(NULL)); 
+    srand(time(NULL));
     measure_time(test_matmul_int, 2048);
     measure_time(test_matmul_fp32, 2048);
 }
