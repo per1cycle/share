@@ -8,6 +8,7 @@
         "cctype": "c",
         "locale": "c",
         "codegen.h": "c",
-        "helper.h": "c"
+        "helper.h": "c",
+        "vector": "cpp"
     }
 }
