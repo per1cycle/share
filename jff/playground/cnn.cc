@@ -5,6 +5,13 @@
 #include <cassert>
 #include <iterator>
 
+typedef struct pngchunk
+{
+    std::uint32_t length;
+    std::uint32_t chunk_type;
+    std::vector<int> chunk_data;
+    std::uint32_t crc;
+} png_chunk;
 
 /**
  * conv matrix
@@ -17,14 +24,15 @@ public:
         // read a image
         auto start = std::chrono::high_resolution_clock::now(); // start timer
 
-        std::ifstream is(filename.c_str(), std::ios::binary);
-        std::vector<std::uint8_t> temp(
-            (std::istream_iterator<char>(is)),
-            std::istream_iterator<char>()
-        );
+        std::ifstream is(filename.c_str(), std::ifstream::binary);
 
-        raw_data_.resize(temp.size());
-        std::copy(temp.begin(), temp.end(), raw_data_.begin());
+        // read file
+        is.seekg(0, std::ios::end);
+        size_t file_size = is.tellg();
+        is.seekg(0, std::ios::beg);
+        
+        raw_data_.resize(file_size);
+        is.read(reinterpret_cast<char*>(raw_data_.data()), file_size);
 
         auto finish = std::chrono::high_resolution_clock::now(); // end timer
         std::chrono::duration<double, std::milli> elapsed = finish - start;
@@ -32,6 +40,7 @@ public:
         std::cout << "Read data speed: " 
             << raw_data_.size() * 1.0 / elapsed.count() 
             << " KByte/s" << std::endl;
+
         std::cout << "Read data speed: "
             << elapsed.count() << " milliseconds." 
             << std::endl;
@@ -45,7 +54,7 @@ public:
         std::uint8_t block1 = raw_data_[1];
         std::uint8_t block2 = raw_data_[2];
         std::uint8_t block3 = raw_data_[3];
-        // raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 4);
+        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 4);
         return ((block0 << 24) | (block1 << 16) | (block2 << 8) | block3);
     }
 
@@ -62,6 +71,7 @@ public:
         std::cout << std::endl;
     }
 
+
     std::uint64_t Read8Byte()
     {
         assert(raw_data_.size() >= 8);
@@ -75,7 +85,7 @@ public:
         std::uint8_t block6 = raw_data_[6];
         std::uint8_t block7 = raw_data_[7];
 
-        // raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 8);
+        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 8);
 
         return 
             (
@@ -90,6 +100,22 @@ public:
             );
     }
 
+    std::vector<int> ReadNByte(std::uint32_t n)
+    {
+        std::vector<int> ret(raw_data_.begin(), raw_data_.begin() + n);
+        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + n);
+        return ret;
+    }
+    
+    /**
+     * calculate crc of current chunk
+     */
+    std::uint32_t Crc(std::uint32_t chunk_type, const std::vector<int> &data)
+    {
+        std::uint32_t crc_register = 1;
+
+    }
+
     int Resolve()
     {
         // resolve a png data.
@@ -99,6 +125,12 @@ public:
             std::cerr << std::hex << Header << " Format error. \n";
             return 1;
         }
+
+        png_chunk chunk;
+        chunk.length = Read4Byte();
+        chunk.chunk_type = Read4Byte();
+        chunk.chunk_data = ReadNByte(chunk.length);
+        chunk.crc = Crc(chunk.chunk_type, chunk.chunk_data);
         return 0;
     }
 
@@ -126,6 +158,6 @@ int main(int argc, char **argv)
     }
 
     Mat image(argv[1]);
-    image.PrintRaw();
+    image.Resolve();
     return 0;
 }
