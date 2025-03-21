@@ -15,18 +15,20 @@ public:
     Mat(std::string filename)
     {
         // read a image
-        auto start = std::chrono::high_resolution_clock::now();
+        auto start = std::chrono::high_resolution_clock::now(); // start timer
+
         std::ifstream is(filename.c_str(), std::ios::binary);
         std::vector<std::uint8_t> temp(
-            (std::istream_iterator<std::uint8_t>(is)),
-            std::istream_iterator<std::uint8_t>()
+            (std::istream_iterator<char>(is)),
+            std::istream_iterator<char>()
         );
+
         raw_data_.resize(temp.size());
         std::copy(temp.begin(), temp.end(), raw_data_.begin());
-        std::cout << "Raw data read " << raw_data_.size() << " bytes" 
-                    << std::endl;
-        auto finish = std::chrono::high_resolution_clock::now();
+
+        auto finish = std::chrono::high_resolution_clock::now(); // end timer
         std::chrono::duration<double, std::milli> elapsed = finish - start;
+
         std::cout << "Read data speed: " 
             << raw_data_.size() * 1.0 / elapsed.count() 
             << " KByte/s" << std::endl;
@@ -43,21 +45,27 @@ public:
         std::uint8_t block1 = raw_data_[1];
         std::uint8_t block2 = raw_data_[2];
         std::uint8_t block3 = raw_data_[3];
-        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 4);
+        // raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 4);
         return ((block0 << 24) | (block1 << 16) | (block2 << 8) | block3);
+    }
+
+    void PrintRaw()
+    {
+        for(int i = 0; i < 64; i ++)
+        {
+            std::cout << std::hex << static_cast<std::uint32_t>(raw_data_[i]) << ' ';
+            if(i > 0 && (i + 1) % 8 == 0)
+            {
+                std::cout << std::endl;
+            }
+        }
+        std::cout << std::endl;
     }
 
     std::uint64_t Read8Byte()
     {
         assert(raw_data_.size() >= 8);
-        for(int i = 0; i < 64; i ++)
-        {
-            std::cout << std::hex << static_cast<std::uint32_t>(raw_data_[i]) << ' ';
-            if(i > 0 && i % 8 == 0)
-            {
-                std::cout << std::endl;
-            }
-        }
+        
         std::uint8_t block0 = raw_data_[0];
         std::uint8_t block1 = raw_data_[1];
         std::uint8_t block2 = raw_data_[2];
@@ -66,8 +74,8 @@ public:
         std::uint8_t block5 = raw_data_[5];
         std::uint8_t block6 = raw_data_[6];
         std::uint8_t block7 = raw_data_[7];
-        // std::cout << "Block 7 " << std::hex << static_cast<std::uint32_t>(block7) << std::endl;
-        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 8);
+
+        // raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 8);
 
         return 
             (
@@ -118,6 +126,6 @@ int main(int argc, char **argv)
     }
 
     Mat image(argv[1]);
-    image.Resolve();
+    image.PrintRaw();
     return 0;
 }
