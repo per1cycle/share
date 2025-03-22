@@ -4,6 +4,7 @@
 #include <vector>
 #include <cassert>
 #include <iterator>
+#include <zlib.h>
 
 #define IHDR 0x49484452
 #define PHYS 0x70485973
@@ -79,7 +80,6 @@ public:
         std::cout << std::endl;
     }
 
-
     std::uint64_t Read8Byte()
     {
         assert(raw_data_.size() >= 8);
@@ -108,6 +108,14 @@ public:
             );
     }
 
+    std::vector<std::uint8_t> ReadNByte(std::uint32_t n)
+    {
+        assert(raw_data_.size() > n);
+        std::vector<std::uint8_t> ret(raw_data_.begin(), raw_data_.begin() + n);
+        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + n);
+        return ret;
+    }
+ 
     png_chunk* ReadChunk()
     {
         png_chunk *chunk = new png_chunk;
@@ -137,19 +145,7 @@ public:
 
         return chunk;
     }
-
-    std::vector<std::uint8_t> ReadNByte(std::uint32_t n)
-    {
-        if(raw_data_.size() < n)
-        {
-            std::cerr << "Raw data doesnot has " << n << " Bytes." << std::endl;
-            exit(1);
-        }
-        std::vector<std::uint8_t> ret(raw_data_.begin(), raw_data_.begin() + n);
-        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + n);
-        return ret;
-    }
-    
+   
     /**
      * calculate crc of current chunk
      * todo, not planned in current version.
@@ -160,6 +156,7 @@ public:
         return 0;
     }
 
+public:
     int Resolve()
     {
         // resolve a png data.
