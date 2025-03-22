@@ -100,8 +100,31 @@ public:
             );
     }
 
+    png_chunk* ReadChunk()
+    {
+        png_chunk *chunk = new png_chunk;
+        chunk->length = Read4Byte();
+        std::cout << "Read chun length: " << chunk->length << std::endl;
+        if(chunk->length == 0)
+        {
+            return nullptr;
+        }
+
+        chunk->chunk_type = Read4Byte();
+        chunk->chunk_data.resize(chunk->length);
+        chunk->chunk_data = ReadNByte(chunk->length);
+        chunk->crc = Read4Byte();
+
+        return chunk;
+    }
+
     std::vector<int> ReadNByte(std::uint32_t n)
     {
+        if(raw_data_.size() < n)
+        {
+            std::cerr << "Raw data doesnot has " << n << " Bytes." << std::endl;
+            exit(1);
+        }
         std::vector<int> ret(raw_data_.begin(), raw_data_.begin() + n);
         raw_data_.erase(raw_data_.begin(), raw_data_.begin() + n);
         return ret;
@@ -113,7 +136,6 @@ public:
     std::uint32_t Crc(std::uint32_t chunk_type, const std::vector<int> &data)
     {
         std::uint32_t crc_register = 1;
-
     }
 
     int Resolve()
@@ -126,11 +148,15 @@ public:
             return 1;
         }
 
-        png_chunk chunk;
-        chunk.length = Read4Byte();
-        chunk.chunk_type = Read4Byte();
-        chunk.chunk_data = ReadNByte(chunk.length);
-        chunk.crc = Crc(chunk.chunk_type, chunk.chunk_data);
+        png_chunk *chunk;
+        std::uint32_t total_size = 0;
+
+        while((chunk = ReadChunk()) != nullptr)
+        {
+            total_size += chunk->length;
+        }
+
+        std::cout << "Image data: " << total_size << std::endl;
         return 0;
     }
 
