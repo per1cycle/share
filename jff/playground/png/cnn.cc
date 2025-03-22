@@ -49,7 +49,7 @@ public:
             << raw_data_.size() * 1.0 / elapsed.count() 
             << " KByte/s" << std::endl;
 
-        std::cout << "Read data speed: "
+        std::cout << "Load image in: "
             << elapsed.count() << " milliseconds." 
             << std::endl;
     }
