@@ -5,6 +5,11 @@
 #include <cassert>
 #include <iterator>
 
+#define IHDR 0x49484452
+#define PHYS 0x70485973
+#define IDAT 0x49444154
+#define IEND 0x49454e44
+
 typedef struct pngchunk
 {
     std::uint32_t length;
@@ -116,7 +121,10 @@ public:
             chunk->chunk_type.type_name[1] << 
             chunk->chunk_type.type_name[0] << 
             ". Chunk length: " << 
-            chunk->length << std::endl;
+            chunk->length << 
+            ". Type in hex: " << 
+            std::hex << chunk->chunk_type.value << 
+            std::endl;
 
         chunk->chunk_data.resize(chunk->length);
         chunk->chunk_data = ReadNByte(chunk->length);
@@ -149,6 +157,7 @@ public:
     std::uint32_t Crc(std::uint32_t chunk_type, const std::vector<int> &data)
     {
         std::uint32_t crc_register = 1;
+        return 0;
     }
 
     int Resolve()
@@ -166,6 +175,17 @@ public:
 
         while((chunk = ReadChunk()) != nullptr)
         {
+            switch (chunk->chunk_type.value)
+            {
+            case IHDR:
+                break;
+            case PHYS:
+                break;
+            case IDAT:
+                break;
+            case IEND:
+                break;
+            }
             total_size += chunk->length;
         }
 
