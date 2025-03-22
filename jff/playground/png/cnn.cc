@@ -8,8 +8,11 @@
 typedef struct pngchunk
 {
     std::uint32_t length;
-    std::uint32_t chunk_type;
-    std::vector<int> chunk_data;
+    union {
+        std::uint32_t value;
+        char type_name[4];
+    } chunk_type;
+    std::vector<std::uint8_t> chunk_data;
     std::uint32_t crc;
 } png_chunk;
 
@@ -104,34 +107,44 @@ public:
     {
         png_chunk *chunk = new png_chunk;
         chunk->length = Read4Byte();
-        std::cout << "Read chun length: " << chunk->length << std::endl;
-        if(chunk->length == 0)
-        {
-            return nullptr;
-        }
+        // std::cout << "Read chun length: " << chunk->length << std::endl;
 
-        chunk->chunk_type = Read4Byte();
+        chunk->chunk_type.value = Read4Byte();
+        std::cout << "Chunk type: " << 
+            chunk->chunk_type.type_name[3] << 
+            chunk->chunk_type.type_name[2] << 
+            chunk->chunk_type.type_name[1] << 
+            chunk->chunk_type.type_name[0] << 
+            ". Chunk length: " << 
+            chunk->length << std::endl;
+
         chunk->chunk_data.resize(chunk->length);
         chunk->chunk_data = ReadNByte(chunk->length);
         chunk->crc = Read4Byte();
 
+        if(chunk->length == 0 && chunk->chunk_type.value == 0x49454e44)
+        {
+            return nullptr;
+        }
+
         return chunk;
     }
 
-    std::vector<int> ReadNByte(std::uint32_t n)
+    std::vector<std::uint8_t> ReadNByte(std::uint32_t n)
     {
         if(raw_data_.size() < n)
         {
             std::cerr << "Raw data doesnot has " << n << " Bytes." << std::endl;
             exit(1);
         }
-        std::vector<int> ret(raw_data_.begin(), raw_data_.begin() + n);
+        std::vector<std::uint8_t> ret(raw_data_.begin(), raw_data_.begin() + n);
         raw_data_.erase(raw_data_.begin(), raw_data_.begin() + n);
         return ret;
     }
     
     /**
      * calculate crc of current chunk
+     * todo, not planned in current version.
      */
     std::uint32_t Crc(std::uint32_t chunk_type, const std::vector<int> &data)
     {
