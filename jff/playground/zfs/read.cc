@@ -1,5 +1,6 @@
 #include "zfs.h"
 #include <iostream>
+
 void usage()
 {
     std::cerr << "Usage: " << 
