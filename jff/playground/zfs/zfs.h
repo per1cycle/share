@@ -116,8 +116,17 @@ typedef struct dnode_phys
     std::uint8_t dn_checksum;
     std::uint8_t dn_compress;
     std::uint8_t dn_pad;
-
-
+    std::uint16_t dn_datablkszsec;
+    std::uint16_t dn_bonuslen;
+    std::uint8_t dn_pad2[4];
+    std::uint64_t dn_maxblkid;
+    std::uint64_t dn_secphys;
+    std::uint64_t dn_pad3[4];
+    blk_ptr_t dn_blkptr[3];
+    std::uint8_t dn_bonus[];
 } dnode_phys_t;
+
+// dsl
+
 
 #endif // ZFS_H
