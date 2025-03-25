@@ -191,16 +191,10 @@ public:
             case PHYS:
                 break;
             case IDAT:
-                for(int i = 0; i < chunk->length; i ++)
-                {
-                    if(i > 0 && i % 8 == 0)
-                    {
-                        std::cout << std::endl;
-                    }
-                    std::cout << std::hex << std::setfill('0')<< std::setw(2) << static_cast<std::uint16_t>(chunk->chunk_data[i]) << ' ';
-                }
-                std::cout << std::endl;
+            {
+
                 break;
+            }
             case IEND:
                 break;
             }
