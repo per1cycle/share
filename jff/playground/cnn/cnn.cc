@@ -6,6 +6,14 @@
 #include <iterator>
 #include <zlib.h>
 
+// define platform
+#define NS_PRIVATE_IMPLEMENTATION
+#define CA_PRIVATE_IMPLEMENTATION
+#define MTL_PRIVATE_IMPLEMENTATION
+#include <Foundation/Foundation.hpp>
+#include <Metal/Metal.hpp>
+#include <QuartzCore/QuartzCore.hpp>
+
 #define IHDR 0x49484452
 #define PHYS 0x70485973
 #define IDAT 0x49444154
