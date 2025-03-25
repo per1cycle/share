@@ -9,4 +9,5 @@ jff/torch/data/
 *.bin
 *.codegen
 *.s
+tmp/*
 
