@@ -6,14 +6,7 @@
 #include <iterator>
 #include <zlib.h>
 
-// define platform
-#define NS_PRIVATE_IMPLEMENTATION
-#define CA_PRIVATE_IMPLEMENTATION
-#define MTL_PRIVATE_IMPLEMENTATION
-#include <Foundation/Foundation.hpp>
-#include <Metal/Metal.hpp>
-#include <QuartzCore/QuartzCore.hpp>
-
+#define PNG_HDR 0x89504e470d0a1a0a
 #define IHDR 0x49484452
 #define PHYS 0x70485973
 #define IDAT 0x49444154
@@ -141,13 +134,15 @@ public:
             ". Type in hex: " << 
             std::hex << chunk->chunk_type.value << 
             std::endl;
-
+        
+        // https://www.w3.org/TR/2003/REC-PNG-20031110/#5Chunk-layout
         chunk->chunk_data.resize(chunk->length);
         chunk->chunk_data = ReadNByte(chunk->length);
         chunk->crc = Read4Byte();
 
         if(chunk->length == 0 && chunk->chunk_type.value == 0x49454e44)
         {
+            delete chunk;
             return nullptr;
         }
 
@@ -164,12 +159,21 @@ public:
         return 0;
     }
 
+    /**
+     * Decompress a sequance of byte to a image data.
+     * algorithm: lz77
+     */
+    std::vector<std::uint8_t> Decompress(const std::vector<std::uint8_t>& data)
+    {
+
+    }
+    
 public:
     int Resolve()
     {
         // resolve a png data.
         std::uint64_t Header = Read8Byte();
-        if (Header != 0x89504e470d0a1a0a)
+        if (Header != PNG_HDR)
         {
             std::cerr << std::hex << Header << " Format error. \n";
             return 1;
@@ -187,6 +191,15 @@ public:
             case PHYS:
                 break;
             case IDAT:
+                for(int i = 0; i < chunk->length; i ++)
+                {
+                    if(i > 0 && i % 8 == 0)
+                    {
+                        std::cout << std::endl;
+                    }
+                    std::cout << std::hex << std::setfill('0')<< std::setw(2) << static_cast<std::uint16_t>(chunk->chunk_data[i]) << ' ';
+                }
+                std::cout << std::endl;
                 break;
             case IEND:
                 break;
@@ -194,7 +207,7 @@ public:
             total_size += chunk->length;
         }
 
-        std::cout << "Image data: " << total_size << std::endl;
+        std::cout << std::dec << "Image data: " << total_size << std::endl;
         return 0;
     }
 
