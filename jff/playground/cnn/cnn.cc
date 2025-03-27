@@ -47,27 +47,16 @@ public:
         auto finish = std::chrono::high_resolution_clock::now(); // end timer
         std::chrono::duration<double, std::milli> elapsed = finish - start;
 
-        std::cout << "Read data speed: " 
-            << raw_data_.size() * 1.0 / elapsed.count() 
-            << " KByte/s" << std::endl;
+        // std::cout << "Read data speed: " 
+        //     << raw_data_.size() * 1.0 / elapsed.count() 
+        //     << " KByte/s" << std::endl;
 
-        std::cout << "Load image in: "
-            << elapsed.count() << " milliseconds." 
-            << std::endl;
+        // std::cout << "Load image in: "
+        //     << elapsed.count() << " milliseconds." 
+        //     << std::endl;
     }
 
 public:
-    std::uint32_t Read4Byte()
-    {
-        assert(raw_data_.size() >= 4);
-        std::uint8_t block0 = raw_data_[0];
-        std::uint8_t block1 = raw_data_[1];
-        std::uint8_t block2 = raw_data_[2];
-        std::uint8_t block3 = raw_data_[3];
-        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 4);
-        return ((block0 << 24) | (block1 << 16) | (block2 << 8) | block3);
-    }
-
     void PrintRaw()
     {
         for(int i = 0; i < 64; i ++)
@@ -81,20 +70,31 @@ public:
         std::cout << std::endl;
     }
 
-    std::uint64_t Read8Byte()
+   std::uint32_t Read4Byte(std::vector<std::uint8_t>& v)
     {
-        assert(raw_data_.size() >= 8);
+        assert(v.size() >= 4);
+        std::uint8_t block0 = v[0];
+        std::uint8_t block1 = v[1];
+        std::uint8_t block2 = v[2];
+        std::uint8_t block3 = v[3];
+        v.erase(v.begin(), v.begin() + 4);
+        return ((block0 << 24) | (block1 << 16) | (block2 << 8) | block3);
+    }
+    
+    std::uint64_t Read8Byte(std::vector<std::uint8_t>& v)
+    {
+        assert(v.size() >= 8);
         
-        std::uint8_t block0 = raw_data_[0];
-        std::uint8_t block1 = raw_data_[1];
-        std::uint8_t block2 = raw_data_[2];
-        std::uint8_t block3 = raw_data_[3];
-        std::uint8_t block4 = raw_data_[4];
-        std::uint8_t block5 = raw_data_[5];
-        std::uint8_t block6 = raw_data_[6];
-        std::uint8_t block7 = raw_data_[7];
+        std::uint8_t block0 = v[0];
+        std::uint8_t block1 = v[1];
+        std::uint8_t block2 = v[2];
+        std::uint8_t block3 = v[3];
+        std::uint8_t block4 = v[4];
+        std::uint8_t block5 = v[5];
+        std::uint8_t block6 = v[6];
+        std::uint8_t block7 = v[7];
 
-        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + 8);
+        v.erase(v.begin(), v.begin() + 8);
 
         return 
             (
@@ -109,21 +109,21 @@ public:
             );
     }
 
-    std::vector<std::uint8_t> ReadNByte(std::uint32_t n)
+    std::vector<std::uint8_t> ReadNByte(std::vector<std::uint8_t>& v, std::uint32_t n)
     {
-        assert(raw_data_.size() > n);
-        std::vector<std::uint8_t> ret(raw_data_.begin(), raw_data_.begin() + n);
-        raw_data_.erase(raw_data_.begin(), raw_data_.begin() + n);
+        assert(v.size() > n);
+        std::vector<std::uint8_t> ret(v.begin(), v.begin() + n);
+        v.erase(v.begin(), v.begin() + n);
         return ret;
     }
  
     png_chunk* ReadChunk()
     {
         png_chunk *chunk = new png_chunk;
-        chunk->length = Read4Byte();
+        chunk->length = Read4Byte(raw_data_);
         // std::cout << "Read chun length: " << chunk->length << std::endl;
 
-        chunk->chunk_type.value = Read4Byte();
+        chunk->chunk_type.value = Read4Byte(raw_data_);
         std::cout << "Chunk type: " << 
             chunk->chunk_type.type_name[3] << 
             chunk->chunk_type.type_name[2] << 
@@ -137,8 +137,8 @@ public:
         
         // https://www.w3.org/TR/2003/REC-PNG-20031110/#5Chunk-layout
         chunk->chunk_data.resize(chunk->length);
-        chunk->chunk_data = ReadNByte(chunk->length);
-        chunk->crc = Read4Byte();
+        chunk->chunk_data = ReadNByte(raw_data_, chunk->length);
+        chunk->crc = Read4Byte(raw_data_);
 
         if(chunk->length == 0 && chunk->chunk_type.value == 0x49454e44)
         {
@@ -159,20 +159,40 @@ public:
         return 0;
     }
 
+    void DumpIDATData(const png_chunk &chunk)
+    {
+        std::ofstream of("idat.out");
+        std::ostream_iterator<std::uint8_t> it(of);
+        std::copy(chunk.chunk_data.begin(), chunk.chunk_data.end(), it);
+    }
+
     /**
      * Decompress a sequance of byte to a image data.
-     * algorithm: lz77
+     * 2025/03/27 implementation:
+     * Give up, and use zlib default impl
+     * 
      */
-    std::vector<std::uint8_t> Decompress(const std::vector<std::uint8_t>& data)
+    std::vector<std::uint8_t> Decompress(std::vector<std::uint8_t>& data)
     {
-
+        // compress example
+        // std::vector<uint8_t> decompressed_data;
+        // decompressed_data.resize(img_width_ * img_height_ * 4);
+        uLong ucomp_size = img_width_ * img_height_ * 4 + img_height_;
+        uLong comp_size = data.size();
+        std::vector<std::uint8_t> temp(ucomp_size);
+        int result = uncompress(static_cast<Bytef*>(&temp[0]), &ucomp_size, &data[0], comp_size);
+        if(result == Z_OK)
+        {
+            return temp;
+        }
+        return {};
     }
     
 public:
     int Resolve()
     {
         // resolve a png data.
-        std::uint64_t Header = Read8Byte();
+        std::uint64_t Header = Read8Byte(raw_data_);
         if (Header != PNG_HDR)
         {
             std::cerr << std::hex << Header << " Format error. \n";
@@ -187,12 +207,18 @@ public:
             switch (chunk->chunk_type.value)
             {
             case IHDR:
+            {
+                img_width_ = Read4Byte(chunk->chunk_data);
+                img_height_ = Read4Byte(chunk->chunk_data);
+                std::cout << std::dec << "Image format: <" << img_width_ << ", " << img_height_ << ">." << std::endl;
                 break;
+            }
             case PHYS:
                 break;
             case IDAT:
             {
-
+                auto ret = Decompress(chunk->chunk_data);
+                std::cout << std::dec << "Image size: " << ret.size() << std::endl;
                 break;
             }
             case IEND:
@@ -201,7 +227,7 @@ public:
             total_size += chunk->length;
         }
 
-        std::cout << std::dec << "Image data: " << total_size << std::endl;
+        // std::cout << std::dec << "Image data: " << total_size << std::endl;
         return 0;
     }
 
@@ -216,6 +242,8 @@ private:
     std::vector<std::vector<std::uint32_t>> data_;
     std::vector<std::vector<int>> result_;
     std::vector<std::vector<int>> core_;
+    std::uint32_t img_width_;
+    std::uint32_t img_height_;
     int stride_ = 1;
     bool padding_ = false;
 };
