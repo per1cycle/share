@@ -181,6 +181,7 @@ public:
         uLong comp_size = data.size();
         std::vector<std::uint8_t> temp(ucomp_size);
         int result = uncompress(static_cast<Bytef*>(&temp[0]), &ucomp_size, &data[0], comp_size);
+
         if(result == Z_OK)
         {
             return temp;
