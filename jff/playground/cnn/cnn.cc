@@ -211,15 +211,22 @@ public:
             {
                 img_width_ = Read4Byte(chunk->chunk_data);
                 img_height_ = Read4Byte(chunk->chunk_data);
-                std::cout << std::dec << "Image format: <" << img_width_ << ", " << img_height_ << ">." << std::endl;
+                data_.resize(img_height_);
+                for(int i = 0; i < img_height_; i ++)
+                {
+                    data_[i].resize(img_width_ + 1);
+                }
                 break;
             }
             case PHYS:
                 break;
             case IDAT:
             {
-                auto ret = Decompress(chunk->chunk_data);
-                std::cout << std::dec << "Image size: " << ret.size() << std::endl;
+                std::vector<std::uint8_t> ret = Decompress(chunk->chunk_data);
+                std::cout << "Image return size: " << ret.size() << std::endl;
+                for(int i = 0; i < ret.size() / img_height_; i ++)
+                {
+                }
                 break;
             }
             case IEND:
