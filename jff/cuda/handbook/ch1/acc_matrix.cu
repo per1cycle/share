@@ -13,7 +13,7 @@ __global__ void accelerate_1d_arr(float *arr_1d_a, float *arr_1d_b, float *arr_1
 // accelerate 2d operation
 __global__ void accelerate_2d_array(float *DevPtrA, float *DevPtrB, float *DevPtrC, size_t Pitch, int Width, int Height)
 {
-
+    // TODO
 }
 
 int main()
