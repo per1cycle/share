@@ -13,10 +13,14 @@ if(CUDA_FOUND)
   -gencode;arch=compute_30,code=sm_30;  
   -gencode;arch=compute_35,code=sm_35;
 <<<<<<< HEAD
+<<<<<<< HEAD
   -gencode;arch=compute_36,code=compute_35;
 =======
   -gencode;arch=compute_35,code=compute_35;
 >>>>>>> e0a1b62 (Upload submodule and init the handbook project.)
+=======
+  -gencode;arch=compute_35,code=compute_35;
+>>>>>>> c2613cd (Upload submodule and init the handbook project.)
   -gencode;arch=compute_20,code=sm_20; 
   -gencode;arch=compute_11,code=sm_11; 
   -gencode;arch=compute_12,code=sm_12;
@@ -32,6 +36,7 @@ if(CUDA_FOUND)
   set(CUDA_NVCC_FLAGS_DEBUG ${CUDA_NVCC_FLAGS_DEBUG} "-G")
   set(CMAKE_CUDA_ARCHITECTURES 50 52 60 61 70 72 75 80 86 87 89 90 
 <<<<<<< HEAD
+<<<<<<< HEAD
         # 100 101 120
         )
   add_subdirectory(playground)
@@ -41,6 +46,11 @@ if(CUDA_FOUND)
         )
   add_subdirectory(playground)
 >>>>>>> e0a1b62 (Upload submodule and init the handbook project.)
+=======
+        # 100 101 120 not support for 1060
+        )
+  add_subdirectory(playground)
+>>>>>>> c2613cd (Upload submodule and init the handbook project.)
 
 else(CUDA_FOUND)
   message("CUDA is not installed on this system.")

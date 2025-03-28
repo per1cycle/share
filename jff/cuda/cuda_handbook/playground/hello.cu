@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include <iostream>
 #include "cuda_runtime.h"
 #include "cuda.h"
@@ -22,6 +23,8 @@ int main()
         std::cout << "Gpu name:" << prop.name << std::endl;
     }
 =======
+=======
+>>>>>>> c2613cd (Upload submodule and init the handbook project.)
 #include "cuda_runtime.h"
 #include <stdio.h>
 
@@ -31,6 +34,9 @@ __global__ void cuda_hello(){
 
 int main() {
     cuda_hello<<<1,1>>>(); 
+<<<<<<< HEAD
 >>>>>>> e0a1b62 (Upload submodule and init the handbook project.)
+=======
+>>>>>>> c2613cd (Upload submodule and init the handbook project.)
     return 0;
 }
