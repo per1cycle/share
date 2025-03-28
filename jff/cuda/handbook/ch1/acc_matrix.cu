@@ -16,8 +16,6 @@ __global__ void accelerate_2d_array(float *DevPtrA, float *DevPtrB, float *DevPt
 
 }
 
-
-
 int main()
 {
     
