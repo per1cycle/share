@@ -1,6 +1,13 @@
 #include "zfs.h"
 #include <iostream>
 
+void better_usage()
+{
+    std::cerr << "Usage: \n" << 
+        "Subcommand: [ls|cat|cp]";
+    exit(1);
+}
+
 void usage()
 {
     std::cerr << "Usage: " << 
