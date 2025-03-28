@@ -1,0 +1,3 @@
+[submodule "jff/cuda/udacity/cs344"]
+	path = jff/cuda/udacity/cs344
+	url = https://github.com/per1cycle/cs344
