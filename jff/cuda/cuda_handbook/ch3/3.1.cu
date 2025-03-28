@@ -2,10 +2,6 @@
 #include "cuda_runtime.h"
 #include "cuda.h"
 
-__device__ void cuda_hello()
-{
-}
-
 int main()
 {
     int device_count = 0;
@@ -18,7 +14,8 @@ int main()
         cudaDeviceProp prop;
         cudaError_t err = cudaGetDevice(&dev);
         cudaGetDeviceProperties(&prop, dev);
-        std::cout << "Gpu name:" << prop.name << std::endl;
+        std::cout << "Gpu name: " << prop.name << std::endl;
     }
+
     return 0;
 }

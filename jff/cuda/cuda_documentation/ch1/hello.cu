@@ -1,7 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <chrono>
-
+#include "common/utils.h"
 const int N = 1000010;
 const size_t size = N * sizeof(float);
 

@@ -1,5 +1,5 @@
 #include <random>
-#include "utils.h"
+#include "common/utils.h"
 const int N = 4096;
 const int blocks_per_grid = 100, threads_per_block = 1024;
 
