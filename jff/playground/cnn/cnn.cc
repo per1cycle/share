@@ -320,7 +320,7 @@ public:
                     data_[i + 2][j + 1] * core_[2][1] +
                     data_[i + 2][j + 2] * core_[2][2];
 
-                cnn_result[i][j] = val;
+                cnn_result[i][j] = val / 3;
 
             }
         }
