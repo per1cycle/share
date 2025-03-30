@@ -57,6 +57,22 @@ public:
     }
 
 public:
+    void InitCNNCore()
+    {
+        /**
+         * 3x3 matric
+         * [1, 0, 0
+         *  0, 1, 0,
+         *  0, 0, 1]
+         */
+        core_.resize(3);
+        for(int i = 0; i < 3; i ++)
+        {
+            core_[i].resize(3);
+            core_[i][i] = 1;
+        }
+
+    }
     void PrintRaw()
     {
         for(int i = 0; i < 64; i ++)
@@ -275,7 +291,19 @@ public:
 
     int CNN()
     {
-        
+        InitCNNCore();
+        std::vector<std::vector<int> > cnn_result;
+        std::uint32_t result_width = img_width_ - core_.size() + 1;
+        std::uint32_t result_height = img_height_ - core_.size() + 1;
+        // init result matrix
+        for(int i = 0; i < result_width; i ++)
+        {
+            for(int j = 0; j < result_width; j ++)
+            {
+                // start conv operation
+
+            }
+        }
         return 0;
     }
 
@@ -300,5 +328,6 @@ int main(int argc, char **argv)
 
     Mat image(argv[1]);
     image.Resolve();
+    image.CNN();
     return 0;
 }
