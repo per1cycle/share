@@ -70,6 +70,19 @@ public:
         std::cout << std::endl;
     }
 
+    void PrintImage()
+    {
+        for(int i = 0; i < img_height_; i ++)
+        {
+            for(int j = 0; j < img_width_; j ++)
+            {
+                std::cout << std::hex << std::setw(8) << std::setfill('0') << data_[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
+    }
+
    std::uint32_t Read4Byte(std::vector<std::uint8_t>& v)
     {
         assert(v.size() >= 4);
@@ -116,7 +129,21 @@ public:
         v.erase(v.begin(), v.begin() + n);
         return ret;
     }
- 
+
+    std::vector<std::uint32_t> ResolveOneLine(std::vector<std::uint8_t>& raw_data, std::uint32_t length)
+    {
+        assert((length % 4) == 1); // image width + crc
+        std::vector<std::uint32_t> result;
+        result.resize(length / 4);
+        for(int i = 0; i < length / 4; i ++)
+        {
+            std::uint32_t data = Read4Byte(raw_data);
+            result[i] = data;
+        }
+        raw_data.erase(raw_data.begin());
+        return result;
+    }
+
     png_chunk* ReadChunk()
     {
         png_chunk *chunk = new png_chunk;
@@ -124,16 +151,16 @@ public:
         // std::cout << "Read chun length: " << chunk->length << std::endl;
 
         chunk->chunk_type.value = Read4Byte(raw_data_);
-        std::cout << "Chunk type: " << 
-            chunk->chunk_type.type_name[3] << 
-            chunk->chunk_type.type_name[2] << 
-            chunk->chunk_type.type_name[1] << 
-            chunk->chunk_type.type_name[0] << 
-            ". Chunk length: " << 
-            chunk->length << 
-            ". Type in hex: " << 
-            std::hex << chunk->chunk_type.value << 
-            std::endl;
+        // std::cout << "Chunk type: " << 
+        //     chunk->chunk_type.type_name[3] << 
+        //     chunk->chunk_type.type_name[2] << 
+        //     chunk->chunk_type.type_name[1] << 
+        //     chunk->chunk_type.type_name[0] << 
+        //     ". Chunk length: " << 
+        //     chunk->length << 
+        //     ". Type in hex: " << 
+        //     std::hex << chunk->chunk_type.value << 
+        //     std::endl;
         
         // https://www.w3.org/TR/2003/REC-PNG-20031110/#5Chunk-layout
         chunk->chunk_data.resize(chunk->length);
@@ -224,10 +251,16 @@ public:
             {
                 std::vector<std::uint8_t> ret = Decompress(chunk->chunk_data);
                 std::cout << "Image return size: " << std::dec << ret.size() << std::endl;
-                for(int i = 0; i < ret.size() / img_height_; i ++)
+                std::uint32_t line = img_height_;
+                std::uint32_t byte_per_line = img_width_ * 4 + 1;
+                for(int i = 0; i < line; i ++)
                 {
-                    
+                    std::vector<std::uint32_t> temp;
+                    temp = ResolveOneLine(ret, byte_per_line);
+                    data_[i] = temp;
                 }
+                assert(ret.size() == 0);
+                PrintImage();
                 break;
             }
             case IEND:
