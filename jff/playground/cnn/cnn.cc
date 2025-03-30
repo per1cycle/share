@@ -186,7 +186,7 @@ public:
         {
             return temp;
         }
-        return {};
+        return {0};
     }
     
 public:
@@ -223,9 +223,10 @@ public:
             case IDAT:
             {
                 std::vector<std::uint8_t> ret = Decompress(chunk->chunk_data);
-                std::cout << "Image return size: " << ret.size() << std::endl;
+                std::cout << "Image return size: " << std::dec << ret.size() << std::endl;
                 for(int i = 0; i < ret.size() / img_height_; i ++)
                 {
+                    
                 }
                 break;
             }
@@ -247,9 +248,9 @@ public:
 
 private:
     std::vector<std::uint8_t> raw_data_;
-    std::vector<std::vector<std::uint32_t>> data_;
-    std::vector<std::vector<int>> result_;
-    std::vector<std::vector<int>> core_;
+    std::vector<std::vector<std::uint32_t> > data_;
+    std::vector<std::vector<int> > result_;
+    std::vector<std::vector<int> > core_;
     std::uint32_t img_width_;
     std::uint32_t img_height_;
     int stride_ = 1;
