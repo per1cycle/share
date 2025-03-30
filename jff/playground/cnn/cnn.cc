@@ -297,11 +297,30 @@ public:
         std::uint32_t result_width = img_width_ - core_.size() + 1;
         std::uint32_t result_height = img_height_ - core_.size() + 1;
         // init result matrix
-        for(int i = 0; i < result_width; i ++)
+        // todo
+        cnn_result.resize(result_height);
+        for(int i = 0; i < result_height; i ++)
+        {
+            cnn_result[i].resize(result_width);
+        }
+
+        for(int i = 0; i < result_height; i ++)
         {
             for(int j = 0; j < result_width; j ++)
             {
                 // start conv operation
+                std::uint32_t val = 
+                    data_[i][j] * core_[0][0] + 
+                    data_[i][j + 1] * core_[0][1] + 
+                    data_[i][j + 2] * core_[0][2] + 
+                    data_[i + 1][j] * core_[1][0] + 
+                    data_[i + 1][j + 1] * core_[1][1] +
+                    data_[i + 1][j + 2] * core_[1][2] + 
+                    data_[i + 2][j] * core_[2][0] +
+                    data_[i + 2][j + 1] * core_[2][1] +
+                    data_[i + 2][j + 2] * core_[2][2];
+
+                cnn_result[i][j] = val;
 
             }
         }
