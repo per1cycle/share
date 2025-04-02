@@ -1,0 +1,1 @@
+add_cl_exe(foo foo.cc)
