@@ -13,6 +13,4 @@ function(add_cl_exe TARGET SOURCE)
     target_link_libraries(${TARGET} OpenCL::OpenCL)
 endfunction(add_cl_exe)
 
-add_cl_exe(vec_mul vec_mul.cpp)
-
 add_subdirectory(SGEMM)
