@@ -39,7 +39,7 @@ int main(int argc, char** argv)
     cl_platform_id platform_id;
     cl_int tmp;
     cl_uint platform_nums;
-    clGetPlatformIDs(tmp, &platform_id, &platform_nums);
+    clGetPlatformIDs(1, NULL, &platform_nums);
     std::cout << platform_nums << std::endl;
     return 0;
 }
