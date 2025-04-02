@@ -1,8 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#ifdef __APPLE__
 #include <OpenCL/cl.h>
-
+#else 
+#include <CL/cl.h>
+#endif
 void usage()
 {
     std::cerr << "Usage: ./vX <path to cl>" << std::endl;
