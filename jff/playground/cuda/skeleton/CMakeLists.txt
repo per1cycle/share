@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
-project(cuda_programming_guide)
+project(skeleton LANGUAGES C CXX CUDA)
 
 find_package(CUDA REQUIRED LANGUAGES C CXX CUDA)
 
