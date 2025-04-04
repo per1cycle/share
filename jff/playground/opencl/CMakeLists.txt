@@ -14,3 +14,4 @@ function(add_cl_exe TARGET SOURCE)
 endfunction(add_cl_exe)
 
 add_subdirectory(SGEMM)
+add_subdirectory(book)
