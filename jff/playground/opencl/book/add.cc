@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <chrono>
+#include <cstring>
 
 #ifdef __APPLE__
 #include <OpenCL/cl.h>
@@ -21,7 +23,7 @@ void print_arr(int *arr, int arr_size)
     for(int i = 0; i < arr_size; i ++)
     {
         std::cout << arr[i] << ' ';
-        if(i && i % 64 == 0)
+        if(i && i % 16 == 0)
             std::cout << std::endl;
     }
     std::cout << std::endl;
@@ -35,6 +37,14 @@ std::string load_kernel_code(const std::string& kernel_path)
     buf << f.rdbuf();
 
     return buf.str();
+}
+
+void simple_add(int *a, int *b, int *c, int arr_size)
+{
+    for(int i = 0; i < arr_size; i ++)
+    {
+        c[i] = a[i] + b[i];
+    }
 }
 
 int main()
@@ -79,7 +89,7 @@ int main()
     CL_CHECK(status);
 
     // allocate data to process
-    const int ARRAY_SIZE = 64;
+    const int ARRAY_SIZE = 4096 * 4096 * 32 * 2;
     int *h_a = new int[ARRAY_SIZE];
     int *h_b = new int[ARRAY_SIZE];
     int *h_c = new int[ARRAY_SIZE];
@@ -140,8 +150,23 @@ int main()
     size_t index_space_size[1], work_group_size[1];
     index_space_size[0] = ARRAY_SIZE;
     work_group_size[0] = 64;
+
+    // measure the time
+    auto start = std::chrono::high_resolution_clock::now();
     clEnqueueNDRangeKernel(command_queue, kernel, 1, NULL, index_space_size, work_group_size, 0, NULL, NULL);
+    auto finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> elapsed = finish - start;
+    std::cout << "Elapsed Time: " << elapsed.count() << " seconds" << std::endl;
+
     status = clEnqueueReadBuffer(command_queue, d_c, CL_TRUE, 0, sizeof(int) * ARRAY_SIZE, h_c, 0, NULL, NULL);
-    print_arr(h_c, ARRAY_SIZE);
+    // print_arr(h_c, ARRAY_SIZE);
+
+    clReleaseKernel(kernel);
+    clReleaseProgram(program);
+    clReleaseMemObject(d_c);
+    clReleaseMemObject(d_b);
+    clReleaseMemObject(d_a);
+    clReleaseCommandQueue(command_queue);
+    clReleaseContext(context);
     return 0;
 }
