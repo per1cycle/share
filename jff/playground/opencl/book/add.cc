@@ -25,10 +25,13 @@ int main()
     CL_CHECK(cl_status);
 
     std::cout << "num of platforms: " << num_platforms << std::endl;
-    cl_device_id device_id;
-    cl_status = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_ALL, 1, &device_id, NULL);
-    CL_CHECK(cl_status);
-    std::cout << "number of device: " << device_id << std::endl;
+    for(cl_int i = 1; i <= num_platforms; i ++)
+    {
+        cl_device_id device_id;
+        cl_status = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_ALL, i, &device_id, NULL);
+        CL_CHECK(cl_status);
+        std::cout << "Device: " << device_id << std::endl;
+    }
     
     cl_context context;
 
@@ -38,10 +41,10 @@ int main()
     float *b = new float[ARRAY_SIZE];
     float *c = new float[ARRAY_SIZE];
 
-    context = clCreateContext(NULL, 1, &device_id, NULL, NULL, &cl_status);
+    // context = clCreateContext(NULL, 1, &device_id, NULL, NULL, &cl_status);
 
-    cl_command_queue command_queue;
-    command_queue = clCreateCommandQueue(context, device_id, NULL, &cl_status);
+    // cl_command_queue command_queue;
+    // command_queue = clCreateCommandQueue(context, device_id, NULL, &cl_status);
 
     CL_CHECK(cl_status);
 
