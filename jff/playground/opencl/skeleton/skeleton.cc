@@ -26,8 +26,12 @@ std::string load_kernel_code(const std::string& kernel_path)
     return buf.str();
 }
 
-int main()
+int main(int argc, char** argv)
 {
+    if(argc < 2)
+    {
+        exit(1);
+    }
     // need call clGetPlatformIDs twice, first time got the num platforms.
     cl_int status;
     cl_uint num_platforms = 0;
@@ -54,6 +58,10 @@ int main()
             std::cout << '\t' << devices[j] << std::endl;
         }
     }
+
+    std::string kernel_source = load_kernel_code(argv[1]);
+    char* str = new char[kernel_source.size() + 1];
+    std::strcpy(str, kernel_source.c_str());
 
     return 0;
 }
