@@ -16,6 +16,16 @@
     } \
 } while(0)
 
+std::string load_kernel_code(const std::string& kernel_path)
+{
+    std::cout << kernel_path << std::endl;
+    std::ifstream f(kernel_path.c_str());
+    std::stringstream buf;
+    buf << f.rdbuf();
+
+    return buf.str();
+}
+
 int main()
 {
     // need call clGetPlatformIDs twice, first time got the num platforms.

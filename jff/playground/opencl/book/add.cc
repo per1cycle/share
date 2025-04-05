@@ -16,6 +16,27 @@
     } \
 } while(0)
 
+void print_arr(int *arr, int arr_size)
+{
+    for(int i = 0; i < arr_size; i ++)
+    {
+        std::cout << arr[i] << ' ';
+        if(i && i % 64 == 0)
+            std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+std::string load_kernel_code(const std::string& kernel_path)
+{
+    std::cout << kernel_path << std::endl;
+    std::ifstream f(kernel_path.c_str());
+    std::stringstream buf;
+    buf << f.rdbuf();
+
+    return buf.str();
+}
+
 int main()
 {
     // need call clGetPlatformIDs twice, first time got the num platforms.
@@ -57,11 +78,51 @@ int main()
     command_queue = clCreateCommandQueue(context, device_id, 0, &status);
     CL_CHECK(status);
 
-    // allocate data to process.
-    cl_mem arr_a = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(int), NULL, &status);
-    cl_mem arr_b = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(int), NULL, &status);
-    cl_mem arr_c = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(int), NULL, &status);
+    // allocate data to process
+    const int ARRAY_SIZE = 64;
+    int *h_a = new int[ARRAY_SIZE];
+    int *h_b = new int[ARRAY_SIZE];
+    int *h_c = new int[ARRAY_SIZE];
 
+    for(int i = 0; i < ARRAY_SIZE; i ++)
+    {
+        h_a[i] = rand() % ARRAY_SIZE;
+        h_b[i] = rand() % ARRAY_SIZE;
+        h_c[i] = 0;
+    }
+
+    // print_arr(h_a, ARRAY_SIZE);
+    // print_arr(h_b, ARRAY_SIZE);
+
+    // method 1
+    // 
+    cl_mem d_a = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(int) * ARRAY_SIZE, NULL, &status);
+    CL_CHECK(status);
+    cl_mem d_b = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(int) * ARRAY_SIZE, NULL, &status);
+    CL_CHECK(status);
+    cl_mem d_c = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(int) * ARRAY_SIZE, NULL, &status);
+    CL_CHECK(status);
+
+    status = clEnqueueWriteBuffer(command_queue, d_a, CL_TRUE, 0, sizeof(int) * ARRAY_SIZE, h_a, 0, NULL, NULL);
+    CL_CHECK(status);
+    status = clEnqueueWriteBuffer(command_queue, d_b, CL_TRUE, 0, sizeof(int) * ARRAY_SIZE, h_b, 0, NULL, NULL);
+    CL_CHECK(status);
+    // shouldn't be called.
+    status = clEnqueueWriteBuffer(command_queue, d_c, CL_TRUE, 0, sizeof(int) * ARRAY_SIZE, h_c, 0, NULL, NULL);
+    CL_CHECK(status);
+
+    const char *kernel_code = 
+"__kernel void add(__global int *A, __global int *B, __global int *C)"\
+"{" \
+"    int thread_id = get_global_id(0);" \
+"    C[thread_id] = A[thread_id] + B[thread_id];" \
+"}";
+    
+    std::cout << kernel_code << std::endl;
+    cl_program program = clCreateProgramWithSource(context, 1, (const char**)&kernel_code, NULL, &status);
+    CL_CHECK(status);
+    status = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
+    CL_CHECK(status);
     
     return 0;
 }
