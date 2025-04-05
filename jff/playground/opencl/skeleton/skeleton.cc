@@ -35,6 +35,7 @@ int main(int argc, char** argv)
     // need call clGetPlatformIDs twice, first time got the num platforms.
     cl_int status;
     cl_uint num_platforms = 0;
+    cl_uint num_device_per_platform = 0;
     status = clGetPlatformIDs(0, NULL, &num_platforms);
     CL_CHECK(status);
     
@@ -46,7 +47,6 @@ int main(int argc, char** argv)
     {
         std::cout << "Platform: " << platforms[i] << " has devices:" << std::endl;
         // device id also need be call twice 
-        cl_uint num_device_per_platform = 0;
         status = clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, 0, NULL, &num_device_per_platform);
 
         cl_device_id *devices = new cl_device_id[num_device_per_platform];
