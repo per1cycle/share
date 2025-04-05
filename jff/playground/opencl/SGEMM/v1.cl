@@ -3,7 +3,7 @@
  * matrix multiplication accelerated with opencl
  * N x K matrix multiplied with K x M matrix 
  */
-__kernel v1(const int N, const int M, int K, float *A, float *B, float *C)
+__kernel void v1(const int N, const int M, int K, __global float *A, __global float *B, __global float *C)
 {
     const int global_row = get_global_id(0);
     const int global_col = get_global_id(1);
