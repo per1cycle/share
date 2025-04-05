@@ -1,1 +1,1 @@
-add_cl_exe(saxpy saxpy.cc)
+add_cl_exe(get_platform get_platform.cc)

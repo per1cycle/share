@@ -15,3 +15,4 @@ endfunction(add_cl_exe)
 
 add_subdirectory(SGEMM)
 add_subdirectory(book)
+add_subdirectory(skeleton)
