@@ -47,8 +47,12 @@ void simple_add(int *a, int *b, int *c, int arr_size)
     }
 }
 
-int main()
+int main(int argc, char** argv)
 {
+    if(argc < 2)
+    {
+        exit(1);
+    }
     // need call clGetPlatformIDs twice, first time got the num platforms.
     cl_int status;
     cl_uint num_platforms = 0;
@@ -127,7 +131,7 @@ int main()
 // "    int thread_id = get_global_id(0);" \
 // "    C[thread_id] = A[thread_id] + B[thread_id];" \
 // "}";
-    std::string kernel_source = load_kernel_code("/Users/z/Projects/Github/dev/share/jff/playground/opencl/book/add.cl");
+    std::string kernel_source = load_kernel_code(argv[1]);
     char *kernel_code = new char[kernel_source.size() + 1];
     strcpy(kernel_code, kernel_source.c_str());
 
