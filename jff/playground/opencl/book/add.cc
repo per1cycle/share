@@ -86,8 +86,8 @@ int main()
 
     for(int i = 0; i < ARRAY_SIZE; i ++)
     {
-        h_a[i] = rand() % ARRAY_SIZE;
-        h_b[i] = rand() % ARRAY_SIZE;
+        h_a[i] = i;
+        h_b[i] = i;
         h_c[i] = 0;
     }
 
@@ -137,7 +137,11 @@ int main()
     status = clSetKernelArg(kernel, 2, sizeof(cl_mem), &d_c);
     CL_CHECK(status);
 
-    // clEnqueueNDRangeKernel(command_queue, kernel, )
-    
+    size_t index_space_size[1], work_group_size[1];
+    index_space_size[0] = ARRAY_SIZE;
+    work_group_size[0] = 64;
+    clEnqueueNDRangeKernel(command_queue, kernel, 1, NULL, index_space_size, work_group_size, 0, NULL, NULL);
+    status = clEnqueueReadBuffer(command_queue, d_c, CL_TRUE, 0, sizeof(int) * ARRAY_SIZE, h_c, 0, NULL, NULL);
+    print_arr(h_c, ARRAY_SIZE);
     return 0;
 }
