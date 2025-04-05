@@ -111,18 +111,33 @@ int main()
     status = clEnqueueWriteBuffer(command_queue, d_c, CL_TRUE, 0, sizeof(int) * ARRAY_SIZE, h_c, 0, NULL, NULL);
     CL_CHECK(status);
 
-    const char *kernel_code = 
-"__kernel void add(__global int *A, __global int *B, __global int *C)"\
-"{" \
-"    int thread_id = get_global_id(0);" \
-"    C[thread_id] = A[thread_id] + B[thread_id];" \
-"}";
-    
+//     const char *kernel_code = 
+// "__kernel void add(__global int *A, __global int *B, __global int *C)"\
+// "{" \
+// "    int thread_id = get_global_id(0);" \
+// "    C[thread_id] = A[thread_id] + B[thread_id];" \
+// "}";
+    std::string kernel_source = load_kernel_code("/Users/z/Projects/Github/dev/share/jff/playground/opencl/book/add.cl");
+    char *kernel_code = new char[kernel_source.size() + 1];
+    strcpy(kernel_code, kernel_source.c_str());
+
     std::cout << kernel_code << std::endl;
     cl_program program = clCreateProgramWithSource(context, 1, (const char**)&kernel_code, NULL, &status);
     CL_CHECK(status);
     status = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
     CL_CHECK(status);
+
+    // start run kernel.
+    cl_kernel kernel = clCreateKernel(program, "add", &status);
+    CL_CHECK(status);
+    status = clSetKernelArg(kernel, 0, sizeof(cl_mem), &d_a);
+    CL_CHECK(status);
+    status = clSetKernelArg(kernel, 1, sizeof(cl_mem), &d_b);
+    CL_CHECK(status);
+    status = clSetKernelArg(kernel, 2, sizeof(cl_mem), &d_c);
+    CL_CHECK(status);
+
+    // clEnqueueNDRangeKernel(command_queue, kernel, )
     
     return 0;
 }
