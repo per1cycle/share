@@ -18,6 +18,32 @@
 
 int main()
 {
+    // need call clGetPlatformIDs twice, first time got the num platforms.
+    cl_int status;
+    cl_uint num_platforms = 0;
+    status = clGetPlatformIDs(0, NULL, &num_platforms);
+    CL_CHECK(status);
+    
+    cl_platform_id *platforms = new cl_platform_id[num_platforms];
+    status = clGetPlatformIDs(num_platforms, platforms, NULL);
+    CL_CHECK(status);
 
+    for(cl_uint i = 0; i < num_platforms; i ++)
+    {
+        std::cout << "Platform: " << platforms[i] << " has devices:" << std::endl;
+        // device id also need be call twice 
+        cl_uint num_device_per_platform = 0;
+        status = clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, 0, NULL, &num_device_per_platform);
 
+        cl_device_id *devices = new cl_device_id[num_device_per_platform];
+        status = clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, num_device_per_platform, devices, NULL);
+        CL_CHECK(status);
+
+        for(cl_int j = 0; j < num_device_per_platform; j ++)
+        {
+            std::cout << '\t' << devices[j] << std::endl;
+        }
+    }
+
+    return 0;
 }
