@@ -102,8 +102,8 @@ int main(int argc, char** argv)
     }
 
     std::string kernel_source = load_kernel_code(argv[1]);
-    char* str = new char[kernel_source.size() + 1];
-    std::strcpy(str, kernel_source.c_str());
+    char* kernel_code = new char[kernel_source.size() + 1];
+    std::strcpy(kernel_code, kernel_source.c_str());
     // std::cout << str << std::endl;
 
     cl_device_id device_id;
@@ -140,9 +140,49 @@ int main(int argc, char** argv)
     command_queue = clCreateCommandQueue(context, device_id, 0, &status);
     CL_CHECK(status);
 
-    print_2d(h_a, N, K);
-    print_2d(h_b, K, M);
-    simple_matmul(h_a, h_b, h_c, N, K, M);
-    print_2d(h_c, N, M);
+    // print_2d(h_a, N, K);
+    // print_2d(h_b, K, M);
+    // simple_matmul(h_a, h_b, h_c, N, K, M);
+    // print_2d(h_c, N, M);
+    
+    cl_mem d_a = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float) * N * K, NULL, &status);
+    CL_CHECK(status);
+    cl_mem d_b = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float) * K * M, NULL, &status);
+    CL_CHECK(status);
+    cl_mem d_c = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(float) * N * M, NULL, &status);
+    CL_CHECK(status);
+
+    // copy host mem to device
+    status = clEnqueueWriteBuffer(command_queue, d_a, CL_TRUE, 0, sizeof(float) * N * K, h_a, 0, NULL, NULL);
+    CL_CHECK(status);
+    status = clEnqueueWriteBuffer(command_queue, d_b, CL_TRUE, 0, sizeof(float) * K * M, h_b, 0, NULL, NULL);
+    CL_CHECK(status);
+    status = clEnqueueWriteBuffer(command_queue, d_c, CL_TRUE, 0, sizeof(float) * N * M, h_c, 0, NULL, NULL);
+    CL_CHECK(status);
+
+    cl_program program;
+    program = clCreateProgramWithSource(context, 1, (const char**)&kernel_code, NULL, &status);
+    CL_CHECK(status);
+    
+    status = clBuildProgram(program, 1, &device_id, NULL, NULL, NULL);
+    CL_CHECK(status);
+
+    cl_kernel kernel;
+    kernel = clCreateKernel(program, "v1", &status);
+    CL_CHECK(status);
+
+    status = clSetKernelArg(kernel, 0, sizeof(int), &N);
+    CL_CHECK(status);
+    status = clSetKernelArg(kernel, 1, sizeof(int), &M);
+    CL_CHECK(status);
+    status = clSetKernelArg(kernel, 2, sizeof(int), &K);
+    CL_CHECK(status);
+    status = clSetKernelArg(kernel, 3, sizeof(cl_mem), &d_a);
+    CL_CHECK(status);
+    status = clSetKernelArg(kernel, 4, sizeof(cl_mem), &d_b);
+    CL_CHECK(status);
+    status = clSetKernelArg(kernel, 5, sizeof(cl_mem), &d_c);
+    CL_CHECK(status);
+
     return 0;
 }

@@ -5,8 +5,8 @@
  */
 __kernel void v1(const int N, const int M, int K, __global float *A, __global float *B, __global float *C)
 {
-    const int global_row = get_global_id(0);
-    const int global_col = get_global_id(1);
+    const int global_row = get_global_id(1);
+    const int global_col = get_global_id(0);
     float tmp = 0.0;
     
     for(int k = 0; k < K; k ++)
