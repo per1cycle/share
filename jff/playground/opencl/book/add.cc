@@ -158,9 +158,10 @@ int main(int argc, char** argv)
     // measure the time
     auto start = std::chrono::high_resolution_clock::now();
     clEnqueueNDRangeKernel(command_queue, kernel, 1, NULL, index_space_size, work_group_size, 0, NULL, NULL);
+    // simple_add(h_a, h_b, h_c, ARRAY_SIZE);
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> elapsed = finish - start;
-    std::cout << "Elapsed Time: " << elapsed.count() << " seconds" << std::endl;
+    std::cout << "Elapsed Time: " << elapsed.count() << " mili seconds" << std::endl;
 
     status = clEnqueueReadBuffer(command_queue, d_c, CL_TRUE, 0, sizeof(int) * ARRAY_SIZE, h_c, 0, NULL, NULL);
     // print_arr(h_c, ARRAY_SIZE);
