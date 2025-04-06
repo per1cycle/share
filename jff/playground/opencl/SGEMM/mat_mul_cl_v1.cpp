@@ -323,6 +323,7 @@ int main(int argc, char** argv)
     cl_mem d_c = clCreateBuffer(context, CL_MEM_WRITE_ONLY, sizeof(float) * N * M, NULL, &status);
     CL_CHECK(status);
 
+    auto start = std::chrono::high_resolution_clock::now();
     // copy host mem to device
     status = clEnqueueWriteBuffer(command_queue, d_a, CL_TRUE, 0, sizeof(float) * N * K, h_a, 0, NULL, NULL);
     CL_CHECK(status);
@@ -361,15 +362,14 @@ int main(int argc, char** argv)
     status = clEnqueueNDRangeKernel(command_queue, kernel, 2, NULL, g_work, l_work, 0, NULL, NULL);
     CL_CHECK(status);
     // measure time
-    auto start = std::chrono::high_resolution_clock::now();
     // simple_matmul(h_a, h_b, result_from_host, N, K, M);
     clEnqueueReadBuffer(command_queue, d_c, CL_TRUE, 0, sizeof(float) * N * M, h_c, 0, NULL, NULL);
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> elapsed = finish - start;
     
-    std::cout << "Flops: " << 2.0f * N * M * K / elapsed.count() * 1000 / 1000 / 1000 / 1000 / 1000 << " TFLOPS." << std::endl;
+    std::cout << "Flops: " << std::setw(5) << std::setprecision(5) << 2.0f * N * M * K / elapsed.count() * 1000 / 1000 / 1000 / 1000 / 1000 << " TFLOPS." << std::endl;
 
-    print_2d(h_c, N, M, "h_c");
+    // print_2d(h_c, N, M, "h_c");
     // numpy_dot("h_a", "h_b", "h_c");
 
     return 0;
