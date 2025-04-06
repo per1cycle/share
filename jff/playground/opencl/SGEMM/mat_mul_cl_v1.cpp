@@ -201,6 +201,11 @@ void numpy_dot(std::string arr_a, std::string arr_b, std::string arr_compare)
     std::cout << "print(res)" << std::endl;
 }
 
+void gen_py(float *A, float *B, float *C, int N, int M, int K)
+{
+
+}
+
 void simple_matmul(float *a, float *b, float *c, int N, int K, int M)
 {
     for(int i = 0; i < N; i ++)
@@ -357,7 +362,7 @@ int main(int argc, char** argv)
     CL_CHECK(status);
 
     size_t g_work[2] = {N, M};
-    size_t l_work[2] = {32, 32};
+    size_t l_work[2] = {16, 16};
 
     status = clEnqueueNDRangeKernel(command_queue, kernel, 2, NULL, g_work, l_work, 0, NULL, NULL);
     CL_CHECK(status);
