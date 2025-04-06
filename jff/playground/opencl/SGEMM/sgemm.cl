@@ -25,7 +25,7 @@ __kernel void v1(const int N, const int M, int K, __global float *A, __global fl
 __kernel void v2(const int N, const int M, const int K,
                  __global float *A, __global float *B, __global float *C)
 {
-    const int TS = 16;
+    const int TS = 32;
     const int row = get_local_id(1);
     const int col = get_local_id(0);
     const int global_row = get_group_id(1) * TS + row;

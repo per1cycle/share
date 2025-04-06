@@ -279,7 +279,7 @@ int main(int argc, char** argv)
     status = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_GPU, num_device_per_platform, &device_id, NULL);
     CL_CHECK(status);
 
-    const int N = 1024, M = 1024, K = 2048;
+    const int N = 8192, M = 8192, K = 8192;
     // const int N = 16, M = 16, K = 16;
     float *h_a = new float[N * K];
     float *h_b = new float[K * M];
@@ -313,7 +313,7 @@ int main(int argc, char** argv)
 
     // print_2d(h_a, N, K, "h_a");
     // print_2d(h_b, K, M, "h_b");
-    simple_matmul(h_a, h_b, result_from_host, N, K, M);
+    // simple_matmul(h_a, h_b, result_from_host, N, K, M);
     // print_2d(h_c, N, M);
     
     cl_mem d_a = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float) * N * K, NULL, &status);
@@ -356,7 +356,7 @@ int main(int argc, char** argv)
     CL_CHECK(status);
 
     size_t g_work[2] = {N, M};
-    size_t l_work[2] = {16, 16};
+    size_t l_work[2] = {32, 32};
 
     status = clEnqueueNDRangeKernel(command_queue, kernel, 2, NULL, g_work, l_work, 0, NULL, NULL);
     CL_CHECK(status);
@@ -367,9 +367,9 @@ int main(int argc, char** argv)
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double, std::milli> elapsed = finish - start;
     
-    std::cout << "Flops: " << 2.0f * N * M * K / elapsed.count() * 1000 / 1000 / 1000 / 1000 << "GFLOPS." << std::endl;
+    std::cout << "Flops: " << 2.0f * N * M * K / elapsed.count() * 1000 / 1000 / 1000 / 1000 / 1000 << " TFLOPS." << std::endl;
 
-    // print_2d(h_c, N, M, "h_c");
+    print_2d(h_c, N, M, "h_c");
     // numpy_dot("h_a", "h_b", "h_c");
 
     return 0;
