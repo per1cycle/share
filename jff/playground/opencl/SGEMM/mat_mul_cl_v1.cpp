@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <chrono>
 
 #ifdef __APPLE__
 #include <OpenCL/cl.h>
