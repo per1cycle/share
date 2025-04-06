@@ -179,12 +179,24 @@ void usage()
 
 std::string load_kernel_code(const std::string& kernel_path)
 {
-    std::cout << kernel_path << std::endl;
+    // std::cout << kernel_path << std::endl;
     std::ifstream f(kernel_path.c_str());
     std::stringstream buf;
     buf << f.rdbuf();
-
     return buf.str();
+}
+
+void load_numpy()
+{
+    std::cout << "import numpy as np" << std::endl;
+}
+
+void numpy_dot(std::string arr_a, std::string arr_b, std::string arr_compare)
+{
+    std::cout << "tmp = ";
+    std::cout << arr_a << ".dot(" << arr_b << ")" << std::endl;
+    std::cout << "res = np.allclose(" << "tmp" << ", " << arr_compare << ")" << std::endl;
+    std::cout << "print(res)" << std::endl;
 }
 
 void simple_matmul(float *a, float *b, float *c, int N, int K, int M)
@@ -203,11 +215,9 @@ void simple_matmul(float *a, float *b, float *c, int N, int K, int M)
     }
 }
 
-void print_2d(float *a, int row, int col)
+void print_2d(float *a, int row, int col, std::string arr_name)
 {
-    for(int i = 0; i < 10; i ++) 
-        std::cout << '+';
-    std::cout << std::endl;
+    std::cout << arr_name << " = np.array(";
     std::cout << "[";
     for(int i = 0; i < row; i ++)
     {
@@ -221,7 +231,7 @@ void print_2d(float *a, int row, int col)
         else 
             std::cout << "]";
     }
-    std::cout << "]" << std::endl;
+    std::cout << "])" << std::endl;
 }
 
 int main(int argc, char** argv)
@@ -230,6 +240,7 @@ int main(int argc, char** argv)
     {
         exit(1);
     }
+    // load_numpy();
     // need call clGetPlatformIDs twice, first time got the num platforms.
     cl_int status;
     cl_uint num_platforms = 0;
@@ -243,7 +254,7 @@ int main(int argc, char** argv)
 
     for(cl_uint i = 0; i < num_platforms; i ++)
     {
-        std::cout << "Platform: " << platforms[i] << " has devices:" << std::endl;
+        // std::cout << "Platform: " << platforms[i] << " has devices:" << std::endl;
         // device id also need be call twice 
         status = clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, 0, NULL, &num_device_per_platform);
 
@@ -251,10 +262,10 @@ int main(int argc, char** argv)
         status = clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, num_device_per_platform, devices, NULL);
         CL_CHECK(status);
 
-        for(cl_int j = 0; j < num_device_per_platform; j ++)
-        {
-            std::cout << '\t' << devices[j] << std::endl;
-        }
+        // for(cl_int j = 0; j < num_device_per_platform; j ++)
+        // {
+        //     std::cout << '\t' << devices[j] << std::endl;
+        // }
     }
 
     std::string kernel_source = load_kernel_code(argv[1]);
@@ -266,10 +277,12 @@ int main(int argc, char** argv)
     status = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_GPU, num_device_per_platform, &device_id, NULL);
     CL_CHECK(status);
 
-    const int N = 256, M = 256, K = 256;
+    const int N = 1024, M = 1024, K = 2048;
+    // const int N = 16, M = 16, K = 16;
     float *h_a = new float[N * K];
     float *h_b = new float[K * M];
     float *h_c = new float[N * M];
+    float *result_from_host = new float[N * M];
 
     // initialize the two matrix
     for(int i = 0; i < N; i ++)
@@ -296,9 +309,9 @@ int main(int argc, char** argv)
     command_queue = clCreateCommandQueue(context, device_id, 0, &status);
     CL_CHECK(status);
 
-    // print_2d(h_a, N, K);
-    // print_2d(h_b, K, M);
-    // simple_matmul(h_a, h_b, h_c, N, K, M);
+    // print_2d(h_a, N, K, "h_a");
+    // print_2d(h_b, K, M, "h_b");
+    simple_matmul(h_a, h_b, result_from_host, N, K, M);
     // print_2d(h_c, N, M);
     
     cl_mem d_a = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float) * N * K, NULL, &status);
@@ -324,7 +337,7 @@ int main(int argc, char** argv)
     CL_CHECK(status);
 
     cl_kernel kernel;
-    kernel = clCreateKernel(program, "v1", &status);
+    kernel = clCreateKernel(program, "v2", &status);
     CL_CHECK(status);
 
     status = clSetKernelArg(kernel, 0, sizeof(int), &N);
@@ -341,9 +354,21 @@ int main(int argc, char** argv)
     CL_CHECK(status);
 
     size_t g_work[2] = {N, M};
-    size_t l_work[2] = {32, 32};
+    size_t l_work[2] = {16, 16};
 
     status = clEnqueueNDRangeKernel(command_queue, kernel, 2, NULL, g_work, l_work, 0, NULL, NULL);
     CL_CHECK(status);
+    // measure time
+    auto start = std::chrono::high_resolution_clock::now();
+    // simple_matmul(h_a, h_b, result_from_host, N, K, M);
+    clEnqueueReadBuffer(command_queue, d_c, CL_TRUE, 0, sizeof(float) * N * M, h_c, 0, NULL, NULL);
+    auto finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> elapsed = finish - start;
+    
+    std::cout << "Flops: " << 2.0f * N * M * K / elapsed.count() * 1000 / 1000 / 1000 / 1000 << "GFLOPS." << std::endl;
+
+    // print_2d(h_c, N, M, "h_c");
+    // numpy_dot("h_a", "h_b", "h_c");
+
     return 0;
 }
