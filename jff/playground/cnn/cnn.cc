@@ -101,7 +101,7 @@ public:
             for(int j = 0; j < img_width_; j ++)
             {
                 // in A RGB format.
-                std::cout << std::hex << std::setw(8) << std::setfill('0') << EndianSwap(data_[i][j]) << " ";
+                std::cout << std::hex << std::setw(8) << std::setfill('0') << (data_[i][j]) << " ";
             }
             std::cout << std::endl;
         }

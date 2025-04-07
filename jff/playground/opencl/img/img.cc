@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iomanip>
 #include <cstring>
+#include <inttypes.h>
 #include "common.h"
 
 #include <opencv2/core.hpp>
@@ -30,18 +31,18 @@ std::string load_kernel_code(const std::string& kernel_path)
 void img_info(const cv::Mat& img)
 {
     std::cout << "Image size: " << img.rows << ", " << img.cols << std::endl;
-    for(int r = 0; r < img.rows; r ++)
+    for(int c = 0; c < img.cols; c ++)
     {
-        for(int c = 0; c < img.cols; c ++)
+        for(int r = 0; r < img.rows; r ++)
         {
-            std::cout << std::hex << std::setw(8) << std::setfill('0') << img.at<int>(r, c) << ' ';
+            std::cout << std::hex << std::setw(8) << std::setfill('0') << (img.at<std::uint32_t>(c, r)) << ' ';
         }
         std::cout << std::endl;
     }
 }
 int main(int argc, char **argv)
 {
-    cv::Mat img = cv::imread(argv[1], cv::IMREAD_COLOR_BGR);
+    cv::Mat img = cv::imread(argv[1], cv::IMREAD_COLOR);
 
     if(img.empty())
     {
