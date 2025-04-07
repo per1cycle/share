@@ -5,6 +5,7 @@
 #include <cassert>
 #include <iterator>
 #include <zlib.h>
+#include <inttypes.h>
 
 #define PNG_HDR 0x89504e470d0a1a0a
 #define IHDR 0x49484452
@@ -86,6 +87,13 @@ public:
         std::cout << std::endl;
     }
 
+    std::uint32_t EndianSwap(const std::uint32_t &pixel)
+    {
+        return 
+        __builtin_bswap32(pixel);
+        ;
+    }
+
     void PrintImage()
     {
         for(int i = 0; i < img_height_; i ++)
@@ -93,7 +101,7 @@ public:
             for(int j = 0; j < img_width_; j ++)
             {
                 // in A RGB format.
-                std::cout << std::hex << std::setw(8) << std::setfill('0') << data_[i][j] << " ";
+                std::cout << std::hex << std::setw(8) << std::setfill('0') << EndianSwap(data_[i][j]) << " ";
             }
             std::cout << std::endl;
         }
@@ -348,6 +356,6 @@ int main(int argc, char **argv)
 
     Mat image(argv[1]);
     image.Resolve();
-    image.CNN();
+    // image.CNN();
     return 0;
 }

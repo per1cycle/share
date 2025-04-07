@@ -3,8 +3,11 @@
 #include <sstream>
 #include <iomanip>
 #include <cstring>
-#include <opencv2/opencv.hpp>
+#include "common.h"
 
+#include <opencv2/core.hpp>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/highgui.hpp>
 
 #include "common.h"
 
@@ -24,12 +27,27 @@ std::string load_kernel_code(const std::string& kernel_path)
     return buf.str();
 }
 
-int main(int argc, char** argv)
+void img_info(const cv::Mat& img)
 {
-    if(argc < 2)
+    std::cout << "Image size: " << img.rows << ", " << img.cols << std::endl;
+    for(int r = 0; r < img.rows; r ++)
     {
-        exit(1);
+        for(int c = 0; c < img.cols; c ++)
+        {
+            std::cout << std::hex << std::setw(8) << std::setfill('0') << img.at<int>(r, c) << ' ';
+        }
+        std::cout << std::endl;
     }
-    cv::Mat mat;
+}
+int main(int argc, char **argv)
+{
+    cv::Mat img = cv::imread(argv[1], cv::IMREAD_COLOR_BGR);
+
+    if(img.empty())
+    {
+        std::cout << "Could not read the image: " << argv[1] << std::endl;
+        return 1;
+    }
+    img_info(img);
     return 0;
 }
