@@ -201,6 +201,11 @@ void numpy_dot(std::string arr_a, std::string arr_b, std::string arr_compare)
     std::cout << "print(res)" << std::endl;
 }
 
+void gen_info(float *a, float *b, float *c, int N, int M, int K, std::uint32_t flags)
+{
+
+}
+
 void gen_py(float *A, float *B, float *C, int N, int M, int K)
 {
 
@@ -284,7 +289,8 @@ int main(int argc, char** argv)
     status = clGetDeviceIDs(platforms[0], CL_DEVICE_TYPE_GPU, num_device_per_platform, &device_id, NULL);
     CL_CHECK(status);
 
-    const int N = 8192, M = 8192, K = 8192;
+    // const int N = 8192, M = 8192, K = 8192;
+    const int N = 8192, M = 4096, K = 4096;
     // const int N = 16, M = 16, K = 16;
     float *h_a = new float[N * K];
     float *h_b = new float[K * M];
@@ -361,8 +367,9 @@ int main(int argc, char** argv)
     status = clSetKernelArg(kernel, 5, sizeof(cl_mem), &d_c);
     CL_CHECK(status);
 
+    const int TS = 16;
     size_t g_work[2] = {N, M};
-    size_t l_work[2] = {16, 16};
+    size_t l_work[2] = {TS, TS};
 
     status = clEnqueueNDRangeKernel(command_queue, kernel, 2, NULL, g_work, l_work, 0, NULL, NULL);
     CL_CHECK(status);
