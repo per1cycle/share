@@ -31,21 +31,88 @@ void gen_data(float *A, float *B, float *C, int N, int M, int K)
     }
 }
 
-void print_arr(float *arr, int row, int col)
+void gen_data_in_row_major(float *A, float *B, float *C, int N, int M, int K)
 {
-    for(int r = 0; r < row; r ++)
+    for(int i = 0; i < N; i ++)
     {
-        for(int c = 0; c < col; c ++)
+        for(int j = 0; j < K; j ++)
         {
-            std::cout << std::setw(5) << arr[r * col + c] << ' ';
+            A[i * K + j] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
         }
-        std::cout << std::endl;
     }
+
+    for(int i = 0; i < K; i ++)
+    {
+        for(int j = 0; j < M; j ++)
+        {
+            B[i * M + j] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        }
+    }
+
+    for(int i = 0; i < N; i ++)
+    {
+        for(int j = 0; j < M; j ++)
+        {
+            C[i * M + j] = 0.0f;
+        }
+    }
+}
+
+void gen_data_in_col_major(float *A, float *B, float *C, int N, int M, int K)
+{
+    for(int i = 0; i < N; i ++)
+    {
+        for(int j = 0; j < K; j ++)
+        {
+            A[j * N + i] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        }
+    }
+
+    for(int i = 0; i < K; i ++)
+    {
+        for(int j = 0; j < M; j ++)
+        {
+            B[j * K + i] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        }
+    }
+    
+    // only need to set all to zero.
+    for(int i = 0; i < N; i ++)
+    {
+        for(int j = 0; j < M; j ++)
+        {
+            C[i * M + j] = 0.0f;
+        }
+    }
+}
+
+void print_arr(float *a, int row, int col, std::string arr_name)
+{
+    std::cout << arr_name << " = np.array(";
+    std::cout << "[";
+    for(int i = 0; i < row; i ++)
+    {
+        std::cout << '[';
+        for(int j = 0; j < col; j ++)
+        {
+            std::cout << a[i * col + j] << ", ";
+        }
+        if(i != row - 1)
+            std::cout << "]," << std::endl;
+        else 
+            std::cout << "]";
+    }
+    std::cout << "])" << std::endl;
 }
 
 
 void simple_matmul(float *a, float *b, float *c, int N, int M, int K)
 {
+    simple_matmul_row_major(a, b, c, N, M, K);
+}
+
+void simple_matmul_row_major(float *a, float *b, float *c, int N, int M, int K)
+{    
     for(int i = 0; i < N; i ++)
     {
         for(int j = 0; j < M; j ++)
@@ -58,6 +125,16 @@ void simple_matmul(float *a, float *b, float *c, int N, int M, int K)
             c[i * M + j] = temp;
         }
     }
+}
+/**
+ * mul two matrix in column major way
+ * e.g: a [
+ *      N is the row number used in row major arrangement
+ *      K is the column number used in row major arrangement
+ * ]
+ */
+void simple_matmul_col_major(float *a, float *b, float *c, int N, int M, int K)
+{
 }
 
 int compare_result(float *correct, float *compare, int N, int M)

@@ -8,7 +8,7 @@
  */
 
 int main(int argc, char *argv[]) {
-    const int N = 1024, M = 1024, K = 1024;
+    const int N = 8, M = 4, K = 2;
     float flops = 2.0f * N * M * K;
 
     float *h_a = new float[N * K];
@@ -52,7 +52,9 @@ int main(int argc, char *argv[]) {
     
     // The correct order is: cublasSgemm(handle, transa, transb, m, n, k, alpha, B, ldb, A, lda, beta, C, ldc)
     // In CUBLAS, matrices are stored in column-major order, but in C/C++ we use row-major
-    // So we compute C = B*A instead of A*B by swapping the order and dimensions
+    // So we compute C = Bt*At instead of A*B by swapping the order and dimensions
+    // a = n * k
+    // b = k * m
     stat = cublasSgemm(handle, 
                       CUBLAS_OP_N, CUBLAS_OP_N,  // No transpositions
                       N, M, K,                   // Dimensions (m, n, k) for column-major 
@@ -60,7 +62,15 @@ int main(int argc, char *argv[]) {
                       d_a, N,                    // Matrix B and its leading dimension
                       d_b, K,                    // Matrix A and its leading dimension
                       &beta,                     // Beta scaling factor 
-                      d_c, M);                   // Result matrix C and its leading dimension
+                      d_c, N);                   // Result matrix C and its leading dimension
+    // stat = cublasSgemm(handle, 
+    //                   CUBLAS_OP_N, CUBLAS_OP_N,  // No transpositions
+    //                   M, N, K,                   // Dimensions (m, n, k) for column-major 
+    //                   &alpha,                    // Alpha scaling factor
+    //                   d_b, M,                    // Matrix B and its leading dimension
+    //                   d_a, K,                    // Matrix A and its leading dimension
+    //                   &beta,                     // Beta scaling factor 
+    //                   d_c, M);                   // Result matrix C and its leading dimension
     
     if (stat != CUBLAS_STATUS_SUCCESS) {
         std::cout << "CUBLAS SGEMM failed" << std::endl;
@@ -78,6 +88,11 @@ int main(int argc, char *argv[]) {
     if(compare_result(ans, h_c, N, M)) {
         std::cout << "Results match!" << std::endl;
     }
+    // print_arr(ans, N, M, "ans_in_row_major");
+
+    print_arr(h_a, N, K, "a");
+    print_arr(h_b, K, M, "b");
+    print_arr(h_c, N, M, "device");
 
     // Clean up
     cublasDestroy(handle);
