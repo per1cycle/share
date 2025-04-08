@@ -35,6 +35,7 @@ if(CUDA_FOUND)
         )
     # project(playground LANGUAGES C CXX CUDA) used in sub_directory
     add_executable(matmul matmul.cu)
+    add_executable(benchmark benchmark.cu)
     add_executable(cublas cublas.cu)
     add_executable(01native native.cu)
 

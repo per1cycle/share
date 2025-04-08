@@ -105,6 +105,7 @@ void print_arr(float *a, int row, int col, std::string arr_name)
     std::cout << "])" << std::endl;
 }
 
+void simple_matmul_row_major(float *a, float *b, float *c, int N, int M, int K);
 
 void simple_matmul(float *a, float *b, float *c, int N, int M, int K)
 {

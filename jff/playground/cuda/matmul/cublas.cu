@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     float *h_c = new float[N * M];
     float *ans = new float[N * M];
     
-    gen_data(h_a, h_b, h_c, N, M, K);
+    gen_data_in_col_major(h_a, h_b, h_c, N, M, K);
     
     simple_matmul(h_a, h_b, ans, N, M, K);
 
@@ -59,8 +59,8 @@ int main(int argc, char *argv[]) {
                       CUBLAS_OP_N, CUBLAS_OP_N,  // No transpositions
                       N, M, K,                   // Dimensions (m, n, k) for column-major 
                       &alpha,                    // Alpha scaling factor
-                      d_a, N,                    // Matrix B and its leading dimension
-                      d_b, K,                    // Matrix A and its leading dimension
+                      d_a, K,                    // Matrix B and its leading dimension
+                      d_b, M,                    // Matrix A and its leading dimension
                       &beta,                     // Beta scaling factor 
                       d_c, N);                   // Result matrix C and its leading dimension
     // stat = cublasSgemm(handle, 
@@ -85,8 +85,9 @@ int main(int argc, char *argv[]) {
 
     cudaMemcpy(h_c, d_c, N * M * sizeof(float), cudaMemcpyDeviceToHost);
 
-    if(compare_result(ans, h_c, N, M)) {
-        std::cout << "Results match!" << std::endl;
+    if(compare_result(ans, h_c, N, M))
+    {
+        std::cout << "Results mismatch!" << std::endl;
     }
     // print_arr(ans, N, M, "ans_in_row_major");
 
