@@ -42,6 +42,7 @@ if(CUDA_FOUND)
     add_executable(01native native.cu)
 
     target_link_libraries(cublas -lcublas -lcurand)
+    target_link_libraries(benchmark -lcublas -lcurand)
     
 
 else(CUDA_FOUND)

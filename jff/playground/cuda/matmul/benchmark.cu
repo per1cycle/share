@@ -4,6 +4,7 @@
 #include <chrono> // for calculate duration.
 
 #include "common.cuh"
+#include "kernel/cublas_sgemm.cuh"
 
 typedef struct dim
 {
@@ -24,10 +25,9 @@ const std::vector<dim_t> dims =
     {.n = 2048, .m = 2048, .k = 2048},
     {.n = 4096, .m = 2048, .k = 2048},
     {.n = 4096, .m = 4096, .k = 4096},
-    {.n = 4096, .m = 8192, .k = 8192},
 };
 
-const int REP = 10;
+const int REP = 50;
 
 const std::vector<std::string> opt_to_kernel = 
 {
@@ -52,14 +52,14 @@ void benchmark_info(uint n, uint m, uint k)
 void benchmark_result(int N, int M, int K, float total_elapse_time_in_milisecond)
 {
     float total_elapse_time_in_second = total_elapse_time_in_milisecond / REP / 1000.0f; // to seconds.
-    std::cout << "FLOPS: " << 2.0f * M * N * K / total_elapse_time_in_second / 1000 / 1000 / 1000 << " GFLOPS." << std::endl;
+    std::cout << "FLOPS: " << 2.0f * M * N * K / total_elapse_time_in_second / 1000 / 1000 / 1000 / 1000 << " TFLOPS." << std::endl;
 }
 
 void benchmark(uint &opt)
 {
     std::cout << "Running with option: " << opt << std::endl;
 
-    for(int i = 0; i < dims.size() - 3; i ++)
+    for(int i = 0; i < dims.size(); i ++)
     {
         dim_t dim = dims[i];
         uint N = dim.n;
@@ -76,11 +76,8 @@ void benchmark(uint &opt)
 
         for(int r = 0; r < REP; r ++)
         {
-            auto start = std::chrono::high_resolution_clock::now();
-            simple_matmul(h_a, h_b, h_c, N, M, K);
-            auto finish = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double, std::milli> elapsed = finish - start;
-            total_elapse_time_in_milisecond += elapsed.count();
+            float elapse = run_kernel_cublas_sgemm(h_a, h_b, h_c, N, M, K);
+            total_elapse_time_in_milisecond += elapse;
         }
 
         benchmark_result(N, M, K, total_elapse_time_in_milisecond);
