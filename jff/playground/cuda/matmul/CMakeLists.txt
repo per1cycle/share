@@ -3,6 +3,8 @@ project(skeleton LANGUAGES C CXX CUDA)
 
 find_package(CUDA REQUIRED LANGUAGES C CXX CUDA)
 
+# https://siboehm.com/articles/22/CUDA-MMM
+
 if(CUDA_FOUND)
     # compared to class settings, we let NVidia's FindCUDA CMake detect 
     # whether to build x64.  We tell it to support most devices, though, 
@@ -22,7 +24,7 @@ if(CUDA_FOUND)
     # my gpu is 1060
     # add -Wextra compiler flag for gcc compilations
     if (UNIX)
-    set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} "-Xcompiler -Wextra")
+    set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} "-Xcompiler -Wextra -lcublas")
     set(CMAKE_CXX_FLAGS "-stdlib=libstdc++")
     endif (UNIX)
 
@@ -33,6 +35,11 @@ if(CUDA_FOUND)
         )
     # project(playground LANGUAGES C CXX CUDA) used in sub_directory
     add_executable(matmul matmul.cu)
+    add_executable(cublas cublas.cu)
+    add_executable(01native native.cu)
+
+    target_link_libraries(cublas -lcublas -lcurand)
+    
 
 else(CUDA_FOUND)
     message("CUDA is not installed on this system.")

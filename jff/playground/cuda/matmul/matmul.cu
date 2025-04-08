@@ -4,10 +4,10 @@ __global__ void mat_mul(float *a, float *b, float *c, int N, int M, int K)
 {
     const uint x = blockIdx.x * blockDim.x + threadIdx.x;
     const uint y = blockIdx.y * blockDim.y + threadIdx.y;
+
     float tmp = 0.0f;
     for(int k = 0; k < K; k ++)
-        tmp += a[y * K + k] * b[k * M + x];
-    c[y * M + x] = tmp;
+        tmp += a[x * K + k] * b[y * M + k];
 }
 
 void load_numpy()
@@ -54,6 +54,7 @@ int main()
 {
     // const int N = 8192, M = 8192, K = 8192;
     const int N = 2048, M = 2048, K = 2048;
+    float flops = 2.0f * N * M * K;
     // const int N = 1024, M = 1024, K = 1024;
     // const int N = 4, M = 4, K = 4;
     float *A = new float[N * K];
@@ -91,16 +92,25 @@ int main()
 
     dim3 block(16, 16);
     dim3 grid((M + block.x - 1) / block.x, (N + block.y - 1) / block.y);
-    auto start = std::chrono::high_resolution_clock::now();
     cudaMemcpy(d_A, A, N * K * sizeof(float), cudaMemcpyHostToDevice);
     cudaMemcpy(d_B, B, K * M * sizeof(float), cudaMemcpyHostToDevice);
     cudaMemcpy(d_C, C, N * M * sizeof(float), cudaMemcpyHostToDevice);
-    mat_mul<<<grid, block>>>(d_A, d_B, d_C, N, M, K);
-    auto finish = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> elapsed = finish - start;
-    std::cout << "Flops: " << 2.0f * N * M * K / elapsed.count() * 1000 / 1000 / 1000 / 1000 / 1000 << " TFLOPS." << std::endl; 
+    
+    float et;
+    cudaEvent_t start, stop;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+    cudaEventRecord(start, 0);
 
-    cudaDeviceSynchronize();
+    mat_mul<<<grid, block>>>(d_A, d_B, d_C, N, M, K);
+
+    cudaEventRecord(stop, 0);
+    cudaEventSynchronize(start);
+    cudaEventSynchronize(stop);
+    cudaEventElapsedTime(&et, start, stop);
+    et = et * 1e-3; // convert to seconds.
+    std::cout << "FLOPS: " << (flops) * 1e-9 / et << " GFLOPS." << std::endl;
+
     cudaMemcpy(C, d_C, N * M * sizeof(float), cudaMemcpyDeviceToHost);
 
     // gen_py(A, B, C, N, M, K);
