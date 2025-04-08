@@ -20,7 +20,9 @@ if(CUDA_FOUND)
     -gencode;arch=compute_12,code=sm_12;
     -gencode;arch=compute_13,code=sm_13;")
 
-    include_directories(${CMAKE_SOURCE_DIR})
+    include_directories(
+        ${CMAKE_SOURCE_DIR}
+        )
     # my gpu is 1060
     # add -Wextra compiler flag for gcc compilations
     if (UNIX)
