@@ -13,4 +13,6 @@ tmp/*
 
 build/
 .vscode/
+# for digital output
 netlist/
+icarus/
