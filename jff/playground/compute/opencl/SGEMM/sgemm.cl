@@ -7,10 +7,11 @@ __kernel void v1(const int N, const int M, int K, __global float *A, __global fl
 {
     const int global_row = get_global_id(1);
     const int global_col = get_global_id(0);
-    float tmp = 0.0;
-    
+    float tmp = 0.0f;
+    float foo = 0.0f;
     for(int k = 0; k < K; k ++)
     {
+        // AtomicAdd(foo, 1.0f); doesnot have built in intrinsic for float point atomic add.
         tmp += A[K * global_row + k] * B[k * M + global_col];
     }
     C[global_row * M + global_col] = tmp;
