@@ -84,6 +84,7 @@
         "typeindex": "cpp",
         "__tree": "cpp",
         "charconv": "cpp",
-        "forward_list": "cpp"
+        "forward_list": "cpp",
+        "stdio.h": "c"
     }
 }
