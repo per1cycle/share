@@ -16,3 +16,4 @@ build/
 # for digital output
 netlist/
 icarus/
+*.xml
