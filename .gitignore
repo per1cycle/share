@@ -17,3 +17,6 @@ build/
 netlist/
 icarus/
 *.xml
+
+.bsp/
+.scala-build/
