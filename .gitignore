@@ -20,3 +20,4 @@ icarus/
 
 .bsp/
 .scala-build/
+.metals/
