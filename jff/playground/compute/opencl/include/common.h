@@ -1,6 +1,8 @@
 #ifndef COMMON_H
 #define COMMON_H
 #include <iostream>
+#include <vector>
+
 #define CL_CHECK(err) do \
 { \
     if(err) { \

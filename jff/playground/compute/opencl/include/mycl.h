@@ -86,7 +86,7 @@ std::vector<int> generate_4x4_image()
     
 }
 
-std::vector<int> 
+
 
 } // namespace mycl
 #endif // MYCL_H
