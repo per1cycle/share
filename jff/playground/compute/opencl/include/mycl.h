@@ -80,10 +80,47 @@ void list_platform_and_device()
     }
 }
 
-// used for histagram.
-std::vector<int> generate_4x4_image()
+namespace simple
 {
-    
+/**
+ * create context with select device.
+ */
+cl_context simple_create_context(cl_device_id *device)
+{
+    cl_int status;
+    cl_context ctx = clCreateContext(NULL, get_platform_num(), device, NULL, NULL, &status);
+    CL_CHECK(status);
+    return ctx;
+}
+
+cl_command_queue simple_create_command_queue()
+{
+
+}
+}
+// used for histagram.
+/**
+ * generate N rows and M columns matrix.
+ */
+std::vector<int> generate_NxM_image(int N, int M)
+{
+    if(N <= 0 || M <= 0)
+    {
+        return {0};
+    }
+
+    std::vector<int> res;
+    res.resize(N * M);
+
+    for(int i = 0; i < N; i ++) // row
+    {
+        // image i th row j column.
+        for(int j = 0; j < M; j ++)
+        {
+            res[i * M + j] = rand() % 50;
+        }
+    }
+    return res;
 }
 
 

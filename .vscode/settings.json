@@ -85,6 +85,7 @@
         "__tree": "cpp",
         "charconv": "cpp",
         "forward_list": "cpp",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "omp.h": "c"
     }
 }
