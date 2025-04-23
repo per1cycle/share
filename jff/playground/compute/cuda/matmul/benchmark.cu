@@ -31,7 +31,7 @@ const int REP = 50;
 
 const std::vector<std::string> opt_to_kernel = 
 {
-   "simple_matmul",
+    "simple_matmul",
     "cublas_sgemm"
 };
 
