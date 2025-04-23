@@ -6,7 +6,7 @@
 #define CL_CHECK(err) do \
 { \
     if(err) { \
-        std::cout << "CL_CHECK ERROR: code <" << err << ">: "; \
+        std::cout << "CL_CHECK ERROR: code <" << err << "> on line " << ":" << __FILE__ << ":" << __LINE__ << ": "; \
         switch(err) \
         { \
             case -11: \
@@ -163,16 +163,17 @@
                 std::cout << "Unknown error code"; \
         } \
         std::cout << std::endl; \
+        exit(1); \
     } \
 } while(0)
 
-std::string load_kernel_code(const std::string& kernel_path)
-{
-    // std::cout << kernel_path << std::endl;
-    std::ifstream f(kernel_path.c_str());
-    std::stringstream buf;
-    buf << f.rdbuf();
-    return buf.str();
-}
+// std::string load_kernel_code(const std::string& kernel_path)
+// {
+//     // std::cout << kernel_path << std::endl;
+//     std::ifstream f(kernel_path.c_str());
+//     std::stringstream buf;
+//     buf << f.rdbuf();
+//     return buf.str();
+// }
 
 #endif // COMMON_H

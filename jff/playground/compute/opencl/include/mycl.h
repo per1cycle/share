@@ -8,6 +8,7 @@
 #endif
 
 #include "common.h"
+#include <iomanip>
 
 /** 
  * wrapper for my cl demo usage.
@@ -85,45 +86,73 @@ namespace simple
 /**
  * create context with select device.
  */
-cl_context simple_create_context(cl_device_id *device)
+cl_context simple_create_context(cl_device_id *device, int std_platform_id)
 {
     cl_int status;
-    cl_context ctx = clCreateContext(NULL, get_platform_num(), device, NULL, NULL, &status);
+    cl_context ctx = clCreateContext(NULL, get_device_num_of_platform(std_platform_id), device, NULL, NULL, &status);
     CL_CHECK(status);
+
     return ctx;
 }
 
-cl_command_queue simple_create_command_queue()
+cl_command_queue simple_create_command_queue(cl_context ctx, cl_device_id device)
 {
-
+    cl_int status;
+    cl_command_queue cq = clCreateCommandQueue(ctx, device, 0, &status);
+    CL_CHECK(status);
+    return cq;
 }
+
+cl_mem simple_create_ro_cl_buffer(cl_context ctx, size_t size)
+{
+    cl_int status;
+
+    cl_mem mem = clCreateBuffer(ctx, CL_MEM_READ_ONLY, size, NULL, &status);
+    CL_CHECK(status);
+    return mem;
+}
+
+cl_mem simple_create_wo_cl_buffer(cl_context ctx, size_t size)
+{
+    cl_int status;
+
+    cl_mem mem = clCreateBuffer(ctx, CL_MEM_WRITE_ONLY, size, NULL, &status);
+    CL_CHECK(status);
+    return mem;
+}
+
 }
 // used for histagram.
 /**
  * generate N rows and M columns matrix.
  */
-std::vector<int> generate_NxM_image(int N, int M)
+void generate_NxM_mat(float *dst, int N, int M)
 {
     if(N <= 0 || M <= 0)
     {
-        return {0};
     }
-
-    std::vector<int> res;
-    res.resize(N * M);
 
     for(int i = 0; i < N; i ++) // row
     {
         // image i th row j column.
         for(int j = 0; j < M; j ++)
         {
-            res[i * M + j] = rand() % 50;
+            dst[i * M + j] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
         }
     }
-    return res;
 }
 
-
+void print_NxM_mat(float *dst, int N, int M)
+{
+    for(int i = 0; i < N; i ++)
+    {
+        for(int j = 0; j < M; j ++)
+        {
+            std::cout << std::setw(6) << std::setfill('0') << dst[i * M + j] << ' ';
+        }
+        std::cout << std::endl;
+    }
+}
 
 } // namespace mycl
 #endif // MYCL_H
