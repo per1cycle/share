@@ -3,6 +3,9 @@
 
 #include "common.cuh"
 
+int N;
+uint BLK = 32;
+
 void usage()
 {
     std::cout << "Usage: ./a.out <matrix dimension>\n"
@@ -34,7 +37,12 @@ __global__ void sgemm_naive(int N, int M, int K, float *a, float *b, float *c, f
         c[x * K + y] = alpha * tmp + beta;
     }
 }
-
+/**
+ * Time:           0.524241ms.
+ *  GFlop:          17.1841
+ *  GFLOPS:         32.7789
+ *  Percentage:     0.749233%.
+ */
 int main(int argc, char ** argv)
 {
     if(argc < 2)
@@ -43,8 +51,7 @@ int main(int argc, char ** argv)
         exit(1);
     }
 
-    int N = atoi(argv[1]);
-    uint BLK = 64;
+    N = atoi(argv[1]);
     size_t size = sizeof(float) * N * N;
     float flops = 1.0 * N * N * (2 * N + 1);
     
@@ -68,8 +75,9 @@ int main(int argc, char ** argv)
     cudaMemcpy(d_b, h_b, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_c, h_c, size, cudaMemcpyHostToDevice);
 
-    dim3 grid_dim = {BLK, BLK, 1};
-    dim3 blk_dim = {N / BLK, N / BLK, 1};
+    // fix typo.
+    dim3 grid_dim = {N / BLK, N / BLK, 1};
+    dim3 blk_dim = {BLK, BLK, 1};
 
     // start measuring.
     float elapsed; // in milisecond
@@ -92,7 +100,7 @@ int main(int argc, char ** argv)
     std::cout << "Time: \t\t" << elapsed << "ms.\n"
             << "GFlop: \t\t" << gflops << "\n"
             << "GFLOPS: \t" << gflops / elapsed << "\n"
-            << "Percentage: \t" << (gflops / elapsed) / 4375.0f * 100.0 << "%.\n";
+            << "Percentage: \t" << (gflops / elapsed) / 4591.26f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
     return 0;
