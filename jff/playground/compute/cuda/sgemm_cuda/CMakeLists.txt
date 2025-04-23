@@ -40,6 +40,7 @@ if(CUDA_FOUND)
     # project(playground LANGUAGES C CXX CUDA) used in sub_directory
     add_executable(skeleton skeleton.cu)
     add_executable(sgemm_naive sgemm_naive.cu)
+    add_executable(sgemm_global_memory_coalescing sgemm_global_memory_coalescing.cu)
     add_cublas(sgemm_cublas sgemm_cublas.cu)
 
 else()
