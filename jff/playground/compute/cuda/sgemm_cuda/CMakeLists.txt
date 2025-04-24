@@ -41,6 +41,7 @@ if(CUDA_FOUND)
     add_executable(skeleton skeleton.cu)
     add_executable(sgemm_naive sgemm_naive.cu)
     add_executable(sgemm_global_memory_coalescing sgemm_global_memory_coalescing.cu)
+    add_executable(sgemm_share_memory_caching sgemm_share_memory_caching.cu)
     add_cublas(sgemm_cublas sgemm_cublas.cu)
 
 else()

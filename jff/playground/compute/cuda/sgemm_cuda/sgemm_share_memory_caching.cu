@@ -22,15 +22,36 @@ void usage()
 template <const int BLK>
 __global__ void sgemm_share_memory_caching(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta)
 {
+    int cRow = blockIdx.x;
+    int cCol = blockIdx.y;
+
     int x = blockIdx.x * BLK + (threadIdx.x / BLK);
     int y = blockIdx.y * BLK + (threadIdx.x % BLK);
 
+    a += cRow * BLK * M;
+    b += cCol * BLK;
+    c += cRow * K + cCol * BLK;
+
+    int thread_row = threadIdx / BLK;
+    int thread_col = threadIdx / BLK;
+
     if(x <= N && y <= K)
     {
-        float tmp = 0.0f;
-        for(int k = 0; k < M; k ++)
+        __shared__ float *a_share[BLK * BLK];
+        __shared__ float *b_share[BLK * BLK];
+        __shared__ float *c_share[BLK * BLK];
+
+        for(int k = 0; k < M; k += BLK)
         {
-            tmp += a[x * M + k] * b[k * K + y];
+            a_share[thread_row * BLK + thread_col] = a[thread_row * M + thread_col];
+            b_share[thread_row * BLK + thread_col] = b[thread_row * K + thread_col];
+
+            __syncthreads();
+
+            for(int t1 = 0; t1 < BLK; t1 ++)
+            {
+            }
+
         }
 
         c[x * K + y] = alpha * tmp + beta;
@@ -105,5 +126,6 @@ int main(int argc, char ** argv)
             << "Percentage: \t" << (gflops / elapsed) / 4591.26f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
+    cmp_result(h_c, h_a, h_b, N, N, N);
     return 0;
 }
