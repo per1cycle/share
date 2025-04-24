@@ -3,6 +3,7 @@
 const int N = 16;
 __global__ void MatAdd(float A[N], float B[N], float C[N])
 {
+    printf("Execute in Block dim: (%d), blockIdx: (%d), thread: %d\n", blockDim.x, blockIdx.x, threadIdx.x);
     int i = threadIdx.x + blockDim.x * blockIdx.x;
     C[i] = A[i] + B[i];
 }

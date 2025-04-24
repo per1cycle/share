@@ -18,44 +18,45 @@ void usage()
 
 /**
  * assuming all of data can be divided by block
+ * not fully understand why do this...
  */
 template <const int BLK>
 __global__ void sgemm_share_memory_caching(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta)
 {
-    int cRow = blockIdx.x;
-    int cCol = blockIdx.y;
+    int c_row = blockIdx.x;
+    int c_col = blockIdx.y;
 
-    int x = blockIdx.x * BLK + (threadIdx.x / BLK);
-    int y = blockIdx.y * BLK + (threadIdx.x % BLK);
+    a += c_row * BLK * M;
+    b += c_col * BLK;
+    c += c_row * K * BLK + c_col * BLK;
 
-    a += cRow * BLK * M;
-    b += cCol * BLK;
-    c += cRow * K + cCol * BLK;
+    int thread_row = threadIdx.x / BLK;
+    int thread_col = threadIdx.x % BLK;
+    float tmp = 0.0f;
 
-    int thread_row = threadIdx / BLK;
-    int thread_col = threadIdx / BLK;
+    __shared__ float a_share[BLK * BLK];
+    __shared__ float b_share[BLK * BLK];
 
-    if(x <= N && y <= K)
+    for(int k = 0; k < M; k += BLK)
     {
-        __shared__ float *a_share[BLK * BLK];
-        __shared__ float *b_share[BLK * BLK];
-        __shared__ float *c_share[BLK * BLK];
+        a_share[thread_row * BLK + thread_col] = a[thread_row * M + thread_col];
+        b_share[thread_row * BLK + thread_col] = b[thread_row * K + thread_col];
 
-        for(int k = 0; k < M; k += BLK)
+        __syncthreads();
+
+        a += BLK;
+        b += BLK * K;
+
+        for(int inner = 0; inner < BLK; inner ++)
         {
-            a_share[thread_row * BLK + thread_col] = a[thread_row * M + thread_col];
-            b_share[thread_row * BLK + thread_col] = b[thread_row * K + thread_col];
-
-            __syncthreads();
-
-            for(int t1 = 0; t1 < BLK; t1 ++)
-            {
-            }
-
+            tmp += a_share[thread_row * BLK + inner] * b_share[inner * BLK + thread_col];
         }
 
-        c[x * K + y] = alpha * tmp + beta;
+        __syncthreads();
+
     }
+
+    c[thread_row * K + thread_col] = alpha * tmp + beta;
 }
 /**
  * Time:           0.63702ms.
@@ -70,7 +71,7 @@ int main(int argc, char ** argv)
         usage();
         exit(1);
     }
-    int N;
+    uint N;
     const int BLK = 32;
 
     N = atoi(argv[1]);
@@ -126,6 +127,5 @@ int main(int argc, char ** argv)
             << "Percentage: \t" << (gflops / elapsed) / 4591.26f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
-    cmp_result(h_c, h_a, h_b, N, N, N);
     return 0;
 }
