@@ -3,8 +3,6 @@
 
 #include "common.cuh"
 
-int N;
-uint BLK = 32;
 
 void usage()
 {
@@ -21,10 +19,11 @@ void usage()
 /**
  * assuming all of data can be divided by block
  */
-__global__ void sgemm_naive(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta, uint BLK)
+template <const int BLK>
+__global__ void sgemm_global_memory_coalescing(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta)
 {
     int x = blockIdx.x * BLK + (threadIdx.x / BLK);
-    int y = blockIdx.y * BLK + (threadIdx.x / BLK);
+    int y = blockIdx.y * BLK + (threadIdx.x % BLK);
 
     if(x <= N && y <= K)
     {
@@ -50,8 +49,11 @@ int main(int argc, char ** argv)
         usage();
         exit(1);
     }
+    int N;
+    const int BLK = 32;
 
     N = atoi(argv[1]);
+
     size_t size = sizeof(float) * N * N;
     float flops = 1.0 * N * N * (2 * N + 1);
     
@@ -87,7 +89,7 @@ int main(int argc, char ** argv)
     cudaEventCreate(&stop);
     cudaEventRecord(start, 0);
 
-    sgemm_naive<<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f, BLK);
+    sgemm_global_memory_coalescing<BLK><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
 
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
