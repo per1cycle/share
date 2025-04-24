@@ -77,7 +77,7 @@ int main(int argc, char ** argv)
     N = atoi(argv[1]);
 
     size_t size = sizeof(float) * N * N;
-    float flops = 1.0 * N * N * (2 * N + 1);
+    float flop = 1.0 * N * N * (2 * N + 1);
     
     float *h_a = new float[N * N];
     float *h_b = new float[N * N];
@@ -118,13 +118,15 @@ int main(int argc, char ** argv)
     cudaEventElapsedTime(&elapsed, start, stop);
     // std::cout << "GFLOPS: " << flops / 1000000000.0f / elapsed * 1000.0f << std::endl;
 
-    float gflops = flops / 1000000000.0f;
+    float gflop = flop / 1000000000.0f;
     elapsed = elapsed / 1000.0f; // to second
 
-    std::cout << "Time: \t\t" << elapsed << "ms.\n"
-            << "GFlop: \t\t" << gflops << "\n"
-            << "GFLOPS: \t" << gflops / elapsed << "\n"
-            << "Percentage: \t" << (gflops / elapsed) / 4591.26f * 100.0 << "%.\n";
+    std::cout 
+            << "Time:                                   \t"   << elapsed << "ms.\n"
+            << "GFlop:                                  \t"   << gflop << "\n"
+            << "GFLOPS:                                 \t"     << gflop / elapsed << "\n"
+            << "Percentage(compare to theoratical peak):\t"     << (gflop / elapsed) / 4591.26f * 100.0 << "%.\n"
+            << "Percentage(compare to cublas peak):     \t"   << (gflop / elapsed) / 3815.45f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
     return 0;
