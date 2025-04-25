@@ -20,15 +20,19 @@ void usage()
  * assuming all of data can be divided by block
  * not fully understand why do this...
  */
-template <const int BLK>
-__global__ void sgemm_share_memory_caching(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta)
+template <
+    const int BLK_N,
+    const int BLK_M,
+    const int BLK_K
+    >
+__global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta)
 {
     int c_row = blockIdx.x;
     int c_col = blockIdx.y;
 
-    a += c_row * BLK * M;
-    b += c_col * BLK;
-    c += c_row * K * BLK + c_col * BLK;
+    a += c_row * BLK_M * M;
+    b += c_col * BLK_N;
+    c += c_row * K * BLK_K + c_col * BLK_N;
 
     int thread_row = threadIdx.x / BLK;
     int thread_col = threadIdx.x % BLK;
@@ -72,7 +76,9 @@ int main(int argc, char ** argv)
         exit(1);
     }
     uint N;
-    const int BLK = 32;
+    const int BLK_N = 32;
+    const int BLK_M = 32;
+    const int BLK_K = 8;
 
     N = atoi(argv[1]);
 
@@ -100,8 +106,8 @@ int main(int argc, char ** argv)
     cudaMemcpy(d_c, h_c, size, cudaMemcpyHostToDevice);
 
     // fix typo.
-    dim3 grid_dim = {N / BLK, N / BLK};
-    dim3 blk_dim = {BLK * BLK};
+    dim3 grid_dim = {N / BLK_N, N / BLK_M};
+    dim3 blk_dim = {BLK_N * BLK_M};
 
     // start measuring.
     float elapsed; // in milisecond
@@ -111,7 +117,7 @@ int main(int argc, char ** argv)
     cudaEventCreate(&stop);
     cudaEventRecord(start, 0);
 
-    sgemm_share_memory_caching<BLK><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
+    sgemm_1d_tiling<BLK_N, BLK_M, BLK_K><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
 
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
@@ -129,5 +135,6 @@ int main(int argc, char ** argv)
             << "Percentage(compare to cublas peak):     \t"   << (gflop / elapsed) / 3815.45f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
+    cmp_result(h_c, h_a, h_b, N, N, N);
     return 0;
 }

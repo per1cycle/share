@@ -44,6 +44,7 @@ __global__ void sgemm_share_memory_caching(int N, int M, int K, float *a, float 
 
         __syncthreads();
 
+        // in loop k, so need handle next sm tile.
         a += BLK;
         b += BLK * K;
 
@@ -129,5 +130,7 @@ int main(int argc, char ** argv)
             << "Percentage(compare to cublas peak):     \t"   << (gflop / elapsed) / 3815.45f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
+    cmp_result(h_c, h_a, h_b, N, N, N);
+
     return 0;
 }
