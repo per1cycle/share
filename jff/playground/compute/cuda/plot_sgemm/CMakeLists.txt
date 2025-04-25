@@ -37,7 +37,7 @@ if(CUDA_FOUND)
         )
     # project(playground LANGUAGES C CXX CUDA) used in sub_directory
     add_executable(runner runner.cu)
-
+    target_link_libraries(runner -lcublas -lcurand)
 else(CUDA_FOUND)
     message("CUDA is not installed on this system.")
 endif()
