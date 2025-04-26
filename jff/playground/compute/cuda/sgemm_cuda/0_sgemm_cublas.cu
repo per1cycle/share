@@ -80,11 +80,11 @@ int main(int argc, char ** argv)
     elapsed = elapsed / 1000.0f; // to second
 
     std::cout 
-            << "Time:                                   \t"   << elapsed << "ms.\n"
-            << "GFlop:                                  \t"   << gflop << "\n"
-            << "GFLOPS:                                 \t"     << gflop / elapsed << "\n"
-            << "Percentage(compare to theoratical peak):\t"     << (gflop / elapsed) / 4591.26f * 100.0 << "%.\n"
-            << "Percentage(compare to cublas peak):     \t"   << (gflop / elapsed) / 3737.3f * 100.0 << "%.\n";
+            << "Time:                                   \t" << elapsed << "ms.\n"
+            << "GFlop:                                  \t" << gflop << "\n"
+            << "GFLOPS:                                 \t" << gflop / elapsed << "\n"
+            << "Percentage(compare to theoratical peak):\t" << (gflop / elapsed) / 4591.26f * 100.0 << "%.\n"
+            << "Percentage(compare to cublas peak):     \t" << (gflop / elapsed) / 3737.3f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
     return 0;
