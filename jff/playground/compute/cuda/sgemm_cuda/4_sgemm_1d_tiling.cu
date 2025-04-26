@@ -2,7 +2,7 @@
 #include <chrono>
 
 #include "common.cuh"
-
+#include <assert.h>
 
 void usage()
 {
