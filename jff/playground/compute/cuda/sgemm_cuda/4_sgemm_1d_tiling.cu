@@ -18,49 +18,70 @@ void usage()
 
 /**
  * assuming all of data can be divided by block
- * not fully understand why do this...
+ * completely doesnot understand this.
  */
 template <
     const int BLK_N,
-    const int BLK_M,
-    const int BLK_K
+    const int BLK_M, // reduce the m to optimize blkm
+    const int BLK_K,
+    const int THREAD_N
     >
 __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta)
 {
-    int c_row = blockIdx.x;
-    int c_col = blockIdx.y;
+    assert(BLK_N * BLK_M == blockDim.x);
+    assert(BLK_M * BLK_K == blockDim.x);
+    int c_row = blockIdx.y;
+    int c_col = blockIdx.x;
 
-    a += c_row * BLK_M * M;
-    b += c_col * BLK_N;
-    c += c_row * K * BLK_K + c_col * BLK_N;
+    int thread_row = threadIdx.x / BLK_K;
+    int thread_col = threadIdx.x % BLK_K;
 
-    int thread_row = threadIdx.x / BLK;
-    int thread_col = threadIdx.x % BLK;
-    float tmp = 0.0f;
+    int inner_a_row = threadIdx.x / BLK_M;
+    int inner_a_col = threadIdx.x % BLK_M;
 
-    __shared__ float a_share[BLK * BLK];
-    __shared__ float b_share[BLK * BLK];
+    int inner_b_row = threadIdx.x / BLK_K;
+    int inner_b_col = threadIdx.x % BLK_K;
 
-    for(int k = 0; k < M; k += BLK)
+    a += c_row * BLK_N * M;
+    b += c_col * BLK_K;
+    c += c_row * K * BLK_N + c_col * BLK_K;
+
+    __shared__ float a_share[BLK_N * BLK_M];
+    __shared__ float b_share[BLK_M * BLK_K];
+
+    float temp_arr[THREAD_N] = {0.0f};
+
+    /**
+     * A: N * M
+     * B: M * K
+     */
+    for(int k = 0; k < M; k += BLK_M)
     {
-        a_share[thread_row * BLK + thread_col] = a[thread_row * M + thread_col];
-        b_share[thread_row * BLK + thread_col] = b[thread_row * K + thread_col];
+        a_share[inner_a_row * BLK_M + inner_a_col] = a[inner_a_row * M + inner_a_col];
+        b_share[inner_b_row * BLK_K + inner_b_col] = b[inner_b_row * K + inner_b_col];
 
         __syncthreads();
 
-        a += BLK;
-        b += BLK * K;
+        a += BLK_M;
+        b += BLK_M * K;
 
-        for(int inner = 0; inner < BLK; inner ++)
+        for(int inner = 0; inner < BLK_M; inner ++)
         {
-            tmp += a_share[thread_row * BLK + inner] * b_share[inner * BLK + thread_col];
+            float temp_b = b_share[inner * BLK_K + thread_col];
+            for(int tid = 0; tid < THREAD_N; tid++)
+            {
+                temp_arr[tid] += 
+                    a_share[(thread_row * THREAD_N + tid) * BLK_M + inner]
+                    * temp_b;
+            }
         }
 
         __syncthreads();
 
     }
 
-    c[thread_row * K + thread_col] = alpha * tmp + beta;
+    for(int i = 0; i < THREAD_N; i ++)
+        c[(thread_row * THREAD_N + i) * K + thread_col] = alpha * temp_arr[i] + beta;
 }
 /**
  * Time:           0.63702ms.
@@ -76,9 +97,9 @@ int main(int argc, char ** argv)
         exit(1);
     }
     uint N;
-    const int BLK_N = 32;
-    const int BLK_M = 32;
-    const int BLK_K = 8;
+    const int BLK_N = 64;
+    const int BLK_M = 8;
+    const int BLK_K = 64;
 
     N = atoi(argv[1]);
 
@@ -117,7 +138,7 @@ int main(int argc, char ** argv)
     cudaEventCreate(&stop);
     cudaEventRecord(start, 0);
 
-    sgemm_1d_tiling<BLK_N, BLK_M, BLK_K><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
+    sgemm_1d_tiling<BLK_N, BLK_M, BLK_K, 8><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
 
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);

@@ -2,7 +2,7 @@
 #define COMMON_CUH
 
 #include <random>
-#define abs(x) ((x > 0)? x: - x)
+#define abs(x) (((x) > 0)? (x): - (x))
 
 void generate_float_matrix(float *out, int row, int column)
 {
