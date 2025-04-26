@@ -24,14 +24,16 @@ template <
     const int BLK_N,
     const int BLK_M, // reduce the m to optimize blkm
     const int BLK_K,
-    const int THREAD_N
+    const int THREAD_N,
+    const int THREAD_K
     >
-__global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta)
+__global__ void sgemm_2d_tiling(int N, int M, int K, float *a, float *b, float *c, float alpha, float beta)
 {
     assert(BLK_N * BLK_M == blockDim.x);
     assert(BLK_M * BLK_K == blockDim.x);
-    int c_row = blockIdx.x;
-    int c_col = blockIdx.y;
+
+    int c_row = blockIdx.y;
+    int c_col = blockIdx.x;
 
     int thread_row = threadIdx.x / BLK_K;
     int thread_col = threadIdx.x % BLK_K;
@@ -49,7 +51,10 @@ __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *
     __shared__ float a_share[BLK_N * BLK_M];
     __shared__ float b_share[BLK_M * BLK_K];
 
-    float temp_arr[THREAD_N] = {0.0f};
+    float thread_res[THREAD_N * THREAD_K] = {0.0f};
+
+    float thread_n[THREAD_N];
+    float thread_k[THREAD_K];
 
     /**
      * A: N * M
@@ -70,7 +75,7 @@ __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *
             float temp_b = b_share[inner * BLK_K + thread_col];
             for(int tid = 0; tid < THREAD_N; tid++)
             {
-                temp_arr[tid] += 
+                thread_res[tid] += 
                     a_share[(thread_row * THREAD_N + tid) * BLK_M + inner]
                     * temp_b;
             }
@@ -81,7 +86,7 @@ __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *
     }
 
     for(int i = 0; i < THREAD_N; i ++)
-        c[(thread_row * THREAD_N + i) * K + thread_col] = alpha * temp_arr[i] + beta;
+        c[(thread_row * THREAD_N + i) * K + thread_col] = alpha * thread_res[i] + beta;
 }
 /**
  * Time:                                           0.113557ms.
@@ -102,6 +107,7 @@ int main(int argc, char ** argv)
     const int BLK_M = 8;
     const int BLK_K = 64;
     const int THREAD_N = 8;
+    const int THREAD_K = 8;
 
     N = atoi(argv[1]);
 
@@ -140,7 +146,7 @@ int main(int argc, char ** argv)
     cudaEventCreate(&stop);
     cudaEventRecord(start, 0);
 
-    sgemm_1d_tiling<BLK_N, BLK_M, BLK_K, THREAD_N><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
+    sgemm_2d_tiling<BLK_N, BLK_M, BLK_K, THREAD_N, THREAD_K><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
 
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
