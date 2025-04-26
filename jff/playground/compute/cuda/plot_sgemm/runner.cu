@@ -17,7 +17,7 @@
 
 int kernel_num = 5;
 const int loop = 4;
-const int shape_num = 25;
+const int shape_num = 20;
 int shape[shape_num];
 std::string marker = ".ov^<>s*P+xD";
 
