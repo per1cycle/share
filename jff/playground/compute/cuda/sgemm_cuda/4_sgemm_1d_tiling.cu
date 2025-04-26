@@ -30,8 +30,8 @@ __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *
 {
     assert(BLK_N * BLK_M == blockDim.x);
     assert(BLK_M * BLK_K == blockDim.x);
-    int c_row = blockIdx.x;
-    int c_col = blockIdx.y;
+    int c_row = blockIdx.y;
+    int c_col = blockIdx.x;
 
     int thread_row = threadIdx.x / BLK_K;
     int thread_col = threadIdx.x % BLK_K;
@@ -155,7 +155,7 @@ int main(int argc, char ** argv)
             << "GFlop:                                  \t"   << gflop << "\n"
             << "GFLOPS:                                 \t"     << gflop / elapsed << "\n"
             << "Percentage(compare to theoratical peak):\t"     << (gflop / elapsed) / 4591.26f * 100.0 << "%.\n"
-            << "Percentage(compare to cublas peak):     \t"   << (gflop / elapsed) / 3815.45f * 100.0 << "%.\n";
+            << "Percentage(compare to cublas peak):     \t"   << (gflop / elapsed) / 3737.3f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
     return 0;
