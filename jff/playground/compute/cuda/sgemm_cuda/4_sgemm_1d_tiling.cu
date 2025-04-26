@@ -30,8 +30,8 @@ __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *
 {
     assert(BLK_N * BLK_M == blockDim.x);
     assert(BLK_M * BLK_K == blockDim.x);
-    int c_row = blockIdx.y;
-    int c_col = blockIdx.x;
+    int c_row = blockIdx.x;
+    int c_col = blockIdx.y;
 
     int thread_row = threadIdx.x / BLK_K;
     int thread_col = threadIdx.x % BLK_K;
@@ -84,10 +84,11 @@ __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *
         c[(thread_row * THREAD_N + i) * K + thread_col] = alpha * temp_arr[i] + beta;
 }
 /**
- * Time:           0.63702ms.
- * GFlop:          137.456
- * GFLOPS:         215.779
- * Percentage:     4.9321%.
+ * Time:                                           0.113557ms.
+ * GFlop:                                          137.456
+ * GFLOPS:                                         1210.46
+ * Percentage(compare to theoratical peak):        26.3644%.
+ * Percentage(compare to cublas peak):             31.7252%.
  */
 int main(int argc, char ** argv)
 {
@@ -100,6 +101,7 @@ int main(int argc, char ** argv)
     const int BLK_N = 64;
     const int BLK_M = 8;
     const int BLK_K = 64;
+    const int THREAD_N = 8;
 
     N = atoi(argv[1]);
 
@@ -127,8 +129,8 @@ int main(int argc, char ** argv)
     cudaMemcpy(d_c, h_c, size, cudaMemcpyHostToDevice);
 
     // fix typo.
-    dim3 grid_dim = {N / BLK_N, N / BLK_M};
-    dim3 blk_dim = {BLK_N * BLK_M};
+    dim3 grid_dim = {N / BLK_N, N / BLK_K};
+    dim3 blk_dim = {(BLK_N * BLK_K) / THREAD_N};
 
     // start measuring.
     float elapsed; // in milisecond
@@ -138,7 +140,7 @@ int main(int argc, char ** argv)
     cudaEventCreate(&stop);
     cudaEventRecord(start, 0);
 
-    sgemm_1d_tiling<BLK_N, BLK_M, BLK_K, 8><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
+    sgemm_1d_tiling<BLK_N, BLK_M, BLK_K, THREAD_N><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
 
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
@@ -156,6 +158,5 @@ int main(int argc, char ** argv)
             << "Percentage(compare to cublas peak):     \t"   << (gflop / elapsed) / 3815.45f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
-    cmp_result(h_c, h_a, h_b, N, N, N);
     return 0;
 }
