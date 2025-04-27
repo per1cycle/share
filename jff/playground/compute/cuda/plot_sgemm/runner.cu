@@ -11,11 +11,12 @@
 #include "kernel/sgemm_global_memory_coalescing.cuh"
 #include "kernel/sgemm_share_memory_caching.cuh"
 #include "kernel/sgemm_1d_tiling.cuh"
+#include "kernel/sgemm_2d_tiling.cuh"
 
 #include <cublas_v2.h>
 #include <cuda_runtime.h>
 
-int kernel_num = 5;
+int kernel_num = 6;
 const int loop = 4;
 const int shape_num = 20;
 int shape[shape_num];
@@ -142,6 +143,10 @@ std::string type_to_kernel_name(int t)
     {
         return "1D Tiling";
     }
+    case 5:
+    {
+        return "2D Tiling";
+    }
     }
     return "Unknown kernel type";
 }
@@ -202,6 +207,20 @@ void run_kernel(int kernel_type, int N, int M, int K, float *d_a, float *d_b, fl
             dim3 blk_dim = {(BLK_N * BLK_K) / THREAD_N};
 
             sgemm_1d_tiling<BLK_N, BLK_M, BLK_K, THREAD_N><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
+
+            break;
+        }
+        case 5:
+        {
+            const int BLK_N = 64;
+            const int BLK_M = 8;
+            const int BLK_K = 64;
+            const int THREAD_N = 8;
+            const int THREAD_K = 8;
+            dim3 grid_dim = {N / BLK_N, N / BLK_K};
+            dim3 blk_dim = {(BLK_N * BLK_K) / (THREAD_N * THREAD_K)};
+
+            sgemm_2d_tiling<BLK_N, BLK_M, BLK_K, THREAD_N, THREAD_K><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
 
             break;
         }
@@ -275,6 +294,9 @@ int main()
             cudaFree(d_a);
             cudaFree(d_b);
             cudaFree(d_c);
+            free(h_a);
+            free(h_b);
+            free(h_a);
         }
         
         py_arr<int>(shape, shape_num, true);

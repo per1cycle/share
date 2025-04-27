@@ -44,6 +44,7 @@ if(CUDA_FOUND)
     add_executable(2_sgemm_global_memory_coalescing 2_sgemm_global_memory_coalescing.cu)
     add_executable(3_sgemm_share_memory_caching 3_sgemm_share_memory_caching.cu)
     add_executable(4_sgemm_1d_tiling 4_sgemm_1d_tiling.cu)
+    add_executable(5_sgemm_2d_tiling 5_sgemm_2d_tiling.cu)
 
 else()
     message("CUDA is not installed on this system.")
