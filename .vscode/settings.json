@@ -86,6 +86,12 @@
         "charconv": "cpp",
         "forward_list": "cpp",
         "stdio.h": "c",
-        "omp.h": "c"
+        "omp.h": "c",
+        "unordered_set": "cpp",
+        "hash_map": "cpp",
+        "hash_set": "cpp",
+        "slist": "cpp",
+        "shared_mutex": "cpp",
+        "valarray": "cpp"
     }
 }

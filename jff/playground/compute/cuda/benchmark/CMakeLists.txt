@@ -3,8 +3,6 @@ project(skeleton LANGUAGES C CXX CUDA)
 
 find_package(CUDA REQUIRED LANGUAGES C CXX CUDA)
 
-# https://siboehm.com/articles/22/CUDA-MMM
-
 if(CUDA_FOUND)
     # compared to class settings, we let NVidia's FindCUDA CMake detect 
     # whether to build x64.  We tell it to support most devices, though, 
@@ -19,14 +17,16 @@ if(CUDA_FOUND)
     -gencode;arch=compute_11,code=sm_11; 
     -gencode;arch=compute_12,code=sm_12;
     -gencode;arch=compute_13,code=sm_13;")
+    function(add_cublas TARGET SOURCE)
+        add_executable(${TARGET} ${SOURCE})
+        target_link_libraries(${TARGET} -lcublas -lcurand)
+    endfunction(add_cl_exe)
 
-    include_directories(
-        ${CMAKE_SOURCE_DIR}
-        )
+    include_directories(${CMAKE_SOURCE_DIR})
     # my gpu is 1060
     # add -Wextra compiler flag for gcc compilations
     if (UNIX)
-    set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} "-Xcompiler -Wextra -lcublas")
+    set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} "-Xcompiler -Wextra")
     set(CMAKE_CXX_FLAGS "-stdlib=libstdc++")
     endif (UNIX)
 
@@ -36,14 +36,7 @@ if(CUDA_FOUND)
         # 100 101 120
         )
     # project(playground LANGUAGES C CXX CUDA) used in sub_directory
-    add_executable(matmul matmul.cu)
     add_executable(benchmark benchmark.cu)
-    add_executable(cublas cublas.cu)
-    add_executable(01native native.cu)
-
-    target_link_libraries(cublas -lcublas -lcurand)
-    target_link_libraries(benchmark -lcublas -lcurand)
-    
 
 else(CUDA_FOUND)
     message("CUDA is not installed on this system.")
