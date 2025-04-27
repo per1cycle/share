@@ -212,9 +212,9 @@ void run_kernel(int kernel_type, int N, int M, int K, float *d_a, float *d_b, fl
         }
         case 5:
         {
-            const int BLK_N = 64;
+            const int BLK_N = 128;
             const int BLK_M = 8;
-            const int BLK_K = 64;
+            const int BLK_K = 128;
             const int THREAD_N = 8;
             const int THREAD_K = 8;
             dim3 grid_dim = {N / BLK_N, K / BLK_K};
