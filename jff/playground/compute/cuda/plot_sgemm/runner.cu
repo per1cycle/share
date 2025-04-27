@@ -294,9 +294,6 @@ int main()
             cudaFree(d_a);
             cudaFree(d_b);
             cudaFree(d_c);
-            free(h_a);
-            free(h_b);
-            free(h_a);
         }
         
         py_arr<int>(shape, shape_num, true);
