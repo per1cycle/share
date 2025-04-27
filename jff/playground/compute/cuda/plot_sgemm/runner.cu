@@ -49,7 +49,7 @@ std::string current_time()
 
     // Create a string stream to format the time
     std::ostringstream oss;
-    oss << std::put_time(localTime, "%Y-%d-%m-%H:%M:%S");
+    oss << std::put_time(localTime, "%Y-%m-%d-%H:%M:%S");
 
     return oss.str();
 }
