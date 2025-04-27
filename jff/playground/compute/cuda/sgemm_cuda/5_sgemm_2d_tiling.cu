@@ -32,17 +32,19 @@ __global__ void sgemm_2d_tiling(int N, int M, int K, float *a, float *b, float *
     assert(BLK_N * BLK_M == blockDim.x);
     assert(BLK_M * BLK_K == blockDim.x);
 
-    int c_row = blockIdx.y;
-    int c_col = blockIdx.x;
+    int c_row = blockIdx.x;
+    int c_col = blockIdx.y;
 
     int thread_row = threadIdx.x / BLK_K;
     int thread_col = threadIdx.x % BLK_K;
+    int stride_a = ;
 
     int inner_a_row = threadIdx.x / BLK_M;
     int inner_a_col = threadIdx.x % BLK_M;
 
     int inner_b_row = threadIdx.x / BLK_K;
     int inner_b_col = threadIdx.x % BLK_K;
+    int stride_b = ;
 
     a += c_row * BLK_N * M;
     b += c_col * BLK_K;
@@ -53,8 +55,8 @@ __global__ void sgemm_2d_tiling(int N, int M, int K, float *a, float *b, float *
 
     float thread_res[THREAD_N * THREAD_K] = {0.0f};
 
-    float thread_n[THREAD_N];
-    float thread_k[THREAD_K];
+    float register_n[THREAD_N];
+    float register_k[THREAD_K];
 
     /**
      * A: N * M
@@ -62,9 +64,8 @@ __global__ void sgemm_2d_tiling(int N, int M, int K, float *a, float *b, float *
      */
     for(int k = 0; k < M; k += BLK_M)
     {
-        a_share[inner_a_row * BLK_M + inner_a_col] = a[inner_a_row * M + inner_a_col];
-        b_share[inner_b_row * BLK_K + inner_b_col] = b[inner_b_row * K + inner_b_col];
-
+        // move to register.
+        for(int i = 0; i < )
         __syncthreads();
 
         a += BLK_M;
