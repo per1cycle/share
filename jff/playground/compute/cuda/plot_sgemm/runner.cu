@@ -217,7 +217,7 @@ void run_kernel(int kernel_type, int N, int M, int K, float *d_a, float *d_b, fl
             const int BLK_K = 64;
             const int THREAD_N = 8;
             const int THREAD_K = 8;
-            dim3 grid_dim = {N / BLK_N, N / BLK_K};
+            dim3 grid_dim = {N / BLK_N, K / BLK_K};
             dim3 blk_dim = {(BLK_N * BLK_K) / (THREAD_N * THREAD_K)};
 
             sgemm_2d_tiling<BLK_N, BLK_M, BLK_K, THREAD_N, THREAD_K><<<grid_dim, blk_dim>>>(N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
