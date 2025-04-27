@@ -68,7 +68,7 @@ void import()
             << "import numpy as np" << std::endl
             << "import matplotlib.pyplot as plt" << std::endl
             << "from matplotlib.pyplot import MultipleLocator" << std::endl
-            << "plt.figure(figsize=(40, 24))" << std::endl
+            << "plt.figure(figsize=(20, 12))" << std::endl
             << "plt.xlabel('Matrix Size N (for NxN matrices)')" << std::endl
             << "plt.ylabel('Performance (GFLOPs/s)')" << std::endl
             << "plt.title('SGEMM Performance Comparison')" << std::endl
