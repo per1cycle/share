@@ -2,8 +2,8 @@
 How to utilize the runner?
 follow the instruction.
 
-Example of my 3060 laptop
-![Fun](./img/2025-27-04-17:04:07.png "3060 laptop")
+![Foo](./img/2025-27-04-19:25:41.png)
+![Bar](./img/2025-27-04-19:31:09.png)
 
 ```
 pip install matplotlib
