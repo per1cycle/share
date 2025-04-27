@@ -17,7 +17,7 @@
 #include <cuda_runtime.h>
 
 int kernel_num = 6;
-const int loop = 4;
+const int loop = 5;
 const int shape_num = 20;
 int shape[shape_num];
 std::string marker = ".ov^<>s*P+xD";
@@ -68,7 +68,7 @@ void import()
             << "import numpy as np" << std::endl
             << "import matplotlib.pyplot as plt" << std::endl
             << "from matplotlib.pyplot import MultipleLocator" << std::endl
-            << "plt.figure(figsize=(10, 6))" << std::endl
+            << "plt.figure(figsize=(40, 24))" << std::endl
             << "plt.xlabel('Matrix Size N (for NxN matrices)')" << std::endl
             << "plt.ylabel('Performance (GFLOPs/s)')" << std::endl
             << "plt.title('SGEMM Performance Comparison')" << std::endl
@@ -249,7 +249,7 @@ int main()
         // loop shape and get average of kernel performance.
         for(int i = 0; i < shape_num; i ++)
         {
-            int N = shape[i];
+            uint N = shape[i];
             size_t size = sizeof(float) * N * N;
             float flop = 1.0 * N * N * (2 * N + 1);
     

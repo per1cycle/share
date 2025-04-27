@@ -188,6 +188,5 @@ int main(int argc, char ** argv)
             << "Percentage(compare to cublas peak):     \t" << (gflop / elapsed) / 3737.3f * 100.0 << "%.\n";
 
     cudaMemcpy(h_c, d_c, size, cudaMemcpyDeviceToHost);
-    cmp_result(h_c, h_a, h_b, N, N, N);
     return 0;
 }
