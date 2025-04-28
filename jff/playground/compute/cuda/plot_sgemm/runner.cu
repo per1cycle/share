@@ -99,6 +99,7 @@ void py_idx_arr(int arr_size)
     for(int i = 0; i < arr_size; i ++) 
         tmp[i] = (i + 1);
     py_arr<int>(tmp, arr_size, false);
+    free((void*)tmp);
 }
 
 inline void py_plt_start()
@@ -305,6 +306,7 @@ int main()
         add_label(type_to_kernel_name(t), true);
         select_marker(t, false);
         py_plt_end();
+        free((void*)gflops_arr);
     }
 
     save_fig();

@@ -31,7 +31,7 @@ void print_array(float *arr, int row, int column)
 
 void cmp_result(float *res, float *a, float *b, int N, int M, int K)
 {
-    float *tmp = new float[N * K];
+    float *tmp = (float*)malloc(sizeof(float) * N * K);
     memset(tmp, 0, sizeof(float) * N * K);
     for(int i = 0; i < N; i ++)
     {
@@ -50,7 +50,7 @@ void cmp_result(float *res, float *a, float *b, int N, int M, int K)
         }
     }
     std::cout << "Correct! be proud of it!\n";
-
+    free((void*)tmp);
 }
 
 #endif
