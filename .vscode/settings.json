@@ -93,5 +93,9 @@
         "slist": "cpp",
         "shared_mutex": "cpp",
         "valarray": "cpp"
-    }
+    },
+    "files.watcherExclude": {
+        "**/target": true
+    },
+    "cmake.sourceDirectory": "/Users/z/Projects/Github/dev/share/jff/playground/compute/cuda/sgemm_cuda"
 }
