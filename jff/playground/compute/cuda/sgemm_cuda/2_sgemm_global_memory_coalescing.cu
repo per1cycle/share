@@ -25,12 +25,12 @@ __global__ void sgemm_global_memory_coalescing(int N, int M, int K, float *a, fl
     int x = blockIdx.x * BLK + (threadIdx.x / BLK);
     int y = blockIdx.y * BLK + (threadIdx.x % BLK);
 
-    if(x <= N && y <= K)
+    if(x < N && y < K)
     {
         float tmp = 0.0f;
-        for(int k = 0; k < M; k ++)
+        for(int m = 0; m < M; m ++)
         {
-            tmp += a[x * M + k] * b[k * K + y];
+            tmp += a[x * M + m] * b[m * K + y];
         }
 
         c[x * K + y] = alpha * tmp + beta;

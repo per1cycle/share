@@ -55,7 +55,7 @@ __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *
      * A: N * M
      * B: M * K
      */
-    for(int k = 0; k < M; k += BLK_M)
+    for(int m = 0; m < M; m += BLK_M)
     {
         a_share[inner_a_row * BLK_M + inner_a_col] = a[inner_a_row * M + inner_a_col];
         b_share[inner_b_row * BLK_K + inner_b_col] = b[inner_b_row * K + inner_b_col];
@@ -64,7 +64,7 @@ __global__ void sgemm_1d_tiling(int N, int M, int K, float *a, float *b, float *
 
         a += BLK_M;
         b += BLK_M * K;
-
+        // calculate each small thread block result.
         for(int inner = 0; inner < BLK_M; inner ++)
         {
             // calculate each element of col of the tile per thread

@@ -1,9 +1,9 @@
 #include <iostream>
 
-const int N = 2048;
+const int N = 1024;
 __global__ void MatAdd(float A[N], float B[N], float C[N])
 {
-    int i = threadIdx.x + blockDim.x * blockIdx.x;
+    int i = threadIdx.x + blockIdx.x;
     C[i] = A[i] + B[i];
 }
 
