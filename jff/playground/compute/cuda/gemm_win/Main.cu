@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
 	cudaEventCreate(&stop);
 	cudaEventRecord(start, 0);
 
-	run_kernel(mode, N, N, N, d_a, d_b, d_c);
+	run_kernel(mode, N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
 
 	cudaEventRecord(stop, 0);
 	cudaEventSynchronize(stop);

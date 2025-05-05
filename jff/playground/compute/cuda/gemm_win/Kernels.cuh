@@ -58,7 +58,8 @@ void cmp_result(float* res, float* a, float* b, int M, int N, int K)
 
 __global__ void sgemm_naive(
     uint M, uint N, uint K,
-	float* a, float* b, float* c)
+	float* a, float* b, float* c,
+    float alpha, float beta)
 {
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
 	int y = threadIdx.y + blockIdx.y * blockDim.y;
@@ -69,13 +70,14 @@ __global__ void sgemm_naive(
 		{
 			sum += a[x * K + k] * b[k * N + y];
 		}
-		c[x * N + y] = sum;
+		c[x * N + y] = alpha * sum + beta;
 	}
 }
 
 void run_kernel(int kernel_type,
 	uint M, uint N, uint K,
-	float *a, float *b, float *c)
+	float *a, float *b, float *c,
+    float alpha, float beta)
 {
     switch (kernel_type)
     {
@@ -83,8 +85,6 @@ void run_kernel(int kernel_type,
     {
 		cublasHandle_t handle;
 		cublasCreate(&handle);
-		float alpha = 1.0f;
-		float beta = 0.0f;
 		cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N,
 			M, N, K,
 			&alpha, a, M,
@@ -96,7 +96,7 @@ void run_kernel(int kernel_type,
     {
 		dim3 grid_dim = dim3(M / 32, N / 32, 1);
 		dim3 block_dim = dim3(32, 32, 1);
-		sgemm_naive << <grid_dim, block_dim >> > (M, N, K, a, b, c);
+		sgemm_naive << <grid_dim, block_dim >> > (M, N, K, a, b, c, alpha, beta);
         break;
     }
     default:
