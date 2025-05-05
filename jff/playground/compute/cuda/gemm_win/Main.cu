@@ -13,7 +13,7 @@ int main(int argc, char ** argv)
 
 	unsigned int N = atoi(argv[2]);
 	int mode = atoi(argv[1]);
-	std::cout << "Running with mode: " << mode << std::endl;
+	std::cout << "Running with mode: " << mode << ". With shape: " << N << std::endl;
 	unsigned int size = N * N;
 
 	float* h_a, * h_b, * h_c;
@@ -41,7 +41,8 @@ int main(int argc, char ** argv)
 	cudaEventCreate(&stop);
 	cudaEventRecord(start, 0);
 
-	run_kernel(mode, N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
+	for(int i = 0; i < 10; i ++)
+		run_kernel(mode, N, N, N, d_a, d_b, d_c, 1.0f, 0.0f);
 
 	cudaEventRecord(stop, 0);
 	cudaEventSynchronize(stop);
@@ -50,7 +51,7 @@ int main(int argc, char ** argv)
 	// show result
 	float flop = 1.0 * N * N * (2 * N + 1);
 	float gflop = flop / 1000000000.0f;
-	elapsed = elapsed / 1000.0f; // to second
+	elapsed = elapsed / 1000.0f / 10.0f; // to second
 
 	std::cout
 		<< "Time:                                   \t" << elapsed << " s.\n"
