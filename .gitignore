@@ -21,3 +21,4 @@ icarus/
 .bsp/
 .scala-build/
 .metals/
+*.tgz
