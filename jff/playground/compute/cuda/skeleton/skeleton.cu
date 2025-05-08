@@ -15,14 +15,14 @@ int main()
     cudaMalloc((void **)&d_b, K * N * sizeof(float));
     cudaMalloc((void **)&d_c, M * N * sizeof(float));
 
-    cudaMemcpy(d_a, h_a, N * sizeof(float), cudaMemcpyHostToDevice);
-    cudaMemcpy(d_b, h_a, N * sizeof(float), cudaMemcpyHostToDevice);
-    cudaMemcpy(d_c, h_a, N * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_a, h_a, M * K * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b, h_a, K * N * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_c, h_a, M * N * sizeof(float), cudaMemcpyHostToDevice);
     ///////////////////////////////////////////////////////////////////////////////////////
     // run kernel here
 
     ///////////////////////////////////////////////////////////////////////////////////////
-    cudaMemcpy(h_c, d_c, N * sizeof(float), cudaMemcpyDeviceToHost);
+    cudaMemcpy(h_c, d_c, M * N * sizeof(float), cudaMemcpyDeviceToHost);
 
     cudaFree(d_a);
     cudaFree(d_b);
