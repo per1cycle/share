@@ -1,29 +1,35 @@
 #include <iostream>
-
-const int N = 1024;
-__global__ void MatAdd(float A[N], float B[N], float C[N])
-{
-    int i = threadIdx.x;
-    C[i] = A[i] + B[N - i - 1];
-}
-
+// #include <common.cuh>
 int main()
 {
     std::cout << "Cuda works" << std::endl;
-    float A[N], B[N], C[N];
-    for (int i = 0; i < N; i++)
-    {
-        A[i] = i;
-        B[i] = i;
-    }
-    float *d_A, *d_B, *d_C;
-    cudaMalloc((void **)&d_A, N * sizeof(float));
-    cudaMalloc((void **)&d_B, N * sizeof(float));
-    cudaMalloc((void **)&d_C, N * sizeof(float));
-    cudaMemcpy(d_A, A, N * sizeof(float), cudaMemcpyHostToDevice);
-    cudaMemcpy(d_B, B, N * sizeof(float), cudaMemcpyHostToDevice);
-    cudaMemcpy(d_C, C, N * sizeof(float), cudaMemcpyHostToDevice);
-    MatAdd<<<4, N / 4>>>(d_A, d_B, d_C);
-    cudaMemcpy(C, d_C, N * sizeof(float), cudaMemcpyDeviceToHost);
+    int M = 1024, N = 1024, K = 1024;
+
+    float *h_a = (float*) malloc(sizeof(float) * M * K);
+    float *h_b = (float*) malloc(sizeof(float) * K * N);
+    float *h_c = (float*) malloc(sizeof(float) * M * N);
+
+    float *d_a, *d_b, *d_c;
+
+    cudaMalloc((void **)&d_a, M * K * sizeof(float));
+    cudaMalloc((void **)&d_b, K * N * sizeof(float));
+    cudaMalloc((void **)&d_c, M * N * sizeof(float));
+
+    cudaMemcpy(d_a, h_a, N * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b, h_a, N * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(d_c, h_a, N * sizeof(float), cudaMemcpyHostToDevice);
+    ///////////////////////////////////////////////////////////////////////////////////////
+    // run kernel here
+
+    ///////////////////////////////////////////////////////////////////////////////////////
+    cudaMemcpy(h_c, d_c, N * sizeof(float), cudaMemcpyDeviceToHost);
+
+    cudaFree(d_a);
+    cudaFree(d_b);
+    cudaFree(d_c);
+
+    free(h_a);
+    free(h_b);
+    free(h_c);
     std::cout << "Cuda finished" << std::endl;
 }
