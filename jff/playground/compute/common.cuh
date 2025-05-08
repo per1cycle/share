@@ -15,6 +15,7 @@
 #include <hip/hip_runtime.h>
 #endif
 #include <iostream>
+#include <random>
 
 #if defined(CUDA)
 #define Event_t cudaEvent_t
@@ -83,7 +84,22 @@ private:
 
 namespace utils
 {
-void print_array(float *arr, int row, int column)
+
+template<typename T>
+void generate_T_matrix(T *out, int row, int column)
+{
+    srand(time(NULL));
+    for(int i = 0; i < row; i ++)
+    {
+        for(int j = 0; j < column; j ++)
+        {
+            out[i * column + j] = (T)rand() / (T)(INT32_MAX);
+        }
+    }
+}
+
+template<typename T>
+void print_array(T *arr, int row, int column)
 {
     for(int i = 0; i < row; i ++)
     {
@@ -94,15 +110,16 @@ void print_array(float *arr, int row, int column)
         std::cout << std::endl;
     }
 }
-    
-void cmp_result(float *res, float *a, float *b, int M, int N, int K)
+
+template<typename T>
+void cmp_result(T *res, T *a, T *b, int M, int N, int K)
 {
 
     for(int i = 0; i < M; i ++) // i th row
     {
         for(int j = 0; j < N; j ++) // j th column
         {
-            float tmp = 0.0f;
+            T tmp = 0.0f;
             for(int k = 0; k < K; k ++)
             {
                 tmp += a[i * K + k] * b[j + k * N];

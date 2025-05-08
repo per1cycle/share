@@ -20,7 +20,7 @@ if(CUDA_FOUND)
     function(add_cublas TARGET SOURCE)
         add_executable(${TARGET} ${SOURCE})
         target_link_libraries(${TARGET} -lcublas -lcurand)
-    endfunction(add_cl_exe)
+    endfunction(add_cublas)
 
     include_directories(${CMAKE_SOURCE_DIR})
     # my gpu is 1060

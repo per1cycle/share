@@ -20,9 +20,10 @@ if(CUDA_FOUND)
     function(add_cublas TARGET SOURCE)
         add_executable(${TARGET} ${SOURCE})
         target_link_libraries(${TARGET} -lcublas -lcurand)
-    endfunction(add_cl_exe)
+    endfunction(add_cublas)
 
     include_directories(${CMAKE_SOURCE_DIR})
+    include_directories(${CMAKE_SOURCE_DIR}/../../)
     # my gpu is 1060
     # add -Wextra compiler flag for gcc compilations
     if (UNIX)
@@ -36,7 +37,7 @@ if(CUDA_FOUND)
         # 100 101 120
         )
     # project(playground LANGUAGES C CXX CUDA) used in sub_directory
-    add_executable(skeleton skeleton.cu)
+    add_cublas(sgemv_cublas sgemv_cublas.cu)
 
 else(CUDA_FOUND)
     message("CUDA is not installed on this system.")

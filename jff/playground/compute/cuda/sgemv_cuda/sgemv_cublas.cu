@@ -1,12 +1,9 @@
 #include <iostream>
-
-const int N = 1024;
-
-__launch_bounds__(1024)
+#include "common.cuh"
+#include <cublas_v2.h>
 
 int main()
 {
-
-
+    
     return 0;
 }
