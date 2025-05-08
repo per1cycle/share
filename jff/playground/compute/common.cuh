@@ -84,7 +84,27 @@ public:
         float gflop = mflop / 1000.0f;
 
         std::cout 
+                << ">> Problem: SGEMM          \t" << std::endl
                 << "Problem size:              \t" << "M = " << M << ", N = " << N << ", K = " << K << std::endl 
+                << "Flop:                      \t" << flop << std::endl
+                << "mFlop:                     \t" << mflop << std::endl
+                << "gflop:                     \t" << gflop << std::endl
+                << "Time elapse(in second):    \t" << elapse_in_second() << "s."<< std::endl
+                << "Time elapse(in milisecond):\t" << elapse_in_milisecond() << "ms." << std::endl
+                << "MFlops:                    \t" << mflop / elapse_in_second() << std::endl
+                << "GFlops:                    \t" << gflop / elapse_in_second() << std::endl;
+    }
+
+    void report_sgemv(uint M, uint N, [[maybe_unused]] float alpha, [[maybe_unused]] float beta)
+    {
+        // alpha and beta is unused.
+        float flop = 2.0f * M * N; // TODO
+        float mflop = flop / 1000000.0f;
+        float gflop = mflop / 1000.0f;
+
+        std::cout 
+                << ">> Problem: SGEMV          \t" << std::endl
+                << "Problem size:              \t" << "M = " << M << ", N = " << N << std::endl 
                 << "Flop:                      \t" << flop << std::endl
                 << "mFlop:                     \t" << mflop << std::endl
                 << "gflop:                     \t" << gflop << std::endl
