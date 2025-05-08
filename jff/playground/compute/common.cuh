@@ -15,6 +15,7 @@
 #include <hip/hip_runtime.h>
 #endif
 #include <iostream>
+#include <iomanip>
 #include <random>
 
 #if defined(CUDA)
@@ -69,6 +70,28 @@ public:
     void reset()
     {
         elapse_in_milisecond_ = 0.0f;
+    }
+
+    /**
+     * report the information of problem.
+     * alpha and beta is ignore, but still count.
+     */
+    void report_sgemm(uint M, uint N, uint K, [[maybe_unused]] float alpha, [[maybe_unused]] float beta)
+    {
+        // alpha and beta is unused.
+        float flop = 2.0f * M * N * K;
+        float mflop = flop / 1000000.0f;
+        float gflop = mflop / 1000.0f;
+
+        std::cout 
+                << "Problem size:              \t" << "M = " << M << ", N = " << N << ", K = " << K << std::endl 
+                << "Flop:                      \t" << flop << std::endl
+                << "mFlop:                     \t" << mflop << std::endl
+                << "gflop:                     \t" << gflop << std::endl
+                << "Time elapse(in second):    \t" << elapse_in_second() << "s."<< std::endl
+                << "Time elapse(in milisecond):\t" << elapse_in_milisecond() << "ms." << std::endl
+                << "MFlops:                    \t" << mflop / elapse_in_second() << std::endl
+                << "GFlops:                    \t" << gflop / elapse_in_milisecond() << std::endl;
     }
 
     ~Timer()
