@@ -1,0 +1,127 @@
+#ifndef COMPUTE_COMMON_CUH
+#define COMPUTE_COMMON_CUH
+
+// Define platform
+#define CUDA
+
+#ifndef CUDA
+#define HIP
+#endif
+
+// include header
+#ifdef CUDA
+#include <cuda_runtime.h>
+#else 
+#include <hip/hip_runtime.h>
+#endif
+#include <iostream>
+
+#if defined(CUDA)
+#define Event_t cudaEvent_t
+#define EventCreate(event) cudaEventCreate((event))
+#define EventRecord(event, value) cudaEventRecord((event), (value))
+#define EventSynchronize(event) cudaEventSynchronize((event))
+#define EventElapsedTime(elapse, start, end) cudaEventElapsedTime((elapse), (start), (end)) 
+#define EventDestroy(event) cudaEventDestroy((event))
+#elif defined(HIP)
+#define Event_t hipEvent_t
+#define EventCreate(event) hipEventCreate ((event))
+#define EventRecord(event, val) hipEventRecord((event), (value))
+#define EventSynchronize(event) hipEventSynchronize((event))
+#define EventElapsedTime(elapse, start, end) hipEventElapsedTime((elapse), (start), (end)) 
+#define EventDestroy(event) hipEventDestroy((event))
+#endif
+
+class Timer
+{
+public:
+    Timer()
+    {
+        EventCreate(&start_);
+        EventCreate(&stop_);
+        elapse_in_milisecond_ = 0.0f;
+    }
+
+    void start()
+    {
+        EventRecord(start_, 0);
+    }
+
+    void stop()
+    {
+        EventRecord(stop_, 0);
+        EventSynchronize(stop_);
+        EventElapsedTime(&elapse_in_milisecond_, start_, stop_);
+    }
+
+    // get elapsed time in second
+    float elapse_in_milisecond()
+    {
+        return elapse_in_milisecond_; // convert to second
+    }
+
+    float elapse_in_second()
+    {
+        return elapse_in_milisecond_ / 1000.0f; // convert to second
+    }
+
+    void reset()
+    {
+        elapse_in_milisecond_ = 0.0f;
+    }
+
+    ~Timer()
+    {
+        EventDestroy(start_);
+        EventDestroy(stop_);
+    }
+private:
+    Event_t start_, stop_;
+    float elapse_in_milisecond_;
+};
+
+
+namespace utils
+{
+void print_array(float *arr, int row, int column)
+{
+    for(int i = 0; i < row; i ++)
+    {
+        for(int j = 0; j < column; j ++)
+        {
+            std::cout << arr[i * column + j] << ' ';
+        }
+        std::cout << std::endl;
+    }
+}
+    
+void cmp_result(float *res, float *a, float *b, int M, int N, int K)
+{
+
+    for(int i = 0; i < M; i ++) // i th row
+    {
+        for(int j = 0; j < N; j ++) // j th column
+        {
+            float tmp = 0.0f;
+            for(int k = 0; k < K; k ++)
+            {
+                tmp += a[i * K + k] * b[j + k * N];
+            }
+
+            if(abs(res[i * K + j] - tmp) > 1e-3)
+            {
+                std::cout 
+                        << "Result error." << std::endl
+                        << "At:        \t" << "<" << i << ", " << j << ">" << std::endl
+                        << "Should be: \t" << tmp << std::endl
+                        << "But got:   \t" << res[i * K + j] << std::endl;
+                exit(1);
+            }
+        }
+    }
+    std::cout << "Correct! be proud of it!\n";
+}
+
+}
+
+#endif // COMPUTE_COMMON_CUH

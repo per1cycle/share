@@ -92,7 +92,9 @@
         "hash_set": "cpp",
         "slist": "cpp",
         "shared_mutex": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "format": "cpp",
+        "span": "cpp"
     },
     "files.watcherExclude": {
         "**/target": true
