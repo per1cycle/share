@@ -91,7 +91,7 @@ public:
                 << "Time elapse(in second):    \t" << elapse_in_second() << "s."<< std::endl
                 << "Time elapse(in milisecond):\t" << elapse_in_milisecond() << "ms." << std::endl
                 << "MFlops:                    \t" << mflop / elapse_in_second() << std::endl
-                << "GFlops:                    \t" << gflop / elapse_in_milisecond() << std::endl;
+                << "GFlops:                    \t" << gflop / elapse_in_second() << std::endl;
     }
 
     ~Timer()
