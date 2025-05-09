@@ -2,7 +2,7 @@
 #define COMPUTE_COMMON_CUH
 
 // Define platform
-#define CUDA
+#define CPU
 
 
 // include header
