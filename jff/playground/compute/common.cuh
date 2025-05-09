@@ -28,7 +28,7 @@
 #elif defined(HIP)
 #define Event_t hipEvent_t
 #define EventCreate(event) hipEventCreate ((event))
-#define EventRecord(event, val) hipEventRecord((event), (value))
+#define EventRecord(event, value) hipEventRecord((event), (value))
 #define EventSynchronize(event) hipEventSynchronize((event))
 #define EventElapsedTime(elapse, start, end) hipEventElapsedTime((elapse), (start), (end)) 
 #define EventDestroy(event) hipEventDestroy((event))
