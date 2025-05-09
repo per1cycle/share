@@ -2,18 +2,18 @@
 #define COMPUTE_COMMON_CUH
 
 // Define platform
-#define CUDA
+#define CPU
 
-#ifndef CUDA
-#define HIP
-#endif
 
 // include header
 #ifdef CUDA
 #include <cuda_runtime.h>
-#else 
+#elif defined(HIP)
 #include <hip/hip_runtime.h>
+#elif defined(CPU)
+#include <chrono>
 #endif
+
 #include <iostream>
 #include <iomanip>
 #include <random>
@@ -32,6 +32,13 @@
 #define EventSynchronize(event) hipEventSynchronize((event))
 #define EventElapsedTime(elapse, start, end) hipEventElapsedTime((elapse), (start), (end)) 
 #define EventDestroy(event) hipEventDestroy((event))
+#elif defined(CPU)
+#define Event_t std::chrono::system_clock::time_point
+#define EventCreate(event) 
+#define EventRecord(event, value) (event) = std::chrono::system_clock::now()
+#define EventSynchronize(event)
+#define EventElapsedTime(elapse, start, end) *(elapse) = std::chrono::duration_cast<std::chrono::milliseconds>((end) - (start)).count()
+#define EventDestroy(event)
 #endif
 
 class Timer
@@ -123,7 +130,6 @@ private:
     Event_t start_, stop_;
     float elapse_in_milisecond_;
 };
-
 
 namespace utils
 {
