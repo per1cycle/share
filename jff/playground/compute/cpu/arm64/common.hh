@@ -112,6 +112,29 @@ public:
                 << "GFlops:                    \t" << gflop / elapse_in_second() << std::endl;
     }
 
+    void report_sgemm_with_loop(uint M, uint N, uint K, [[maybe_unused]] float alpha, [[maybe_unused]] float beta, int loop_time)
+    {
+        // alpha and beta is unused.
+        float flop = 2.0f * M * N * K;
+        float mflop = flop / 1000000.0f;
+        float gflop = mflop / 1000.0f;
+        float f_loop_time = 1.0f * loop_time;
+
+        std::cout 
+                << ">> Problem: SGEMM                \t" << std::endl
+                << "Problem size:                    \t" << "M = " << M << ", N = " << N << ", K = " << K << std::endl 
+                << "Flop:                            \t" << flop << std::endl
+                << "mFlop:                           \t" << mflop << std::endl
+                << "gflop:                           \t" << gflop << std::endl
+                << "loop time:                       \t" << loop_time << std::endl
+                << "Time elapse(in second total):    \t" << elapse_in_second() << "s."<< std::endl
+                << "Time elapse(in milisecond total):\t" << elapse_in_milisecond() << "ms." << std::endl
+                << "Time elapse(in second avg):      \t" << elapse_in_second() / f_loop_time << "s."<< std::endl
+                << "Time elapse(in milisecond avg):  \t" << elapse_in_milisecond() / f_loop_time << "ms." << std::endl
+                << "MFlops:                          \t" << mflop / (elapse_in_second() / f_loop_time) << std::endl
+                << "GFlops:                          \t" << gflop / (elapse_in_second() / f_loop_time) << std::endl;
+    }
+
     void report_sgemv(uint M, uint N, [[maybe_unused]] float alpha, [[maybe_unused]] float beta)
     {
         // alpha and beta is unused.
@@ -129,6 +152,28 @@ public:
                 << "Time elapse(in milisecond):\t" << elapse_in_milisecond() << "ms." << std::endl
                 << "MFlops:                    \t" << mflop / elapse_in_second() << std::endl
                 << "GFlops:                    \t" << gflop / elapse_in_second() << std::endl;
+    }
+
+    void report_sgemv_with_loop(uint M, uint N, [[maybe_unused]] float alpha, [[maybe_unused]] float beta, int loop_time)
+    {
+        // alpha and beta is unused.
+        float flop = 2.0f * M * N; // TODO
+        float mflop = flop / 1000000.0f;
+        float gflop = mflop / 1000.0f;
+        float f_loop_time = 1.0f * loop_time;
+
+        std::cout 
+                << ">> Problem: SGEMV                \t" << std::endl
+                << "Problem size:                    \t" << "M = " << M << ", N = " << N << std::endl 
+                << "Flop:                            \t" << flop << std::endl
+                << "mFlop:                           \t" << mflop << std::endl
+                << "gflop:                           \t" << gflop << std::endl
+                << "Time elapse(in second total):    \t" << elapse_in_second() << "s."<< std::endl
+                << "Time elapse(in milisecond total):\t" << elapse_in_milisecond() << "ms." << std::endl
+                << "Time elapse(in second avg):      \t" << elapse_in_second() / f_loop_time << "s."<< std::endl
+                << "Time elapse(in milisecond avg):  \t" << elapse_in_milisecond() / f_loop_time << "ms." << std::endl
+                << "MFlops:                          \t" << mflop / (elapse_in_second() / f_loop_time) << std::endl
+                << "GFlops:                          \t" << gflop / (elapse_in_second() / f_loop_time) << std::endl;
     }
 
     ~Timer()
