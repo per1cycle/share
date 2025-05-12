@@ -17,13 +17,41 @@ int main()
     
     utils::generate_T_matrix<float>(a, M, K);
     utils::generate_T_matrix<float>(b, K, N);
+    // kernel v1
+    t.start();
+    for(int i = 0; i < loop_time; i ++)
+        solution::kernel_v1<float>(M, N, K, a, b, c, alpha, beta);
+    t.stop();
+    // utils::cmp_result(c, a, b, M, N, K);
+    t.report_sgemm_with_loop(M, N, K, alpha, beta, loop_time);
+    t.reset();
+
+    // kernel v2
+    t.start();
+    for(int i = 0; i < loop_time; i ++)
+        solution::kernel_v2<float>(M, N, K, a, b, c, alpha, beta);
+    t.stop();
+    // utils::cmp_result(c, a, b, M, N, K);
+    t.report_sgemm_with_loop(M, N, K, alpha, beta, loop_time);
+    t.reset();
+
+    // kernel v3
+    t.start();
+    for(int i = 0; i < loop_time; i ++)
+        solution::kernel_v3<float>(M, N, K, a, b, c, alpha, beta);
+    t.stop();
+    // utils::cmp_result(c, a, b, M, N, K);
+    t.report_sgemm_with_loop(M, N, K, alpha, beta, loop_time);
+    t.reset();
+    
+    // kernel v4
     t.start();
     for(int i = 0; i < loop_time; i ++)
         solution::kernel_v4<float>(M, N, K, a, b, c, alpha, beta);
     t.stop();
     // utils::cmp_result(c, a, b, M, N, K);
-
     t.report_sgemm_with_loop(M, N, K, alpha, beta, loop_time);
+    t.reset();
     
     return 0;
 }
