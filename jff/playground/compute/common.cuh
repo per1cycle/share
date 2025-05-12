@@ -275,8 +275,26 @@ void quick_bench_sgemm()
 template<typename T>
 void quick_bench_sgemv()
 {
-    constexpr uint M = 2048, N = 2048;
+    constexpr uint M = 2048, N = 2048, K = 2048;
+    T alpha = 1.0, beta = 0.0;
+    Timer t;
 
+    T *h_a = (T*)malloc(sizeof(T) * M * K);
+    T *h_b = (T*)malloc(sizeof(T) * K * N);
+    T *h_c = (T*)malloc(sizeof(T) * M * N);
+
+    utils::generate_T_matrix<T>(h_a, M, K);
+    utils::generate_T_matrix<T>(h_b, K, N);
+
+    memset(h_c, 0, sizeof(T) * M * N);
+
+    t.start();
+
+    // blas
+
+    t.stop();
+    t.report_sgemm(M, N, K, alpha, beta);
+    
 }
 
 #endif // CPU
