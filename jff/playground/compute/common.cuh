@@ -216,9 +216,8 @@ void print_array(T *arr, int row, int column)
 }
 
 template<typename T>
-void cmp_result(T *res, T *a, T *b, int M, int N, int K)
+void sgemm_validate_result(T *res, T *a, T *b, T *c, int M, int N, int K, float alpha, float beta)
 {
-
     for(int i = 0; i < M; i ++) // i th row
     {
         for(int j = 0; j < N; j ++) // j th column
@@ -228,6 +227,7 @@ void cmp_result(T *res, T *a, T *b, int M, int N, int K)
             {
                 tmp += a[i * K + k] * b[j + k * N];
             }
+            tmp = alpha * tmp + beta * c[i * M + j];
 
             if(abs(res[i * K + j] - tmp) > 1e-3)
             {
@@ -238,6 +238,32 @@ void cmp_result(T *res, T *a, T *b, int M, int N, int K)
                         << "But got:   \t" << res[i * K + j] << std::endl;
                 exit(1);
             }
+        }
+    }
+    std::cout << "Correct! be proud of it!\n";
+}
+
+template<typename T>
+void sgemv_validate_result(T *res, T *a, T *x, T *y, int M, int N, float alpha, float beta)
+{
+    for(int i = 0; i < M; i ++) // i th row
+    {
+        T tmp = 0.0f;
+        for(int j = 0; j < N; j ++) // j th column
+        {
+            tmp += a[i * N + j] * x[j];
+        }
+
+        tmp = alpha * tmp + beta * y[i];
+
+        if(abs(res[ij] - tmp) > 1e-3)
+        {
+            std::cout 
+                    << "Result error." << std::endl
+                    << "At:        \t" << "<" << i << ">" << std::endl
+                    << "Should be: \t" << tmp << std::endl
+                    << "But got:   \t" << res[i] << std::endl;
+            exit(1);
         }
     }
     std::cout << "Correct! be proud of it!\n";
