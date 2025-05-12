@@ -256,7 +256,7 @@ void sgemv_validate_result(T *res, T *a, T *x, T *y, int M, int N, float alpha, 
 
         tmp = alpha * tmp + beta * y[i];
 
-        if(abs(res[i * N + j] - tmp) > 1e-3)
+        if(abs(res[i] - tmp) > 1e-3)
         {
             std::cout 
                     << "Result error." << std::endl
