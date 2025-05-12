@@ -3,6 +3,7 @@
 #include "kernels/v2.hh"
 #include "kernels/v3.hh"
 #include "kernels/v4.hh"
+#include "kernels/v5.hh"
 
 int main()
 {
@@ -21,11 +22,13 @@ int main()
     for(int i = 0; i < loop; i ++)
     {
         t.start();
-        solution::kernel_v4<float>(M, N, K, a, b, c, alpha, beta);
+        // solution::kernel_v4<float>(M, N, K, a, b, c, alpha, beta);
+        solution::play();
         t.stop();
         // utils::cmp_result<float>(c, a, b, M, N, K);
         // utils::print_array(c, M, N);
-        t.report_sgemm(M, N, K, alpha, beta);
+        // t.report_sgemm(M, N, K, alpha, beta);
+        t.just_report_time();
         t.reset();
     }
 

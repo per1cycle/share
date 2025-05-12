@@ -89,6 +89,14 @@ public:
         elapse_in_milisecond_ = 0.0f;
     }
 
+    void just_report_time()
+    {
+        std::cout 
+                << ">> Problem: Just report    \t" << std::endl
+                << "Time elapse(in second):    \t" << elapse_in_second() << "s."<< std::endl
+                << "Time elapse(in milisecond):\t" << elapse_in_milisecond() << "ms." << std::endl;
+    }
+
     /**
      * report the information of problem.
      * alpha and beta is ignore, but still count.
