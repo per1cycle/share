@@ -1,0 +1,90 @@
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.522s.
+Time elapse(in milisecond):	9522ms.
+MFlops:                    	225.529
+GFlops:                    	0.225529
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.529s.
+Time elapse(in milisecond):	9529ms.
+MFlops:                    	225.363
+GFlops:                    	0.225363
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.523s.
+Time elapse(in milisecond):	9523ms.
+MFlops:                    	225.505
+GFlops:                    	0.225505
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.52s.
+Time elapse(in milisecond):	9520ms.
+MFlops:                    	225.576
+GFlops:                    	0.225576
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.521s.
+Time elapse(in milisecond):	9521ms.
+MFlops:                    	225.552
+GFlops:                    	0.225552
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.527s.
+Time elapse(in milisecond):	9527ms.
+MFlops:                    	225.41
+GFlops:                    	0.22541
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.527s.
+Time elapse(in milisecond):	9527ms.
+MFlops:                    	225.41
+GFlops:                    	0.22541
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.525s.
+Time elapse(in milisecond):	9525ms.
+MFlops:                    	225.458
+GFlops:                    	0.225458
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.525s.
+Time elapse(in milisecond):	9525ms.
+MFlops:                    	225.458
+GFlops:                    	0.225458
+>> Problem: SGEMM          	
+Problem size:              	M = 1024, N = 1024, K = 1024
+Flop:                      	2.14748e+09
+mFlop:                     	2147.48
+gflop:                     	2.14748
+Time elapse(in second):    	9.522s.
+Time elapse(in milisecond):	9522ms.
+MFlops:                    	225.529
+GFlops:                    	0.225529
