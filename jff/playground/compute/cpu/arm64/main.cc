@@ -3,11 +3,12 @@
 #include "kernels/v2.hh"
 #include "kernels/v3.hh"
 #include "kernels/v4.hh"
+#include "kernels/v5.hh"
 
 int main()
 {
     constexpr uint M = 2048, N = 2048, K = 2048;
-    constexpr uint loop_time = 10;
+    constexpr uint loop_time = 1000000;
     float alpha = 1.0f, beta = 0.0f;
     Timer t;
 
@@ -22,8 +23,7 @@ int main()
     t.start();
     for(int i = 0; i < loop_time; i ++)
     {
-        solution::kernel_v1<float>(M, N, K, a, b, c, alpha, beta);
-        utils::sgemm_validate_result(c, a, b, tmp_c, M, N, K, alpha, beta);
+        solution::play();
     }
     t.stop();
     t.report_sgemm_with_loop(M, N, K, alpha, beta, loop_time);
