@@ -211,7 +211,7 @@ namespace utils
  * M]                            ]
  */
 template<typename T>
-void generate_T_matrix_row_major(T *out, int row, int column)
+void generate_T_matrix(T *out, int row, int column)
 {
     srand(time(NULL));
     for(int i = 0; i < row; i ++)
@@ -223,39 +223,53 @@ void generate_T_matrix_row_major(T *out, int row, int column)
     }
 }
 
-/**
- * @brief This function generate a column major matrix, for example
- * generate_T_matrix_column_major<float>(a, 2, 3)
- * the matrix mem layout looks like this:
- * left(index)                 right(value)
- * [                            [
- * -----> M
- * | 0,       3,                  0.1,        0.99,
- * | 1,       4,                  0.42,       0.02
- * v 2        5,                  0.12,       0.75
- * N]                            ]
- */
-template<typename T>
-void generate_T_matrix_column_major(T *out, int row, int column)
-{
-    srand(time(NULL));
-    for(int i = 0; i < row; i ++)
-    {
-        for(int j = 0; j < column; j ++)
-        {
-            out[i + j * row] = (T)rand() / (T)(INT32_MAX);
-        }
-    }
-}
+// /**
+//  * @brief This function generate a column major matrix, for example
+//  * generate_T_matrix_column_major<float>(a, 2, 3)
+//  * the matrix mem layout looks like this:
+//  * left(index)                 right(value)
+//  * [                            [
+//  * -----> M
+//  * | 0,       3,                  0.1,        0.99,
+//  * | 1,       4,                  0.42,       0.02
+//  * v 2        5,                  0.12,       0.75
+//  * N]                            ]
+//  */
+// template<typename T>
+// void generate_T_matrix(T *out, int row, int column)
+// {
+//     srand(time(NULL));
+//     for(int j = 0; j < column; j ++)
+//     {
+//         for(int i = 0; i < row; i ++)
+//         {
+//             out[i + j * row] = (T)rand() / (T)(INT32_MAX);
+//         }
+//     }
+// }
 
 template<typename T>
-void print_array(T *arr, int row, int column)
+void print_array_row_major(T *arr, int row, int column)
 {
     for(int i = 0; i < row; i ++)
     {
         for(int j = 0; j < column; j ++)
         {
             std::cout << arr[i * column + j] << ' ';
+        }
+        std::cout << std::endl;
+    }
+}
+
+
+template<typename T>
+void print_array_column_major(T *arr, int row, int column)
+{
+    for(int j = 0; j < column; j ++)
+    {
+        for(int i = 0; i < row; i ++)
+        {
+            std::cout << arr[i + j * row] << ' ';
         }
         std::cout << std::endl;
     }
