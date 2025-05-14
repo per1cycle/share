@@ -130,6 +130,7 @@ public:
 
         std::cout 
                 << ">> Problem: SGEMM                \t" << std::endl
+                << "Loop time:                       \t" << "[" << loop_time << "]" << std::endl
                 << "Problem size:                    \t" << "M = " << M << ", N = " << N << ", K = " << K << std::endl 
                 << "Flop:                            \t" << flop << std::endl
                 << "mFlop:                           \t" << mflop << std::endl
@@ -172,6 +173,7 @@ public:
 
         std::cout 
                 << ">> Problem: SGEMV                \t" << std::endl
+                << "Loop time:                       \t" << "[" << loop_time << "]" << std::endl
                 << "Problem size:                    \t" << "M = " << M << ", N = " << N << std::endl 
                 << "Flop:                            \t" << flop << std::endl
                 << "mFlop:                           \t" << mflop << std::endl
@@ -197,8 +199,19 @@ private:
 namespace utils
 {
 
+/**
+ * @brief This function generate a column major matrix, for example
+ * generate_T_matrix_column_major<float>(a, 2, 3)
+ * the matrix mem layout looks like this:
+ * left(index)                 right(value)
+ * [                            [
+ * -----> N
+ * | 0,       1,        2,       0.1,        0.99,      0.23,
+ * v 3        4,        5,       0.12,       0.75,      0.01
+ * M]                            ]
+ */
 template<typename T>
-void generate_T_matrix(T *out, int row, int column)
+void generate_T_matrix_row_major(T *out, int row, int column)
 {
     srand(time(NULL));
     for(int i = 0; i < row; i ++)
@@ -206,6 +219,31 @@ void generate_T_matrix(T *out, int row, int column)
         for(int j = 0; j < column; j ++)
         {
             out[i * column + j] = (T)rand() / (T)(INT32_MAX);
+        }
+    }
+}
+
+/**
+ * @brief This function generate a column major matrix, for example
+ * generate_T_matrix_column_major<float>(a, 2, 3)
+ * the matrix mem layout looks like this:
+ * left(index)                 right(value)
+ * [                            [
+ * -----> M
+ * | 0,       3,                  0.1,        0.99,
+ * | 1,       4,                  0.42,       0.02
+ * v 2        5,                  0.12,       0.75
+ * N]                            ]
+ */
+template<typename T>
+void generate_T_matrix_column_major(T *out, int row, int column)
+{
+    srand(time(NULL));
+    for(int i = 0; i < row; i ++)
+    {
+        for(int j = 0; j < column; j ++)
+        {
+            out[i + j * row] = (T)rand() / (T)(INT32_MAX);
         }
     }
 }
