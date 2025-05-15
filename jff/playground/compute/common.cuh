@@ -276,6 +276,38 @@ void print_array_column_major(T *arr, int row, int column)
 }
 
 template<typename T>
+void cpu_sgemm_compute(T *out, T *a, T *b, T *c, int M, int N, int K, float alpha, float beta)
+{
+    for(int i = 0; i < M; i ++)
+    {
+        for(int j = 0; j < N; j ++)
+        {
+            T tmp = 0;
+            for(int k = 0; k < K; k ++)
+            {
+                tmp += a[i * K + k] * b[k * N + j];
+            }
+            out[i * N + j] = alpha * tmp + beta * c[i * N + j];
+        }
+    }
+}
+
+template<typename T>
+void cpu_sgemv_compute(T *out, T *a, T *x, T *y, int M, int N, float alpha, float beta)
+{
+    for(int i = 0; i < M; i ++)
+    {
+        T tmp = 0;
+
+        for(int j = 0; j < N; j ++)
+        {
+            tmp += a[i * N + j] * x[j];
+        }
+        out[i] = alpha * tmp + beta * c[i];
+    }
+}
+
+template<typename T>
 void sgemm_validate_result(T *res, T *a, T *b, T *c, int M, int N, int K, float alpha, float beta)
 {
     for(int i = 0; i < M; i ++) // i th row
