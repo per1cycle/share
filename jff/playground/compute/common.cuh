@@ -199,6 +199,25 @@ private:
 namespace utils
 {
 
+namespace cpu
+{
+template<typename T>
+void transpose(T *out, T *in, const int row, const int column)
+{
+    for(int i = 0; i < row; i ++)
+    {
+        for(int j = 0; j < column; j ++)
+        {
+            out[j * row + i] = in[i * column + j];
+        }
+    }
+}
+
+}
+
+namespace gpu // TODO
+{}
+
 /**
  * @brief This function generate a column major matrix, for example
  * generate_T_matrix_column_major<float>(a, 2, 3)
@@ -255,12 +274,11 @@ void print_array_row_major(T *arr, int row, int column)
     {
         for(int j = 0; j < column; j ++)
         {
-            std::cout << arr[i * column + j] << ' ';
+            std::cout << std::setw(8) << std::setprecision(5) << arr[i * column + j] << ' ';
         }
         std::cout << std::endl;
     }
 }
-
 
 template<typename T>
 void print_array_column_major(T *arr, int row, int column)
@@ -269,7 +287,7 @@ void print_array_column_major(T *arr, int row, int column)
     {
         for(int i = 0; i < row; i ++)
         {
-            std::cout << arr[i + j * row] << ' ';
+            std::cout << std::setw(8) << std::setprecision(5) << arr[i + j * row] << ' ';
         }
         std::cout << std::endl;
     }
@@ -303,7 +321,7 @@ void cpu_sgemv_compute(T *out, T *a, T *x, T *y, int M, int N, float alpha, floa
         {
             tmp += a[i * N + j] * x[j];
         }
-        out[i] = alpha * tmp + beta * c[i];
+        out[i] = alpha * tmp + beta * y[i];
     }
 }
 
