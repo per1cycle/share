@@ -200,80 +200,6 @@ private:
 namespace utils
 {
 
-namespace cpu
-{
-template<typename T>
-void transpose(T *out, T *in, const int row, const int column)
-{
-    for(int i = 0; i < row; i ++)
-    {
-        for(int j = 0; j < column; j ++)
-        {
-            out[j * row + i] = in[i * column + j];
-        }
-    }
-}
-
-}
-
-namespace gpu // TODO
-{
-
-/**
- * TODO: add support for quick benchmark.
- */
-template<typename T>
-void quick_bench_sgemm()
-{
-    constexpr uint M = 2048, N = 2048, K = 2048;
-    T alpha = 1.0, beta = 0.0;
-    Timer t;
-
-    T *h_a = (T*)malloc(sizeof(T) * M * K);
-    T *h_b = (T*)malloc(sizeof(T) * K * N);
-    T *h_c = (T*)malloc(sizeof(T) * M * N);
-
-    utils::generate_T_matrix<T>(h_a, M, K);
-    utils::generate_T_matrix<T>(h_b, K, N);
-
-    memset(h_c, 0, sizeof(T) * M * N);
-
-    t.start();
-
-    // blas
-
-    t.stop();
-    t.report_sgemm(M, N, K, alpha, beta);
-    
-}
-
-template<typename T>
-void quick_bench_sgemv()
-{
-    constexpr uint M = 2048, N = 2048, K = 2048;
-    T alpha = 1.0, beta = 0.0;
-    Timer t;
-
-    T *h_a = (T*)malloc(sizeof(T) * M * K);
-    T *h_b = (T*)malloc(sizeof(T) * K * N);
-    T *h_c = (T*)malloc(sizeof(T) * M * N);
-
-    utils::generate_T_matrix<T>(h_a, M, K);
-    utils::generate_T_matrix<T>(h_b, K, N);
-
-    memset(h_c, 0, sizeof(T) * M * N);
-
-    t.start();
-
-    // blas
-
-    t.stop();
-    t.report_sgemm(M, N, K, alpha, beta);
-    
-}
-
-}
-
 /**
  * @brief This function generate a column major matrix, for example
  * generate_T_matrix_column_major<float>(a, 2, 3)
@@ -297,7 +223,6 @@ void generate_T_matrix(T *out, int row, int column)
         }
     }
 }
-
 
 #if defined(CUDA) || defined(HIP)
 void generate_half_matrix(half *out, int row, int column)
@@ -463,6 +388,80 @@ void sgemv_validate_result(T *res, T *a, T *x, T *y, int M, int N, float alpha, 
     std::cout << "Correct! be proud of it!\n";
 }
 
+
+namespace cpu
+{
+template<typename T>
+void transpose(T *out, T *in, const int row, const int column)
+{
+    for(int i = 0; i < row; i ++)
+    {
+        for(int j = 0; j < column; j ++)
+        {
+            out[j * row + i] = in[i * column + j];
+        }
+    }
+}
+
+}
+
+namespace gpu // TODO
+{
+
+/**
+ * TODO: add support for quick benchmark.
+ */
+template<typename T>
+void quick_bench_sgemm()
+{
+    constexpr uint M = 2048, N = 2048, K = 2048;
+    T alpha = 1.0, beta = 0.0;
+    Timer t;
+
+    T *h_a = (T*)malloc(sizeof(T) * M * K);
+    T *h_b = (T*)malloc(sizeof(T) * K * N);
+    T *h_c = (T*)malloc(sizeof(T) * M * N);
+
+    utils::generate_T_matrix<T>(h_a, M, K);
+    utils::generate_T_matrix<T>(h_b, K, N);
+
+    memset(h_c, 0, sizeof(T) * M * N);
+
+    t.start();
+
+    // blas
+
+    t.stop();
+    t.report_sgemm(M, N, K, alpha, beta);
+    
+}
+
+template <typename T>
+void quick_bench_sgemv()
+{
+    constexpr uint M = 2048, N = 2048, K = 2048;
+    T alpha = 1.0, beta = 0.0;
+    Timer t;
+
+    T *h_a = (T*)malloc(sizeof(T) * M * K);
+    T *h_b = (T*)malloc(sizeof(T) * K * N);
+    T *h_c = (T*)malloc(sizeof(T) * M * N);
+
+    utils::generate_T_matrix<T>(h_a, M, K);
+    utils::generate_T_matrix<T>(h_b, K, N);
+
+    memset(h_c, 0, sizeof(T) * M * N);
+
+    t.start();
+
+    // blas
+
+    t.stop();
+    t.report_sgemm(M, N, K, alpha, beta);
+    
+}
+
+}
 
 }
 #endif // COMPUTE_COMMON_CUH
