@@ -249,6 +249,20 @@ void print_half_array_row_major(half *arr, int row, int column)
     }
 }
 
+__global__ void generate_reference(uint M, uint N, uint K, float *a, float *b, float *c, float alpha, float beta)
+{
+    int x = threadIdx.x + blockIdx.x * blockDim.x;
+    int y = threadIdx.y + blockIdx.y * blockDim.y;
+
+    if(x < M && y < N)
+    {
+        float tmp = 0.0f;
+        for(int i = 0; i < K; i ++)
+            tmp += a[x * K + i] * b[i * N + y];
+        c[x * N + y] = alpha * tmp + beta * c[x * N + y];
+    }
+}
+
 #endif
 
 // /**
