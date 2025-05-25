@@ -12,12 +12,13 @@
 #elif defined(HIP)
 #include <hip/hip_runtime.h>
 #elif defined(CPU)
-#include <chrono>
 #endif
 
 #include <iostream>
 #include <iomanip>
 #include <random>
+#include <chrono>
+#include <thread>
 
 #if defined(CUDA)
 #define Event_t cudaEvent_t
@@ -88,6 +89,11 @@ public:
     void reset()
     {
         elapse_in_milisecond_ = 0.0f;
+    }
+
+    void sleep_with_seconds(int seconds)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(seconds * 1000));
     }
 
     void just_report_time()
@@ -200,30 +206,6 @@ private:
 namespace utils
 {
 
-/**
- * @brief This function generate a column major matrix, for example
- * generate_T_matrix_column_major<float>(a, 2, 3)
- * the matrix mem layout looks like this:
- * left(index)                 right(value)
- * [                            [
- * -----> N
- * | 0,       1,        2,       0.1,        0.99,      0.23,
- * v 3        4,        5,       0.12,       0.75,      0.01
- * M]                            ]
- */
-template<typename T>
-void generate_T_matrix(T *out, int row, int column)
-{
-    srand(time(NULL));
-    for(int i = 0; i < row; i ++)
-    {
-        for(int j = 0; j < column; j ++)
-        {
-            out[i * column + j] = (T)rand() / (T)(INT32_MAX);
-        }
-    }
-}
-
 #if defined(CUDA) || defined(HIP)
 void generate_half_matrix(half *out, int row, int column)
 {
@@ -263,7 +245,115 @@ __global__ void generate_reference(uint M, uint N, uint K, float *a, float *b, f
     }
 }
 
+
+namespace gpu // TODO
+{
+
+/**
+ * TODO: add support for quick benchmark.
+ */
+template<typename T>
+void quick_bench_sgemm()
+{
+    constexpr uint M = 2048, N = 2048, K = 2048;
+    T alpha = 1.0, beta = 0.0;
+    Timer t;
+
+    T *h_a = (T*)malloc(sizeof(T) * M * K);
+    T *h_b = (T*)malloc(sizeof(T) * K * N);
+    T *h_c = (T*)malloc(sizeof(T) * M * N);
+
+    utils::generate_T_matrix<T>(h_a, M, K);
+    utils::generate_T_matrix<T>(h_b, K, N);
+
+    memset(h_c, 0, sizeof(T) * M * N);
+    // TODO: change handle to a platform wrapper.
+    cublasHandle_t handle; // cuBLAS context
+    cublasCreate(&handle);
+    t.start();
+
+    // blas
+    cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N, N, N, N, &alpha, d_b, N,
+        d_a, N, &beta, d_c, N);
+
+    t.stop();
+    t.report_sgemm(M, N, K, alpha, beta);
+    
+}
+
+template <typename T>
+void quick_bench_sgemv()
+{
+    constexpr uint M = 2048, N = 2048;
+    T alpha = 1.0, beta = 0.0;
+    Timer t;
+
+    T *h_a = (T*)malloc(sizeof(T) * M * K);
+    T *h_b = (T*)malloc(sizeof(T) * K * N);
+    T *h_c = (T*)malloc(sizeof(T) * M * N);
+
+    utils::generate_T_matrix<T>(h_a, M, K);
+    utils::generate_T_matrix<T>(h_b, K, N);
+
+    memset(h_c, 0, sizeof(T) * M * N);
+
+    t.start();
+
+    // blas
+
+    t.stop();
+    t.report_sgemv(M, N, K, alpha, beta);
+    
+}
+
+template<typename T>
+void quick_bench_memory_bandwidth()
+{
+
+}
+
+}
+#else
+namespace cpu
+{
+template<typename T>
+void transpose(T *out, T *in, const int row, const int column)
+{
+    for(int i = 0; i < row; i ++)
+    {
+        for(int j = 0; j < column; j ++)
+        {
+            out[j * row + i] = in[i * column + j];
+        }
+    }
+}
+
+}
 #endif
+
+/**
+ * @brief This function generate a column major matrix, for example
+ * generate_T_matrix_column_major<float>(a, 2, 3)
+ * the matrix mem layout looks like this:
+ * left(index)                 right(value)
+ * [                            [
+ * -----> N
+ * | 0,       1,        2,       0.1,        0.99,      0.23,
+ * v 3        4,        5,       0.12,       0.75,      0.01
+ * M]                            ]
+ */
+template<typename T>
+void generate_T_matrix(T *out, int row, int column)
+{
+    srand(time(NULL));
+    for(int i = 0; i < row; i ++)
+    {
+        for(int j = 0; j < column; j ++)
+        {
+            out[i * column + j] = (T)rand() / (T)(INT32_MAX);
+        }
+    }
+}
 
 // /**
 //  * @brief This function generate a column major matrix, for example
@@ -400,81 +490,6 @@ void sgemv_validate_result(T *res, T *a, T *x, T *y, int M, int N, float alpha, 
         }
     }
     std::cout << "Correct! be proud of it!\n";
-}
-
-
-namespace cpu
-{
-template<typename T>
-void transpose(T *out, T *in, const int row, const int column)
-{
-    for(int i = 0; i < row; i ++)
-    {
-        for(int j = 0; j < column; j ++)
-        {
-            out[j * row + i] = in[i * column + j];
-        }
-    }
-}
-
-}
-
-namespace gpu // TODO
-{
-
-/**
- * TODO: add support for quick benchmark.
- */
-template<typename T>
-void quick_bench_sgemm()
-{
-    constexpr uint M = 2048, N = 2048, K = 2048;
-    T alpha = 1.0, beta = 0.0;
-    Timer t;
-
-    T *h_a = (T*)malloc(sizeof(T) * M * K);
-    T *h_b = (T*)malloc(sizeof(T) * K * N);
-    T *h_c = (T*)malloc(sizeof(T) * M * N);
-
-    utils::generate_T_matrix<T>(h_a, M, K);
-    utils::generate_T_matrix<T>(h_b, K, N);
-
-    memset(h_c, 0, sizeof(T) * M * N);
-
-    t.start();
-
-    // blas
-
-    t.stop();
-    t.report_sgemm(M, N, K, alpha, beta);
-    
-}
-
-template <typename T>
-void quick_bench_sgemv()
-{
-    constexpr uint M = 2048, N = 2048, K = 2048;
-    T alpha = 1.0, beta = 0.0;
-    Timer t;
-
-    T *h_a = (T*)malloc(sizeof(T) * M * K);
-    T *h_b = (T*)malloc(sizeof(T) * K * N);
-    T *h_c = (T*)malloc(sizeof(T) * M * N);
-
-    utils::generate_T_matrix<T>(h_a, M, K);
-    utils::generate_T_matrix<T>(h_b, K, N);
-
-    memset(h_c, 0, sizeof(T) * M * N);
-
-    t.start();
-
-    // blas
-
-    t.stop();
-    t.report_sgemm(M, N, K, alpha, beta);
-    
-}
-
 }
 
 }
