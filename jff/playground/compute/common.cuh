@@ -55,18 +55,6 @@
 #define EventDestroy(event)
 #endif
 
-#define PRINT_HALF_ARR(arr_ptr, row, col) \
-    do { \
-        for(int i = 0; i < row; i ++) \
-        { \
-            for(int j = 0; j < col; j ++) \
-            { \
-                printf("%f ", __half2float(arr_ptr[i * col + j]));
-            }\
-            printf("\n");
-        } \
-    } while(0)
-
 class Timer
 {
 public:
