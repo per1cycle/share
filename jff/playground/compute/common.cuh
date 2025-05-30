@@ -21,6 +21,7 @@
 #include <thread>
 
 #if defined(CUDA)
+#define CEIL_DIV(x, y) (((x) + (y) - 1) / y)
 #define Event_t cudaEvent_t
 #define EventCreate(event) cudaEventCreate((event))
 #define EventRecord(event, value) cudaEventRecord((event), (value))
@@ -33,6 +34,7 @@
 #define D2H 0
 #define H2D 1
 #elif defined(HIP)
+#define CEIL_DIV(x, y) (((x) + (y) - 1) / y)
 #define Event_t hipEvent_t
 #define EventCreate(event) hipEventCreate ((event))
 #define EventRecord(event, value) hipEventRecord((event), (value))
@@ -52,6 +54,18 @@
 #define EventElapsedTime(elapse, start, end) *(elapse) = std::chrono::duration_cast<std::chrono::milliseconds>((end) - (start)).count()
 #define EventDestroy(event)
 #endif
+
+#define PRINT_HALF_ARR(arr_ptr, row, col) \
+    do { \
+        for(int i = 0; i < row; i ++) \
+        { \
+            for(int j = 0; j < col; j ++) \
+            { \
+                printf("%f ", __half2float(arr_ptr[i * col + j]));
+            }\
+            printf("\n");
+        } \
+    } while(0)
 
 class Timer
 {
@@ -206,6 +220,42 @@ private:
 namespace utils
 {
 
+namespace gpu // TODO
+{
+
+/**
+ * TODO: add support for quick benchmark.
+ */
+template<typename T>
+void quick_bench_sgemm()
+{
+}
+
+template <typename T>
+void quick_bench_sgemv()
+{
+}
+
+template<typename T>
+void quick_bench_memory_bandwidth()
+{
+}
+
+template<typename T>
+__global__ void sgemm_generate_reference(uint M, uint N, uint K, T *a, T *b, T *c, T alpha, T beta)
+{
+    int x = threadIdx.x + blockIdx.x * blockDim.x;
+    int y = threadIdx.y + blockIdx.y * blockDim.y;
+
+    if(x < M && y < N)
+    {
+        float tmp = 0;
+        for(int i = 0; i < K; i ++)
+            tmp += a[x * K + i] * b[i * N + y];
+        c[x * N + y] = alpha * tmp + beta * c[x * N + y];
+    }
+}
+
 #if defined(CUDA) || defined(HIP)
 void generate_half_matrix(half *out, int row, int column)
 {
@@ -231,89 +281,10 @@ void print_half_array_row_major(half *arr, int row, int column)
     }
 }
 
-__global__ void generate_reference(uint M, uint N, uint K, float *a, float *b, float *c, float alpha, float beta)
-{
-    int x = threadIdx.x + blockIdx.x * blockDim.x;
-    int y = threadIdx.y + blockIdx.y * blockDim.y;
-
-    if(x < M && y < N)
-    {
-        float tmp = 0.0f;
-        for(int i = 0; i < K; i ++)
-            tmp += a[x * K + i] * b[i * N + y];
-        c[x * N + y] = alpha * tmp + beta * c[x * N + y];
-    }
-}
-
-
-namespace gpu // TODO
-{
-
-/**
- * TODO: add support for quick benchmark.
- */
-template<typename T>
-void quick_bench_sgemm()
-{
-    constexpr uint M = 2048, N = 2048, K = 2048;
-    T alpha = 1.0, beta = 0.0;
-    Timer t;
-
-    T *h_a = (T*)malloc(sizeof(T) * M * K);
-    T *h_b = (T*)malloc(sizeof(T) * K * N);
-    T *h_c = (T*)malloc(sizeof(T) * M * N);
-
-    utils::generate_T_matrix<T>(h_a, M, K);
-    utils::generate_T_matrix<T>(h_b, K, N);
-
-    memset(h_c, 0, sizeof(T) * M * N);
-    // TODO: change handle to a platform wrapper.
-    cublasHandle_t handle; // cuBLAS context
-    cublasCreate(&handle);
-    t.start();
-
-    // blas
-    cublasSgemm(handle, CUBLAS_OP_N, CUBLAS_OP_N, N, N, N, &alpha, d_b, N,
-        d_a, N, &beta, d_c, N);
-
-    t.stop();
-    t.report_sgemm(M, N, K, alpha, beta);
-    
-}
-
-template <typename T>
-void quick_bench_sgemv()
-{
-    constexpr uint M = 2048, N = 2048;
-    T alpha = 1.0, beta = 0.0;
-    Timer t;
-
-    T *h_a = (T*)malloc(sizeof(T) * M * K);
-    T *h_b = (T*)malloc(sizeof(T) * K * N);
-    T *h_c = (T*)malloc(sizeof(T) * M * N);
-
-    utils::generate_T_matrix<T>(h_a, M, K);
-    utils::generate_T_matrix<T>(h_b, K, N);
-
-    memset(h_c, 0, sizeof(T) * M * N);
-
-    t.start();
-
-    // blas
-
-    t.stop();
-    t.report_sgemv(M, N, K, alpha, beta);
-    
-}
-
-template<typename T>
-void quick_bench_memory_bandwidth()
-{
+#endif
 
 }
 
-}
-#else
 namespace cpu
 {
 template<typename T>
@@ -328,8 +299,93 @@ void transpose(T *out, T *in, const int row, const int column)
     }
 }
 
+template<typename T>
+void sgemm_T_compute(T *out, T *a, T *b, T *c, int M, int N, int K, float alpha, float beta)
+{
+    for(int i = 0; i < M; i ++)
+    {
+        for(int j = 0; j < N; j ++)
+        {
+            T tmp = 0;
+            for(int k = 0; k < K; k ++)
+            {
+                tmp += a[i * K + k] * b[k * N + j];
+            }
+            out[i * N + j] = alpha * tmp + beta * c[i * N + j];
+        }
+    }
 }
+
+
+template<typename T>
+void cpu_sgemv_compute(T *out, T *a, T *x, T *y, int M, int N, float alpha, float beta)
+{
+    for(int i = 0; i < M; i ++)
+    {
+        T tmp = 0;
+
+        for(int j = 0; j < N; j ++)
+        {
+            tmp += a[i * N + j] * x[j];
+        }
+        out[i] = alpha * tmp + beta * y[i];
+    }
+}
+
+#if defined(CUDA) || defined(HIP)
+void sgemm_half(uint M, uint N, uint K, half *a, half *b, half *c, half alpha, half beta)
+{
+    for(int i = 0; i < M; i ++)
+    {
+        for(int j = 0; j < N; j ++)
+        {
+            float tmp = 0.0f;
+            for(int k = 0; k < K; k ++)
+            {
+                tmp += __half2float(a[i * K + k]) * __half2float(b[k * N + j]);
+            }
+            c[i * N + j] = __float2half(tmp);
+        }
+    }
+}
+
+void sgemm_half_no_alpha_and_beta(uint M, uint N, uint K, half *a, half *b, half *c)
+{
+    sgemm_half(M, N, K, a, b, c, __float2half(1.0f), __float2half(0.0f));
+}
+
+void sgemm_half_validate(uint M, uint N, half *ref, half *src)
+{
+    int num_error = 0;
+    for(int i = 0; i < M; i ++)
+    {
+        for(int j = 0; j < N; j ++)
+        {
+            int idx = i * N + j;
+            if(std::abs(
+                __half2float(ref[idx]) - 
+                __half2float(src[idx])
+            ) > 1e-3)
+            {
+                num_error ++;
+                std::cout << "Error at: " << "(" << i << ", " << j << ")" << std::endl;
+            }
+        }
+    }
+    if(num_error)
+    {
+        std::cout << "Total error: " << num_error << std::endl;
+    }
+    else 
+    {
+        std::cout << "Correct! be proud of it." << std::endl;
+    }
+    
+}
+
 #endif
+
+}
 
 /**
  * @brief This function generate a column major matrix, for example
@@ -354,6 +410,20 @@ void generate_T_matrix(T *out, int row, int column)
         }
     }
 }
+
+#if defined(CUDA) || defined(HIP)
+void generate_half_matrix(half *out, int row, int column)
+{
+    srand(time(NULL));
+    for(int i = 0; i < row; i ++)
+    {
+        for(int j = 0; j < column; j ++)
+        {
+            out[i * column + j] = __float2half((float)rand() / (float)(INT32_MAX));
+        }
+    }
+}
+#endif 
 
 // /**
 //  * @brief This function generate a column major matrix, for example
@@ -406,37 +476,6 @@ void print_array_column_major(T *arr, int row, int column)
     }
 }
 
-template<typename T>
-void cpu_sgemm_compute(T *out, T *a, T *b, T *c, int M, int N, int K, float alpha, float beta)
-{
-    for(int i = 0; i < M; i ++)
-    {
-        for(int j = 0; j < N; j ++)
-        {
-            T tmp = 0;
-            for(int k = 0; k < K; k ++)
-            {
-                tmp += a[i * K + k] * b[k * N + j];
-            }
-            out[i * N + j] = alpha * tmp + beta * c[i * N + j];
-        }
-    }
-}
-
-template<typename T>
-void cpu_sgemv_compute(T *out, T *a, T *x, T *y, int M, int N, float alpha, float beta)
-{
-    for(int i = 0; i < M; i ++)
-    {
-        T tmp = 0;
-
-        for(int j = 0; j < N; j ++)
-        {
-            tmp += a[i * N + j] * x[j];
-        }
-        out[i] = alpha * tmp + beta * y[i];
-    }
-}
 
 template<typename T>
 void sgemm_validate_result(T *res, T *a, T *b, T *c, int M, int N, int K, float alpha, float beta)
